@@ -1,0 +1,54 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+
+
+<h3 class="subTitle">Test Cardコンテンツ登録</h3>
+
+
+<form action="/<?php echo $this->arrayAction['dir']; ?><?php if (($type) && ($bid)){ ?>end<?php }else{ ?>edit<?php } ?>/#enter" method="post" id="formMain" enctype="multipart/form-data">
+<input type="hidden" name="type" value="<?php echo $type; ?>" />
+<input type="hidden" name="bid" value="<?php echo $bid; ?>" />
+
+<?php if (!$type){ ?>
+<p>・Select カテゴリ</p>
+<?php foreach ($arrayType as $objType){ ?>
+
+	<input type="radio" name="type" value="<?php echo $objType['id']; ?>" /><?php echo $objType['value']; ?>
+<?php } ?>
+<?php } ?>
+
+<?php if (($type) && (!$bid)){ ?>
+<p>・Select  教材名</p>
+<select name="bid">
+<?php foreach ($arrayBase as $objBase){ ?>
+<option value="<?php echo $objBase['id']; ?>"><?php echo $objBase['teachingName']; ?></option>
+<?php  } ?>
+</select>
+<?php } ?>
+
+
+<?php if (($type) && ($bid)){ ?>
+<p>・Select  レッスン#名</p>
+<select name="lid">
+<?php foreach ($arrayLesson as $objBase){ ?>
+<option value="<?php echo $objBase['id']; ?>"><?php echo $objBase['lessonName']; ?></option>
+<?php  } ?>
+</select>
+<?php } ?>
+
+
+<div class="center">
+	<input type="submit" value="次へ" class="buttonNormal">
+</div>
+</form>
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

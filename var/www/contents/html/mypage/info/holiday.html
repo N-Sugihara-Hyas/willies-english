@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>休日予定日：ウィリーズ英語塾</title>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+
+
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+
+<h2 class="subTitle">休日予定日</h2>
+
+<p>
+フィリピンでは祝日に労働を強要できないため、祝日は原則休校とさせて頂いております。　ご了承頂きますようよろしくお願い致します。<br /><br />
+なお休校に伴い、“祝日当日”に振替レッスンポイントを付与させて頂きます。振替レッスンポイントには有効期限はございませんので、後日ご都合のよろしいときに振替レッスンを予約・受講頂きますようお願い致します。
+</p>
+
+<p class="text-center">
+祝日と休校日
+</p>
+
+<table class="tableNormal">
+<tr>
+<th>休日</th><th>内容</th>
+</tr>
+
+<?php while ($item = $arrayData['dbGet']->getData()){ ?>
+<tr>
+<td nowrap><?php out(substr($item['dateStart'], 0, 10)); ?></td>
+<td><?php out($item['comment']); ?></td>
+</tr>
+<?php } ?>
+</table>
+<br />
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/navi.html'; ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

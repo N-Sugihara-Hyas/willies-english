@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>マイページ：ウィリーズ英語塾</title>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+
+<script type="text/javascript" src="/common/js/jquery.js"></script>
+<script type="text/javascript" src="/common/js/NowLoading.js"></script>
+
+<script>
+	MainNowLoading = new ShowNowLoading('.blackBack');
+</script>
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+
+
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+
+<h2 class="subTitle">受講プランの選択</h2>
+
+<?php if ($error){ ?>
+<div class="errorBox mt">
+受講プランを選択して下さい。
+</div>
+<br />
+<?php } ?>
+
+<form action="/mypage/setting/step3/" method="post" id="form">
+<select name="cource_style_id" class="mt">
+<option value="">選択して下さい</option>
+<?php foreach ($arrayCource as $key => $item){ ?>
+<option value="<?php echo $item['value']; ?>"><?php echo $item['courceStyleName']; ?></option>
+<?php } ?>
+</select>
+
+<div class="text-center mt" class="mt">
+<a href="/mypage/setting/first/" class="btn btn-lg btn-primary">前へ</a>
+<input type="button" class="btn btn-lg btn-primary" value="次へ" onclick="MainNowLoading.show();$('#form').submit();" />
+</div>
+</form>
+<br />
+
+<div class="cicle2">
+<p class="subTitle">(A) プライベート50分・週２回・担任制：</p>
+<p>
+月々6500円（税別）。週2回・１回50分の担任制レッスンです。<br />
+最初に決めたお好きな曜日・時間帯でレッスンを受講頂けます。毎回予約する必要はありません。<br />
+（受講後、曜日や時間帯を変更することも可能です。また規定回数内でのレッスンキャンセル・振替可能です）<br />
+<span class="att">毎回しっかり学習したい方。早くメソッドを身につけたい方。初めてお申込みの方は、（A）プランをお勧めしています</span>
+</p>
+
+
+
+<p class="subTitle">(B) プライベート50分・週２回・自由予約制：</p>
+<p>
+月々6000円（税別）。週２回・１回50分のレッスンです。担任制ではありません。<br />
+<span class="att">お仕事の都合などで（A）プランが受講できない方にお勧めです。</span><br />
+毎レッスン好きな時間帯に予約し、レッスンを受講いただけます。<br />
+（講師スケジュールの都合上、予約が難しい曜日・時間帯もございますので予めご了承ください）<br />
+</p>
+
+
+<p class="subTitle">(C) プライベート25分・週２回・自由予約制：</p>
+<p>
+月々4000円（税別）。週2回・1回25分レッスンです。担任制ではありません。 <br />
+<span class="att">当塾の学習ペース/ 学習メソッドをある程度理解し、自学習が可能な中-上級者向け。</span>
+</p>
+
+
+
+
+<p class="subTitle">(D) プライベート50分・週１回・担任制</p>
+<p>
+月々3500円（税別）。週１回（月〜日曜日のいずれから選択）。１回５０分の担任レッスンです。
+</p>
+
+<p class="subTitle">(E) プライベート25分・週2回・担任制：</p>
+<p>月々3500円（税別）。週2回・1回25分の担任制レッスンです。</p>
+
+
+<p class="subTitle">(K) プライベート25分・週２回・担任制：</p>
+<p>月々3500円 （税別）。週２回・1回25分の担任制レッスンです、子供向けプランです</p>
+
+<p class="subTitle">(X) 毎日１０分・週５回・自由予約制：</p>
+<p>月々3500円（税別）。週５回・１回１０分レッスンです。担任制ではありません。<br />
+英語学習の時間がとれない方におすすめです。音読、フリートークなどで毎日英語に触れることができるプランです。
+</p>
+
+
+
+<p>
+受講プランについては詳しくは<a href="http://williesenglish.jp/lesson_course.html  " target="_blank">こちら</a>をご参照ください。
+</p>
+<p>
+なお、上記プランについては、システム費（500円/月）が別途かかります。システム費にはビデオ学習教材、講師からのフィードバック用携帯単語帳などが含まれます。
+</p>
+<p>
+（A）プランの50分レッスンだと集中力が続きそうにないな。でも週2回は担任制で学習したいという方や、当塾の学習ペース/ 学習メソッドをある程度理解され、継続していきたい方向けです。
+</p>	
+
+</div>
+<br />
+</div>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

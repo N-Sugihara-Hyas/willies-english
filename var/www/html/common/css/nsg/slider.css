@@ -1,0 +1,30 @@
+#wrapSlider{
+	padding-top : 40px;
+	background : url(/common/img/slider/slider_memory.gif) no-repeat 65px top;
+}
+.label1{
+	width : 80px;
+	float : left;
+}
+
+.label2{
+	float : right;
+	text-align : left;
+	width : 80px;
+}
+
+.backSlider{
+	position : relative;
+	float : left;
+	width : 204px;
+	height : 24px;
+	background : url(../img/slider/slider_bg.png) no-repeat;
+}
+
+.buttonSlider{
+	position : absolute;
+	width : 25px;
+	height : 25px;
+	background : url(/common/img/slider/slider_btn.png);
+}
+

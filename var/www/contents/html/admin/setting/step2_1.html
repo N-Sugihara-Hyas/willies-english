@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>マイページ：ウィリーズ英語塾</title>
+
+<link rel="stylesheet" type="text/css" href="/common/css/layout.css" id="layout-css" />
+<link rel="stylesheet" type="text/css" href="/common/css/tool.css" id="layout-css" />
+
+<script type="text/javascript" src="/common/js/jquery.js"></script>
+<script type="text/javascript" src="/common/js/NowLoading.js"></script>
+
+<script>
+	MainNowLoading = new ShowNowLoading('.blackBack');
+</script>
+
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents">
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+
+<div id="contentsBody">
+
+<h2 class="subTitle">第１回体験レッスン日付 / 時間帯の選択</h2>
+
+<p>
+第１回体験レッスンのご希望の日付/ 時間帯を選択し、次へボタンを押して下さい。
+</p>
+
+<table class="tableNormal mtNormal">
+<tr>
+<th>レッスン日時</th>
+<?php foreach ($arrayDate as $item){ ?>
+<th>
+<?php echo date('Y/m/d D', strtotime($item)); ?>
+</th>
+<?php  } ?>
+</tr>
+
+
+<?php foreach ($arrayTime as $item){ ?>
+<tr>
+<td><?php echo $item['value']; ?></td>
+<?php foreach ($arrayDate as $item2){ ?>
+<td align="center">
+<?php 
+	if (isset($arrayCourceSchedule[$item2][$item['value'] . ':00'])){
+		$arrayReserve = array_shift($arrayCourceSchedule[$item2][$item['value'] . ':00']);
+	}else{
+		$arrayReserve = '';
+	}
+?>
+
+<?php if ($arrayReserve){ ?>
+<input type="button" value="予約" class="buttonNormal" onclick="MainNowLoading.show();location.href='/mypage/setting/step2_2/?date=<?php echo $item2; ?>&time=<?php echo $item['id']; ?>';" />
+</td>
+<?php } ?>
+<?php } ?>
+</tr>
+<?php } ?>
+</table>
+
+<div class="cicle2 mtNormal">
+※体験レッスンは２回受講できます。２回目の体験レッスンは、後ほどマイページより受講ください。
+</div>
+<br />
+<div align="center">
+<a href="/mypage/setting/step2/" class="buttonNormal">前へ</a>
+</div>
+</div>
+
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

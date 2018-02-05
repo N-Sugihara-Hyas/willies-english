@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>マイページ：ウィリーズ英語塾</title>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+<script type="text/javascript" src="/common/js/jquery.js"></script>
+<script type="text/javascript" src="/common/js/NowLoading.js"></script>
+
+<script>
+	MainNowLoading = new ShowNowLoading('.blackBack');
+</script>
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+
+
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+
+<h2 class="subTitle">予約内容の確認</h2>
+
+<p>
+予約内容を確認し、よろしければ確定ボタンを押して下さい。
+</p>
+
+<table class="tableNormal">
+<tr>
+<th>受講コース</th>
+<td><?php out($arrayCourceBase['courceName']); ?></td>
+</tr>
+<tr>
+<th>受講プラン</th>
+<td><?php out($arrayCourceStyle['courceStyleName']); ?></td>
+</tr>
+<tr>
+<th>受講スケジュール(受講曜日)</th>
+<td><?php out($scheduleWeek); ?></td>
+</tr>
+<tr>
+<th>受講スケジュール(開始時間)</th>
+<td><?php echo date('A H:i', strtotime($scheduleTime)); ?></td>
+</tr>
+<tr>
+<th>担当講師</th>
+<td><?php out($arrayTake['nickname']); ?></td>
+</tr>
+
+<?php foreach ($arrayDate as $key => $item){ ?>
+<tr>
+<th>第<?php out($key + 1); ?>回<?php if (!$arrayUser['isSetting']){ ?>体験<?php } ?>レッスン</th>
+<td><?php echo date('Y/m/d (D)', strtotime($item)); ?> <?php echo date('A H:i', strtotime($scheduleTime)); ?></td>
+</tr>
+<?php } ?>
+
+<?php if ($arrayCourceBase['id'] == 1){ ?>
+<?php if (!$arrayUser['isSetting']){ ?>
+<tr>
+<th>レベル</th>
+<td><?php echo $levelChild; ?></td>
+</tr>
+<?php } ?>
+<?php } ?>
+
+
+</table>
+<br />
+
+<div class="text-center">
+<a href="/mypage/setting/<?php if (($arrayCourceBase['id'] == 1) && (!$arrayUser['isSetting'])){ ?>stepChild<?php }else{ ?>step5<?php } ?>/" class="btn btn-lg btn-primary">前へ</a>&nbsp;<a href="javascript:MainNowLoading.show();location.href='/mypage/setting/end/';" class="btn btn-lg btn-primary">確定</a>
+</div>
+
+</div>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

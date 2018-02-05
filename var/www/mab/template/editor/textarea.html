@@ -1,0 +1,1 @@
+<textarea <?php echo $arrayColum[$key]['form']; ?> id="id_<?php echo $key; ?>" name="arrayInput[<?php echo $modelName; ?>][<?php echo $key; ?>]"<?php if (isset($arrayError[$key]) ){?> class="errorInput"<?php } ?>><?php echo strip_tags($arrayInput[$key]); ?></textarea>

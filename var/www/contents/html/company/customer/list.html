@@ -1,0 +1,110 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title><?php echo $arrayUser['nickname']; ?></title>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'company/inc/menu.html' ?>
+
+<div id="contentsMain">
+<div id="contentsMain">
+<h3 class="subTitle left"><?php echo $arrayUser['companyName']; ?>生徒一覧</h3>
+
+
+<a href="/company/download/index/" class="right buttonNormal">全員分の学習履歴をダウンロード</a>
+
+
+
+<br />
+
+<div style="overflow-x:scroll;width:100%;">
+<table class="tableNormal mtNormal" style="width:1500px;">
+<tr>
+<th>
+生徒ID
+</th>
+<th>
+氏名
+</th>
+<th>
+レッスンタイプ
+</th>
+<th>
+レッスンスケジュール
+</th>
+<th>
+担任講師
+</th>
+<th>
+レベル
+</th>
+<th>
+レッスン開始日
+</th>
+<th>
+履歴確認
+</th>
+<th>
+生徒MyPage
+</th>
+</tr>
+
+<?php foreach ($arrayList as $item){ ?>
+<tr id="item<?php echo $item['id']; ?>" >
+<td>
+<?php echo $item['id']; ?>
+</td>
+<td nowrap>
+<?php echo $item['memberNameSecound']; ?>&nbsp;
+<?php echo $item['memberNameFirst']; ?>
+</td>
+<td><?php if ( $item['styleType']){ ?>タイプ<?php echo $item['styleType']; ?><?php } ?></td>
+<td>
+	<?php if ($item['timeStart']){ ?>
+	<?php if (isset($arrayWeek[$item['cource_schedule_id']]['value'])){echo $arrayWeek[$item['cource_schedule_id']]['value'];} ?>
+	
+		
+	<?php echo $item['timeStart']; ?>〜<?php echo $item['timeEnd']; ?>
+	<?php } ?>
+</td>
+<td><?php echo $item['nickname']; ?></td>
+
+<td>
+	<?php if ($item['cource_base_id'] == 1){ ?>
+	lavelKids:
+	<?php if ($item['level'] == 5){ ?>1<?php }else{ echo $item['level']; ?><?php } ?>
+	
+	<?php }else{ ?>
+	lavelGCC:<?php echo $item['levelGCC']; ?>
+	 lavelRLC:<?php echo $item['levelRLC']; ?>
+	<?php } ?>
+	
+</td>
+<td><?php echo $item['arrayReguler']['date']; ?></td>
+
+
+
+<td>
+	<a href="/company/customer/history/<?php echo $item['id']; ?>/">学習履歴を見る</a>
+</td>
+
+<td align="center">
+
+<form action="/login/auth/" method="post" target="_blank">
+<input type="hidden" name="email" value="<?php echo $item['email']; ?>" />
+<input type="hidden" name="pass" value="<?php echo $SecurtyCode->getDecode($item['pass']); ?>" />
+<input type="submit" value="マイページを見る" />
+</form>
+</td>
+</tr>
+<?php } ?>
+</table>
+<br /><br />
+
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

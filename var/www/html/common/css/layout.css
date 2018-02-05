@@ -1,0 +1,143 @@
+body{
+	margin : 0px;
+	padding : 0px;
+	line-height : 150%;
+	background : url(../img/background.jpg);
+	text-align : center;
+	font-family:  "Arial", "ÉÅÉCÉäÉI", Meiryo, Osaka, "ÇlÇr ÇoÉSÉVÉbÉN", "MS PGothic", sans-serif;
+	font-size : 75%;
+}
+
+li,ul{
+	margin : 0px;
+	padding: 0px;
+	list-style : none;
+}
+
+input[type="text"],
+input[type="password"],
+textarea,
+select{
+	background : #FEFEFE;
+	border : solid 1px #999999;
+}
+
+input[type="text"],
+input[type="password"]{
+	height : 2em;
+}
+
+
+select{
+	height : 3em;
+}
+
+
+
+#wrap{
+	margin : 0 auto;
+	width : 1180px;
+	text-align : left;
+	background : #FFFFFF;
+}
+
+#header{
+	background : #000000;
+}
+
+#logo{
+	padding-left : 1%;
+}
+
+
+#menu2,
+#menu3{
+	margin-top : -16px;
+	height : 15px;
+	background : #000000;
+	color : #aaaaaa;
+}
+
+#menu{
+	margin-top : -16px;
+	background : url(../img/backgroundMenu.jpg) repeat-x;
+	height : 30px;
+}
+	
+#menu li{
+	padding : 4px;
+	text-align: center ;
+	
+	border : solid 1px #DDDDDD;
+	color : #000000;
+}
+
+#menu a{
+	display : block;
+	text-decoration : none;
+	width  :20%;
+	background : url(../img/backgroundMenu.jpg) repeat-x;
+	float : left;
+}
+
+
+#menu2 li,
+#menu3 li{
+	padding : 5px;
+	width  :224px;
+	text-align: center ;
+
+	float : left;
+	background : url(../img/backgroundMenu.jpg) repeat-x;
+	border : solid 1px #DDDDDD;
+	color : #000000;
+}
+
+#menu2 li a,
+#menu3 li a{
+	text-decoration : none;
+}
+
+#menu2 li{
+	background : #000000;
+	color : #FFFFFF;
+	border : solid 1px #000000;
+}
+
+#menu3{
+	height : 45px;
+	background : #CCCCCC;
+}
+
+#menu3 li{
+	background : #CCCCCC;
+	border : solid 1px #CCCCCC;
+}
+
+#contents{
+	clear: both;
+	padding-top : 20px;
+}
+
+#sidebar{
+	width : 400px;
+	float : left;
+	text-align : left;
+}
+
+#contentsBody,
+#contentsBodyCard{
+	padding-right : 20px;
+	width : 750px;
+	float : right;
+}
+
+#footer{
+	margin-top : 40px;
+	width :96%;
+	padding : 2%;
+	text-align : center;
+
+	background : #000000;
+	color : #FFFFFF;
+}

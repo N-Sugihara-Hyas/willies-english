@@ -1,0 +1,60 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+<h3 class="subTitle"><?php echo $arraySettingAdmin['title']; ?>の一覧</h3>
+
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>/sendEnd/" method="post">
+<div class="cicleNormal2">下記のメール内容で送信</div>
+<select name="mID">
+<?php while ($item = $arrayMailTarget->getData()){ ?>
+<option value="<?php echo $item['id']; ?>"><?php echo $item['subject']; ?></option>
+<?php } ?>
+</select>
+
+
+<div class="cicleNormal2 mtNormal">下記の条件で送信</div>
+
+<select name="arrayTarget[cource_schedule_id]">
+<option value="">未選択</option>
+<?php foreach ($arrayWeek as $item){ ?>
+<option value="<?php echo $item['id']; ?>" /><?php echo $item['value']; ?></optoin>
+<?php } ?>
+</select>
+
+<select name="arrayTarget[cource_base_id]">
+<option value="">未選択</option>
+<?php foreach ($arrayCource as $item){ ?>
+<option value="<?php echo $item['id']; ?>" /><?php echo $item['value']; ?></optoin>
+<?php } ?>
+</select>
+
+<select name="arrayTarget[take_base_id]">
+<option value="">未選択</option>
+<?php foreach ($arrayTake as $item){ ?>
+<option value="<?php echo $item['id']; ?>" /><?php echo $item['value']; ?></optoin>
+<?php } ?>
+</select>
+<br /><br />
+
+■State<br />
+<?php foreach ($arrayMemberState as $item){ ?>
+<?php if (strlen($item['id'])){ ?>
+<input type="checkbox" name="arrayCheck[]" value="<?php echo $item['id']; ?>" /><?php echo $item['value']; ?>
+<?php } ?>
+<?php } ?>
+
+<div class="center mtNormal">
+<input type="submit" value="送信" class="buttonNormal" />
+</div>
+</form>
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

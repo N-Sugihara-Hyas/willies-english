@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>マイページ：ウィリーズ英語塾</title>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+
+
+<div id="contents" class="row">
+	<div id="contentsBody" class="col-md-8 col-md-push-4">
+
+	<h2 class="subTitle">英作文作成はこちらから</h2>
+<div class="right">
+<a href="/<?php echo $this->arrayAction['dir']; ?>edit/" class="btn btn-lg btn-primary mt">Make New Sentence</a>
+</div>
+<br class="fc" />
+
+<form action="/mypage/exercise/del/" method="post">
+<table class="tableNormal mt">
+<tr>
+<th>
+</th>
+<?php  require_once $this->arrayDir['dirProgram'] . "template/listHeader.html"; ?>
+</tr>
+<?php while ($item = $arrayData['arrayList']->getData()){ ?>
+<tr id="item<?php echo $item['id']; ?>" >
+<td>
+<input type="radio" name="arrayDel[]" value="<?php echo $item['id']; ?>" />
+</td>
+<td>
+<?php if ($item['isTake']){ ?>
+<span class="att">[添削有り]</span>
+<?php } ?>
+
+<a href="/<?php echo $this->arrayAction['dir']; ?>details/<?php echo $item['id']; ?>">内容を見る</a>
+</td>
+<td>
+<?php echo $item['id']; ?>
+</td>
+<?php  require $this->arrayDir['dirProgram'] . "template/listBodyAll.html"; ?>
+</tr>
+<?php } ?>
+</table>
+<br />
+<input type="submit" class="btn btn-lg btn-primary" value="削除" />
+</form>
+<br /><br />
+
+</div>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+</div>
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

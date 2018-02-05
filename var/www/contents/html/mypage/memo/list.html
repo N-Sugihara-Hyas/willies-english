@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>メモ帳</title>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+<script type="text/javascript" src="/common/js/nsg/jquery.js"></script>
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+<h2 class="subTitle">メモ帳</h2>
+<div class="right">
+<form action="/mypage/memoCategory/del/" method="post" id="formMain">
+<a href="/<?php echo $this->arrayAction['dir']; ?>edit/" class="btn btn-lg btn-primary">新しいメモを作成する</a>&nbsp;<a href="/mypage/memoCategory/edit/" class="btn btn-lg btn-primary">新しいカテゴリを作成する</a><br /><br />
+
+<?php if ($arrayMemberMemoCategory){ ?>
+<select name="cID" style="width:auto;">
+<?php foreach ($arrayMemberMemoCategory as $item){ ?>
+<option value="<?php out($item['id']); ?>"><?php out($item['value']); ?>
+<?php } ?>
+</select>
+
+<input type="button" value="削除する" onclick="if(window.confirm('カテゴリを削除しても良いですか？')){$('#formMain').submit();}" />
+</form>
+<?php } ?>
+
+</div>
+<br class="fc" />
+
+<table class="tableNormal mt">
+<tr>
+<?php  require_once $this->arrayDir['dirProgram'] . "template/listHeader.html"; ?>
+<th>内容</th>
+</tr>
+<?php while ($item = $arrayData['arrayList']->getData()){ ?>
+<tr id="item<?php echo $item['id']; ?>" >
+<td>
+<a href="/<?php echo $this->arrayAction['dir']; ?>edit/<?php echo $item['id']; ?>">内容を見る</a>
+</td>
+<td>
+<?php echo $item['id']; ?>
+</td>
+<?php  require $this->arrayDir['dirProgram'] . "template/listBodyAll.html"; ?>
+<td>
+<?php out($item['body'], 20); ?>
+</td>
+</tr>
+<?php } ?>
+
+</table>
+<br /><br />
+
+</div>
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

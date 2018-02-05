@@ -1,0 +1,154 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title>管理画面</title>
+<script type="text/javascript" src="/common/js/nsg/calData.js"></script>
+<script type="text/javascript" src="/common/js/nsg/cal.js"></script>
+<script type="text/javascript" src="/common/js/view/dialog.js"></script>
+
+
+</head>
+
+<body>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+
+<?php $menus = 9;require_once $this->arrayDir['dirHtml'] . 'admin/inc/salary.html' ?>
+
+
+<h3 class="subTitle">給与計算(Other)</h3>
+
+
+		
+<table class="tableNormal mtNormal">
+	<tr>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th align="center">Total Salary<br />(peso)</th>
+		<th align="center">Total Salary<br />(Yen)</th>
+		<th colspan="2">1. # of Days on this month</th>
+		<th colspan="2">2. Your Shift</th>
+		<th colspan="<?php echo count($arrayType); ?>">3. Your Salary Rate</th>
+		<th colspan="<?php echo count($arrayTypeCounter); ?>">4. # of Class You had</th>		
+		<?php $count=1;foreach ($arrayTypeCounter as $type => $objView){if (isset($objView['time'])){$count++;} }?>
+		<th colspan="<?php echo $count; ?>">4. Lesson Salary</th>
+		<th colspan="2">5. New Student Bonus</th>
+		<th colspan="2">6. Internet Allowance</th>	
+		<th>7. Referral Bonus</th>
+		<th colspan="2">8. Others</th>
+		</th>
+	</tr>
+	<tr>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th># of days on Weekday <br />(# of date)</th>
+		<th># of days on Weekend<br />(if you work on weekend)</th>
+		<th>Weekday Shift<br />(hr)</th>
+		<th>Weekend Shift<br />(hr)</th>
+		<?php foreach ($arrayType as $objView){ ?>
+		<th><?php echo $objView['view']; ?></th>
+		<?php } ?>
+			
+		<?php foreach ($arrayTypeCounter as $objView){ ?>
+		<th><?php echo $objView['view']; ?></th>
+		<?php } ?>
+
+		<th>Basic Salary<br />(peso)</th>
+		<?php foreach ($arrayTypeCounter as $objView){ ?>
+		<?php if (!empty($objView['time'])){ ?>
+		<th><?php echo $objView['view']; ?></th>
+		<?php } ?>
+		<?php } ?>
+		<th>New Student Bonus<br />(peso)</th>
+		<th>Student ID</th>
+		<th>Internet Allowance<br />(peso)</th>
+		<th>% of your absence</th>
+		<th>Referral Bonus<br />(peso)</th>
+		<th>Others</th>
+		<th>memo</th>
+	</tr>
+
+	<?php foreach ($arrayData as $objSalary){ ?>
+
+		<tr>
+			<td><?php echo $objSalary['objTake']['id']; ?></td>
+			<td><?php echo $objSalary['objTake']['nickname']; ?></td>
+			<td>
+				<form action="/admin/salary/mail/<?php echo $objSalary['objTake']['id']; ?>/" method="post" target="_blank">
+					<input type="hidden" name="body" value='<?php echo str_replace("\r\n", '', str_replace("'",'', json_encode($objSalary))); ?>' />
+					<input type="hidden" name="arrayDataType5" value='<?php echo str_replace("\r\n", '', json_encode($arrayDataType5)); ?>' />
+
+					
+					<input type="submit" value="E-mail" />
+				</form>
+			</td>
+			<td><?php echo $objSalary['arrayTotal']['total']; ?></td>
+			<td><?php echo $objSalary['arrayTotal']['totalYen']; ?></td>
+			<td><?php echo $objSalary['weekday']; ?></td>
+			<td><?php echo $objSalary['weekend']; ?></td>
+			<td><?php echo $objSalary['weekdayHr']; ?></td>
+			<td><?php echo $objSalary['weekendHr']; ?></td>
+			
+			<!-- 3番目 --!>
+			<?php foreach ($arrayType as $type => $objView){ ?>
+			<td>
+				<?php if (!empty($objSalary['arrayRate'][$type])){echo $objSalary['arrayRate'][$type];} ?>
+			</td>
+			<?php } ?>
+			
+			<!-- 4番目 !-->
+			<?php foreach ($arrayTypeCounter as $type => $objView){ ?>
+			<td>				
+				<?php if (!empty($arrayDataType4[$objSalary['objTake']['id']][$type])){echo $arrayDataType4[$objSalary['objTake']['id']][$type];}else{echo $objSalary['arrayCounter'][$type];} ?>
+			</td>
+			<?php } ?>
+			<td><?php echo $objSalary['arrayTotal']['basic']; ?></td>
+
+
+			<?php 
+			foreach ($arrayTypeCounter as $type => $objView){ ?>
+				<?php 
+					if (isset($objView['time'])){
+					if (!is_numeric($type)){ ?>
+			<td>
+			<?php
+					echo $objSalary['arrayTotal'][$type];
+					
+				}}
+				?>
+			</td>
+			<?php } ?>
+
+			<!-- 5番目 -->			
+			<td><?php echo $objSalary['ntotal']; ?></td>
+			<td>
+				<?php echo $objSalary['nmember']; ?>
+			</td>
+			
+			<!-- 6番目 -->			
+			<td><?php echo $objSalary['ipeso']; ?></td>
+			<td><?php echo $objSalary['icount']; ?></td>
+
+			<!-- 7番目 -->			
+			<td><?php echo $objSalary['rtotal']; ?></td>
+
+			<!-- 8番目 -->			
+			<td><?php echo $objSalary['ocount']; ?></td>
+			<td><?php echo $objSalary['memo']; ?></td>
+			
+		</tr>
+	<?php } ?>
+</table>
+
+
+
+
+</form>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

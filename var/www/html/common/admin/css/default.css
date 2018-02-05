@@ -1,0 +1,47 @@
+@charset "utf-8";
+
+img{
+	border:none;
+}
+
+p{
+	margin : 0;
+	padding : 12px 0 0 12px;
+}
+
+h1,h2,h3,h4{
+	margin : 0px;
+	font-size : 100%;
+}
+
+
+ul,li{
+	padding : 0px;
+	margin : 0px;
+
+	list-style-type:none;
+}
+
+dl,dd,dt,form{
+	margin :0px;
+	padding: 0px;
+}
+
+
+table{
+	border-collapse : collapse;
+}
+
+th,td{
+	vertical-align:top;
+}
+
+.fc{
+	clear:both;
+}
+
+
+h1,h2,h3,h4{
+	font-weight : 400;
+	font-size : 100%;
+}

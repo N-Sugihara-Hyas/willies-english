@@ -1,0 +1,8 @@
+			<?php 
+				if (file_exists($this->arrayDir['dirProgram'] . "template/editorConfirmation/" . $arrayColum[$key]['type'] . ".html") ){
+					require $this->arrayDir['dirProgram'] . "template/editorConfirmation/" . $arrayColum[$key]['type'] . ".html";
+				}else{
+					echo nl2br(preg_replace ('/((http|https):\/\/[0-9a-z-\/._?=&%\[\]~]+)/i', '<a href="\\1">\\1</a>', $arrayInput[$key]));
+				}
+				
+			?>

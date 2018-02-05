@@ -1,0 +1,11 @@
+			<?php
+				$arrayControlData = $this->$modelName->getFunctionData($arrayColum[$key]['data'], $arrayColum[$key]);
+			?>
+
+			<select id="id_<?php echo $key; ?>" name="arrayInput[<?php echo $modelName; ?>][<?php echo $key; ?>]" <?php echo getVar($arrayColum[$key], 'form'); if (isset($arrayError[$modelName][$key]) ){?> class="errorInput"<?php } ?>>
+			<?php if (!empty($arrayControlData)){ ?>
+			<?php foreach ($arrayControlData as $key2 => $item2){ ?>
+			<option value="<?php echo $item2['id']; ?>"<?php if (($item2['id'] == getVar($arrayInput, $key)) || ((getVar($arrayColum[$key], 'default')==$item2['id']) && (!isset($arrayInput[$key])))){ ?> selected<?php } ?>><?php echo $item2['value']; ?></option>
+			<?php } ?>
+			<?php } ?>
+			</select>

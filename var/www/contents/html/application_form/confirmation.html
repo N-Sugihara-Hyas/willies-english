@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<title>登録：ウィリーズ英語塾</title>
+
+<link rel="stylesheet" type="text/css" href="/common/css/layout.css" id="layout-css" />
+<link rel="stylesheet" type="text/css" href="/common/css/tool.css" id="layout-css" />
+<link rel="stylesheet" type="text/css" href="/common/css/top.css" id="layout-css" />
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+
+<div id="contentsTop">
+
+
+<div id="form">
+<table class="tableNormal">
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/editorConfirmation.html'; ?>
+</table>
+
+<div class="center mtNormal">
+<form action="/application_form/index/reInput/#form">
+<input type="submit" value="修正する" class="buttonNormal" />
+</form>
+
+<form action="/application_form/end" class="mtNormal">
+<input type="submit" value="確定する" class="buttonNormal" />
+</form>
+
+</div>
+</div>
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+
+<script>
+<?php if (getVar($arrayPost, 'testName')){ ?>
+
+window.opener.newBaseEnd('<?php echo getVar($arrayPost, 'testName'); ?>', '<?php echo getVar($arrayPost, 'uid'); ?>');
+window.close();
+<?php } ?>
+</script>
+
+</head>
+
+<h2 class="subTitle">Test</h2>
+
+
+<?php if (getVar($arrayPost, 'error')){ ?>
+<p style="color:#FF0000;">Error</p>
+<?php } ?>
+
+<form action="/admin/test/base/" method="post">
+<input type="text" name="testName" value="<?php echo getVar($arrayPost, 'testName'); ?>" /><br /><br />
+<input type="submit" value="Confirm" />
+</form>
+
+</div>
+</div>
+

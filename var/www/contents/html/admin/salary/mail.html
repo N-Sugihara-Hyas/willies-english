@@ -1,0 +1,37 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title>管理画面</title>
+<script type="text/javascript" src="/common/js/nsg/calData.js"></script>
+<script type="text/javascript" src="/common/js/nsg/cal.js"></script>
+<script type="text/javascript" src="/common/js/view/dialog.js"></script>
+
+
+</head>
+
+<body>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+
+<?php $menus = 9;require_once $this->arrayDir['dirHtml'] . 'admin/inc/salary.html' ?>
+
+
+<h3 class="subTitle">給与計算(Other)</h3>
+
+
+		
+<form action="/admin/salary/mailAdd/" method="post">
+
+<input type="text" name="email" value="<?php echo $arrayBody['objTake']['email']; ?>" size="80" /> <br /><br />
+<input type="text" name="subject" value="<?php echo $subject; ?>" size="80" /> 
+<br /><br />
+<textarea style="width:90%;height:100em;" name="body"><?php echo $body; ?></textarea>
+
+<div class="center">
+	<input type="submit" value="送信" class="buttonNormal" />
+</div>
+</form>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

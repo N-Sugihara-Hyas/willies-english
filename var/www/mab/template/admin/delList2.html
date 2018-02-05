@@ -1,0 +1,38 @@
+<td
+({if isset($popup)})
+({if $popup!='non'}) 
+
+({/if})
+({else})
+onmouseover="overItem('({$item.id})');" onmouseout="outItem('({$item.id})');" onclick="onItemEdit('({$key})');"
+({/if})
+>({if !isset($edit)})<a href="/({$arrayAction.dir})edit/({$item.id})/">({/if})({$item.id})</a></td>
+({foreach from=$arrayColum key=key item=item2})
+	({if $item2.list})
+({if isset($item2.name)})
+	</td><td
+({if isset($popup)})
+
+({else})
+	onmouseover="overItem('({$item.id})');" onmouseout="outItem('({$item.id})');" onclick="onItemEdit('({$item.id})');"
+	
+({/if})>
+({/if})
+		({if $item2.type == 'file'})
+		<img src="./?dir=api&a=img&fileName=({$item[$key]})&w=50" width="50">
+		({else if $item2.type == 'select'})
+		({foreach from=$item2.data item=item3})
+		({if $item3.id == $item[$key]})({$item3.value})({/if})
+		({/foreach})
+		({else})
+		({$item[$key]})
+		({/if})
+({if isset($item2.name)})
+	
+({/if})
+	({/if})
+({/foreach})
+</a>
+
+
+({assign var=colorNo value=$colorNo+1})

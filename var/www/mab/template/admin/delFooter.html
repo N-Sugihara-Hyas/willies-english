@@ -1,0 +1,13 @@
+<br />
+<div align="center">
+	<form action="/({$arrayAction.dir})delSelect/" method="post">
+		({foreach from=$uid item=item})
+		<input type="hidden" name="uid[]" value="({$item})" />
+		({/foreach})
+		<input type="submit" value="実行" class="buttonNormal" />
+	</form>
+
+	<form action="/({$arrayAction.dir})list/" method="post">
+		<input type="submit" value="やめる" class="buttonNormal" />
+	</form>
+</div>

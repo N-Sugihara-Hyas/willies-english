@@ -1,0 +1,164 @@
+.errorBox{
+	padding : 5px;
+	background : #990000;
+	color : #FFFFFF;
+	width : 97%;
+}
+
+.errorInput{
+	background : #ffeeee;
+	border : solid 1px #FF9999;
+}
+
+
+.mtNormal{
+	margin-top : 10px;
+}
+
+.subTitle{
+	padding-top : 8px;
+	padding-left : 25px;
+	padding-bottom : 0px;
+
+	height : 32px;
+
+	background : url(../img/mark5.jpg) no-repeat;
+	font-size : 15px;
+	font-weight : 800;
+}
+
+
+.tableNormal{
+	width : 99%;
+
+	border : solid 1px #EEEEEE;
+}
+
+.tableNormal td,
+.tableNormal th{
+	text-align : left;
+	padding : 4px;
+	padding-top : 10px;
+	border : solid 1px #cccccc;
+}
+
+.tableNormal th{
+	background : #EEEEEE;
+}
+
+.updateBox{
+	padding : 30px;
+	margin : 10px;
+	background : #CD304E;
+	color : #FFFFFF;
+	text-align : center;
+	
+}
+
+.updateBox{
+	padding : 30px;
+	margin : 10px;
+
+	background : #8CC62B;
+}
+
+.center{
+	width : 100%;
+	text-align : center;
+}
+
+.left{
+	float : left;
+}
+
+.right{
+	float : right;
+}
+
+
+.buttonNormal{
+	padding : 10px 0px;
+	margin-bottom : 10px;
+	text-decoration : none;
+	font-size : 100%;
+	
+	background : url(../img/button.jpg) repeat-x #d2d2d2;
+	border : none;
+	color : #444444;
+	font-weight : 800;
+	cursor : pointer;
+	text-align : center;
+	white-space : nowrap;
+	width : 200px;
+	display:inline-block;
+}
+
+.cicleNormal{
+	margin : 40px;
+	padding : 30px;
+	text-align :center;
+
+	background : #ececec;
+}
+
+.cicleNormal2{
+	padding : 10px;
+
+	background : #ececec;
+}
+
+.detailsMenu{
+	margin : 10px;
+	border-bottom : solid 1px #1c70d2;
+	height : 2em;
+}
+
+.widthHalf{
+	width : 48%;
+}
+
+#blackBack,
+#dialog{
+	position  : absolute;
+	display: none;
+}
+
+.pageNavi{
+	display:inline-block;
+}
+
+.pageNavi li{
+	margin-right : 10px;
+	padding : 10px;
+	border : solid 1px #EEEEEE;
+	float : left;
+	display:inline-block;
+}
+
+.pageHit{
+	background: #EEEEEE;
+
+}
+
+.checkbox{
+	float : left;
+}
+
+.checkbox dt,
+.checkbox dd{
+	float : left;
+}
+
+.tab a{
+	margin : 5px;
+	display : block;
+	float : left;
+	
+	padding : 5px;
+	border : solid 1px #CCCCCC;
+	color : #000000;
+}
+
+.tab a.hit{
+	background : #DDDDDD;	
+}

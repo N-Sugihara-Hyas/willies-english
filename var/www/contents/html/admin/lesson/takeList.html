@@ -1,0 +1,9 @@
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<p>
+<?php echo $arrayCourceBase['courceName']; ?>に対応している講師
+</p>
+
+<?php foreach ($arrayTakeBase as $item){ ?>
+<a href="/admin/take/edit/<?php echo $item['id']; ?>/"><?php echo $item['nickname']; ?></a><br />
+<?php } ?>

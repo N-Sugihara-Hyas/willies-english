@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>FLASH CARD：ウィリーズ英語塾</title>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+		<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+
+<a href="/card/test/details/?tid=<?php echo $arrayTest['id']; ?>">最初から受講</a><?php if ($ng){ ?> | <a href="/card/test/details/?tid=<?php echo $arrayTest['id']; ?>&ng=<?php echo $ng; ?>">間違った問題のみを受講</a><?php } ?>
+
+
+<h3 class="cicle3">学習中のテスト：<?php echo $arrayTest['testName']; ?> </h3>
+
+<div class="cicle3">
+<p>Your Score:	<?php echo $point; ?></p>
+
+<h3 class="mtNormal">Check Answersh</h3><br /><br />
+
+<?php $i = 1;foreach ($arrayData as $item){ ?>
+<div class="mtBig">
+<h3 class="mtNormal">Q<?php echo $item['pageNow']; ?>/<?php echo $page; ?></h3>
+<div style="padding-left : 50px;">
+<p>Your Answer:<?php echo $item['arrayDetails']['select' . $item['select']]; ?></p>
+<p>Correct Answer:<?php echo $item['arrayDetails']['select' . $item['hit']]; ?></p>
+
+<p><?php echo $item['arrayDetails']['body1']; ?></p>
+<p class="att"><?php echo $item['arrayDetails']['body2']; ?></p>
+</div>
+</div>
+<br /><br />
+
+<?php $i++;} ?>
+</div>
+
+<div class="mtNormal center">
+	<a href="/card/test/" class="buttonNormal">HOME</a>
+</div>
+
+</div>
+
+</div>
+<br class="fc" />
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

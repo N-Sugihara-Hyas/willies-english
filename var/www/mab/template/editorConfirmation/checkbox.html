@@ -1,0 +1,25 @@
+<?php	
+	if (!empty($arrayColum[$key]['data']) ){
+		if (isset($arrayInput[$key])){
+			foreach ($arrayInput[$key] as $key2 => $item2){
+				if (isset($arrayColum[$key]['dataType']) ){
+					$value = $key2;
+				}else{
+					$value = $item2;
+				}
+				
+				if (strlen($value)){
+					echo $this->$modelName->getFunctionDataOwn($arrayColum[$key]['data'], $value, $arrayColum[$key]) . '<br />';					
+				}
+			}
+		}
+?>
+<?php
+	}else{
+		if (!empty($arrayInput[$key])){
+			echo $arrayColum[$key]['checkValue'];
+		}else{
+			echo '-';
+		}
+	}
+?>

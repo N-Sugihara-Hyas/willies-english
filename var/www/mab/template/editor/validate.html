@@ -1,0 +1,10 @@
+<script src="/common/js/nsg/validate/Base.js" language="javascript"></script>
+<script>
+	var ValidateBase = new ValidateBase();
+
+	({foreach from=$arrayValidate key=key item=item})
+	({foreach from=$item key=key2 item=item2})
+		ValidateBase.addValidate('({$key})', '({$item2.type})', '({$item2.message})');
+	({/foreach})
+	({/foreach})
+</script>

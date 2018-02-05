@@ -1,0 +1,189 @@
+@charset "utf-8";
+
+body{
+	margin: 0px;
+	padding : 0px;	
+
+	font-size : 75%;
+	text-align : center;
+
+	font-family:  "Arial", "ÉÅÉCÉäÉI", Meiryo, Osaka, "ÇlÇr ÇoÉSÉVÉbÉN", "MS PGothic", sans-serif;
+	line-height : 150%;
+}
+
+
+td,th{
+	font-size : 100%;
+}
+
+html, body, #wrap {
+	height: 100%;
+}
+
+
+a{
+	text-decoration:none;
+	font-weight : 800;
+}
+
+p{
+	line-height : 200%;
+	padding-top : 15px;
+	padding-left : 0px;
+}
+
+input[type="text"]{
+	padding : 0.1em;
+	border : solid 1px #cccccc;
+	width : 90%;
+}
+
+#wrap{
+	margin : 0px auto;
+	text-align : left;
+	width : 100%;
+}
+
+#logo{
+	padding-top : 12px;
+	padding-left : 48px;
+	padding-bottom : 32px;
+
+	background : url(../img/mark4.png) no-repeat;
+	font-weight : 800;
+	font-size : 120%;
+}
+
+
+
+.alink1{
+	color : #000000;
+	text-decoration: none;
+}
+
+
+
+.tableLogin{
+	margin-top : 10px;
+	margin-left : 10px;
+}
+
+.tableLogin th{
+	padding-top : 25px;
+}
+
+.tableLogin td{
+	padding-top : 20px;
+	text-align:left;
+}
+
+
+.tableLogin td{
+	padding-left : 30px;
+}
+
+
+#header {
+	position: relative;
+	width : 100%;
+	height: 40px;
+
+	background : #EEEEEE;
+}
+
+.logout{
+	position:absolute;
+
+	top:50%;
+	right:10px;
+	margin-top: -0.75em;
+}
+
+
+#contentsLeft{
+	width : 198px;
+	float : left;
+	margin-top : 20px;
+}
+
+.menuList{
+	width : 100%;
+	border : solid 1px #cccccc;
+	border-top : none;
+}
+
+.menuList dt,
+.menuList dd{
+	padding : 5px;
+}
+
+.menuList dd div{
+	padding-top : 3px;
+	padding-left : 18px;
+	min-height : 25px;
+	
+	background : url(../img/mark6.jpg) no-repeat;
+
+}
+
+
+.menuTitle{
+	padding : 5px;
+
+	width : 100%;
+	height : 22px;
+
+	background : url(../img/subTitle1.jpg) no-repeat;
+}
+
+
+#contentsMenuTitle{
+	padding-top : 3px;
+	padding-left : 19px;
+	width : 150px;
+
+
+	background : url(../img/mark3.png) no-repeat;
+	font-weight : 800;
+}
+
+
+#contentsMain{
+	padding : 10px;
+	margin-top : 20px;
+	margin-bottom : 5px;
+	margin-left : 1%;
+	width : 80%;
+	float : left;
+
+	border : solid 1px #dddddd;
+}
+
+
+#floatNew{
+	padding-top : 5px;
+	padding-right : 40px;
+	float : right;
+	width  :30%;
+	text-align : right;
+}
+
+#nowLoading{
+	position:absolute;
+	width : 100%;
+	height : 100%;
+	z-index : 100;
+
+	padding-top : 30%;
+	text-align : center;
+	
+	background : #000000;
+	filter: alpha(opacity=50);
+	-moz-opacity: 0.5;
+	opacity: 0.5;
+	color : #FFFFFF;
+	font-size : 16px;
+	font-weight : 800;
+	display:none;
+}
+

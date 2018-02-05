@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>お支払いの最終確認</title>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+
+
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+<h2 class="subTitle">お支払いの最終確認</h2>
+<br class="fc" />
+
+<table class="tableNormal">
+		<tr><th>お名前:</td><td><?php echo $res["LASTNAME"]." ".$res["FIRSTNAME"] ?></tr>
+		<tr><th>Email:</td><td><?php echo  $res["EMAIL"] ?></tr>
+		<tr><th>金額</td><td><?php echo  number_format($res["AMT"]) ?>円</tr>
+		<tr><th>受講プラン</th><td><?php echo  $arrayCource["courceStyleName"] ?></td></tr>
+		<tr><th>決済種類</th><td><?php echo $typeName; ?></td>
+		</tr>
+
+</table>
+
+<div class="text-center">
+	<br /><br />
+	<form action='/mypage/pay/end2/' method='POST' class="mtNormla">
+	<input type="submit" value="支払いを完了" class="btn btn-lg btn-primary" />
+	</form>
+	<br />
+	<form action='/mypage/' method='POST' class="mtNormla">
+	<input type="submit" value="支払いをやめる" class="btn btn-lg btn-primary" />
+	</form>
+</div>
+
+</div>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

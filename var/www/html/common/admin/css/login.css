@@ -1,0 +1,22 @@
+#login{
+	position:absolute;
+	padding-left : 20px;
+
+	top:50%;
+	left:50%;
+	margin-left: -245px;
+	margin-top: -208px;
+	width : 491px;
+	height : 308px;
+	text-align:left;
+
+	background : url(../img/frame1.jpg) no-repeat;
+}
+
+#loginString{
+	margin-top : 20px;
+	padding-top : 3px;
+	padding-left : 35px;
+
+	background : url(../img/new.jpg) no-repeat;
+}

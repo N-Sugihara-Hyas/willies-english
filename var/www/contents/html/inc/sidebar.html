@@ -1,0 +1,169 @@
+ <div class="col-md-4 col-md-pull-8" id="sidebar">	
+	<div class="panel panel-danger">
+	  <div class="panel-heading">
+	    <h3 class="panel-title"><i class="glyphicon glyphicon-tag"></i>英語学習のお悩み解決他</h3>
+	  </div>
+	  <div class="panel-body">	
+			・<a href="http://williesenglish.jp/advice.html" target="_blank">英語学習のお悩み解決 （必ずお読み下さい）</a><br />
+			・<a href="http://williesenglish.jp/questions.html" target="_blank">レッスンに関する重要なQ&A</a>
+	  </div>
+	</div>
+		
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title"><i class="glyphicon glyphicon-user"></i>生徒情報</h3>
+	  </div>
+	  <div class="panel-body">	
+			<table class="tableWhite">
+			<tr><th>氏名</th><td><?php out($arrayUser['memberNameFirstEnglish']); ?> <?php out($arrayUser['memberNameSecoundEnglish']); ?></td></tr>
+			<tr><th>Skype ID</th><td><?php out($arrayUser['skypeID']); ?></td></tr>
+			<tr><th>ID</th><td><?php echo $arrayUser['id']; ?></td></tr>
+			</table>
+	
+			<?php if ($arrayUser['isSetting']){ ?>
+			<div class="text-center mt">
+			<a href="/mypage/profile/edit/" class="btn btn-danger"><i class="glyphicon glyphicon-cog"></i>プロフィール</a>
+			</div>
+			<?php } ?>
+	  </div>
+	</div>
+	
+	
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title"><i class="glyphicon glyphicon-list-alt"></i>レギュラーコース情報</h3>
+	  </div>
+	  <div class="panel-body">
+			<?php if ($arrayUser['isSetting']){ ?>
+				<table class="tableWhite mtNormal">
+				<tr><th>受講コース</th><td><?php out($arraySideCourceBase['courceName']); ?></td></tr>
+				<tr><th nowrap>受講プラン</th><td><?php out($arraySideCourceStyle['courceStyleName']); ?><a href="/mypage/pay/planChange/">>> プラン変更方法</a></td></tr>
+			
+				<?php if ($arraySideCourceStyle['weekTake']){ ?>
+					<tr><th>スケジュール</th><td><?php echo $scheduleName; ?> <?php echo date('H:i', strtotime($arrayUser['timeStart'])); ?> – <?php echo date('H:i', strtotime($arrayUser['timeEnd'])); ?><?php if ($isChange){ ?>
+					<a href="/mypage/setting/changeWeek/" class="buttonNormal" style="min-width : 70px;width:70px;">変更</a></td></tr>
+					<?php } ?>
+				<?php } ?>
+			
+				<tr><th>現行レベル</th><td>
+				<?php if ($arrayUser['isPay']){ ?>
+					レッスン中
+				<?php }else{ ?>
+					体験レッスン中
+				<?php } ?>
+				
+				<div>					
+				<?php if ($arrayUser['cource_base_id'] == 1){ ?>
+					Kids Level
+					 L <?php echo $arrayUser['level']; ?>
+				<?php }else{ ?>
+					<?php if ($arrayUser['levelRLC']){ ?>
+						RLC(音読)  L<?php echo $arrayUser['levelRLC']; ?> 
+					<?php } ?>
+					<?php if ($arrayUser['levelGCC']){ ?>
+						GCC(英文)  L<?php echo $arrayUser['levelGCC']; ?> 
+					<?php } ?>
+				<?php } ?>
+				</div>
+			</td></tr>
+			
+			<?php if ($arraySideCourceStyle['weekTake']){ ?>
+			<tr><th>担当講師</th><td><?php out($arrayTakeBase['nickname']); ?></td></tr>
+			<tr><th nowrap>担当講師Skype ID</th><td><?php out($arrayTakeBase['skypeID']); ?></td></tr>
+			<?php } ?>
+			<tr><th nowrap>教材名</th><td>
+				<?php if ($arrayTextBook){foreach ($arrayTextBook as $objText){ ?>
+				<p>・<?php echo $objText['teachingName']; ?></p>
+				<?php }} ?>
+			</td></tr>
+			
+			</table>
+			
+			<div class="text-center mt">
+				<a href="/mypage/subText/" class="btn btn-success"><i class="glyphicon glyphicon-book"></i>他の教材をリクエストする</a>
+			</div>
+			<br />
+			
+			
+			
+
+		
+		<?php }else{ ?>
+		<div class="errorBox mtNormal">
+		未設定
+		</div>
+		<?php } ?>
+	
+	</div>
+ </div>
+ 
+	<?php if ($arrayUser['isSetting']){ ?>
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title"><i class="glyphicon glyphicon-file"></i><?php if ($arraySideCourceStyle['weekTake']){ ?>振替<?php } ?>レッスン予約</h3>
+	  </div>
+	  <div class="panel-body">	
+	
+				<?php if (!$arraySideCourceStyle['weekTake']){ ?>
+			<table class="tableWhite">
+			<tr><th>レッスンポイント</th><td><?php out($arrayUser['countLesson']); ?></td></tr>
+			</table>
+			<?php if (isset($isLesson)){ ?>
+			<div class="text-center mt">
+			<a href="javascript:MainNowLoading.show();location.href='/mypage/return/step1/?type=1';" class="btn btn-primary"><i class="glyphicon glyphicon-star"></i>レッスン予約</a>
+			</div><br />
+			<?php } ?>
+			<div class="text-center">
+			<a href="/mypage/pay/first2/" class="btn btn-primary" style="width:300px;"><i class="glyphicon glyphicon-star"></i>レッスンポイントの追加購入はこちら</a>
+			</div>
+			<?php } ?>
+			
+			<table class="tableWhite">
+			<tr><th>振替ポイント</th><td><?php out($arrayUser['countReturn']); ?></td></tr>
+			</table>
+	
+	  </div>
+		<?php if ($arrayUser['countReturn']){ ?>
+		<div class="text-center mt">
+			<a href="javascript:MainNowLoading.show();location.href='/mypage/return/step1/?type=2';" class="btn btn-danger"><i class="glyphicon glyphicon-star"></i>振替レッスン予約</a>
+		</div>
+		<?php } ?>
+		
+		<div class="text-center mt">
+		<a href="/mypage/pay/first2/" class="btn btn-success"><i class="glyphicon glyphicon-star"></i>振替ポイントの追加購入はこちら</a>
+		</div><br />
+	</div>
+
+ <?php } ?>
+	
+	<?php if ($arrayUser['isSetting']){ ?>
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title"><i class="glyphicon glyphicon-file"></i>英作文道場・教材案内他</h3>
+	  </div>
+	  <div class="panel-body">	
+			
+				
+				・<a href="/mypage/info/history/">受講履歴</a><br />
+			
+				<?php if (!isset($isLesson)){ ?>		
+					・<a href="/mypage/exercise/list/">英作文道場</a>&nbsp;&nbsp;<a href="http://williesenglish.jp/_src/sc1380/weekly20feedback81u89p8dec95b693b98fea81i81v82c982c282a282c4.pdf" target="_blank">(英作文道場の使い方はこちら）</a><br />
+				<?php } ?>
+				・<a href="http://williesenglish.jp/lesson_plan.html" target="_blank">今後のレッスン計画・教材案内</a><br />
+				・<a href="http://williesenglish.jp/textbook_trial_lesson.html" target="_blank">体験レッスン用教材案内</a><br / >
+				・<a href="/mypage/info/holiday/">フィリピンの祝日と休校日案内</a><br />
+				・<a href="http://williesenglish.jp/student_mypage.html" target="_blank">生徒マイページの使い方</a><br />
+				<?php foreach ($arrayMenu as $item){ ?>
+				・<?php if ($item['url']){ ?><a href="<?php echo $item['url']; ?>" target="_blank"><?php }else{  ?><a href="/mypage/menu/details/<?php echo $item['id']; ?>"><?php } ?><?php if ((time() - (3600 * 24 * 4)) < strtotime($item['modified'])){ ?><span><?php } ?><?php echo $item['subject']; ?>
+					</a><br />
+				<?php } ?>
+
+	  </div>
+	</div>
+	<?php } ?>
+	
+	<div style="padding:10px;">
+		<?php require $this->arrayDir['dirHtml'] . 'inc/sns.html'; ?>
+	</div>
+</div>
+

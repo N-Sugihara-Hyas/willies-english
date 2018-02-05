@@ -1,0 +1,5 @@
+			<?php if (isset($item['api']) && (!empty($arrayInput[$key]))){ ?>
+			<img src="<?php echo $item['api']; ?>/<?php echo getVar($arrayInput, $key); ?>/?cID=<?php echo $key; ?>" class="mt1" />
+			<?php }else{ ?>
+			<?php echo $arrayInput[$key]; ?>
+			<?php } ?>

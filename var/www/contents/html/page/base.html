@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title><?php echo $subject; ?></title>
+
+<link rel="stylesheet" type="text/css" href="/common/css/layout.css" id="layout-css" />
+<link rel="stylesheet" type="text/css" href="/common/css/tool.css" id="layout-css" />
+<script type="text/javascript" src="/common/js/nsg/jquery.js"></script>
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents">
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+
+<div id="contentsBody">
+<h2 class="subTitle"><?php echo $subject; ?></h2>
+
+<?php echo $body; ?>
+
+</div>
+<br class="fc" />
+
+<table class="tableNormal mtNormal">
+<tr>
+<?php  require_once $this->arrayDir['dirProgram'] . "template/listHeader.html"; ?>
+<th>内容</th>
+</tr>
+<?php while ($item = $arrayData['arrayList']->getData()){ ?>
+<tr id="item<?php echo $item['id']; ?>" >
+<td>
+<a href="/<?php echo $this->arrayAction['dir']; ?>edit/<?php echo $item['id']; ?>">内容を見る</a>
+</td>
+<td>
+<?php echo $item['id']; ?>
+</td>
+<?php  require $this->arrayDir['dirProgram'] . "template/listBodyAll.html"; ?>
+<td>
+<?php out($item['body'], 20); ?>
+</td>
+</tr>
+<?php } ?>
+
+</table>
+<br /><br />
+
+</div>
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

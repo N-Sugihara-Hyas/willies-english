@@ -1,0 +1,50 @@
+<div class="title mtNormal" style="font-size : 130%;font-weight:800;"><?php echo $arrayUser['companyName']; ?> 生徒一覧</div>
+	
+<div id="contentsLeft">
+
+	<div class="menuTitle">
+		<div id="contentsMenuTitle">
+			閲覧ID, パスワード
+		</div>
+	</div>
+	<dl class="menuList" class="fc">
+		<dd class="center">
+			<a href="" class="mtNormal buttonNormal" style="width:100px;" onclick="$('#loginpass').css('display', 'block');return false;">確認・変更</a>
+			
+				<form action="/company/login/pass/?return=<?php echo urlencode($my); ?>"method="post" id="loginpass" style="display:none;text-align:left;"> 
+					<p>ID:<?php echo $arrayUser['loginID']; ?></p>
+					<p>パスワード:<input type="text" name="pass" value="<?php echo $SecurtyCode->getDecode($arrayUser['pass']); ?>" /></p>
+					<p class="center"><input type="submit" value="変更" /></p>
+				</form>
+		</dd>
+	</dl>
+
+			
+	<div class="menuTitle mtNormal">
+		<div id="contentsMenuTitle">
+			TOPに戻る
+		</div>
+	</div>
+	<dl class="menuList" class="fc">
+		<dd class="center">
+			<a href="/company/customer/list/" class="buttonNormal" style="width:100px;">TOPに戻る</a>
+		</dd>
+	</dl>
+	
+	<div class="menuTitle mtNormal">
+		<div id="contentsMenuTitle">
+			生徒一覧
+		</div>
+	</div>
+	<dl class="menuList" class="fc">
+		<dd>
+			<?php foreach ($arraySideMember as $objMember){ ?>
+			<div>
+				<a href="/company/customer/history/<?php echo $objMember['id']; ?>/">ID:<?php echo $objMember['id']; ?>&nbsp;<?php echo $objMember['memberNameSecound'] . ' ' . $objMember['memberNameFirst']; ?></a>
+			</div>
+			<?php } ?>
+		</dd>
+	</dl>
+
+</div>
+

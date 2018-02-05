@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>次回レッスンの範囲と宿題</title>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+<h2 class="subTitle">次回レッスンの範囲と宿題</h2>
+<br class="fc" />
+
+	<table class="tableNormal">
+	<tr>
+		<th>宿題投稿日</th><td><?php echo $arrayInput['created']; ?></td>
+	</tr>
+
+	<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/editorConfirmation.html' ?>
+
+	</table>
+	<br />
+
+	<div class="mt" class="text-center">
+		<a href="/<?php echo $this->arrayAction['dir']; ?>list/" class="btn btn-lg btn-primary">リストに戻る</a>
+	</div>
+
+</div>
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

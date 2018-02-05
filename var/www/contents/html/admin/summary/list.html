@@ -1,0 +1,44 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+<h3 class="subTitle"> Summary of Students List </h3>
+
+
+
+<table class="tableNormal mtNormal">
+<tr>
+<th>Course</th><th>Plan</th><?php foreach ($arrayMemberState as $item){ ?><th><?php echo $item['value']; ?></th><?php } ?>
+</tr>
+
+<?php foreach ($arrayMember as $key => $item){ ?>
+<?php foreach ($item as $key2 => $item2){ ?>
+<tr>
+<th>
+<?php echo $key; ?>
+</th>
+<th>
+<?php echo $key2; ?>
+</th>
+
+<?php foreach ($item2 as $item3){ ?>
+<td><?php echo $item3; ?></td>
+<?php } ?>
+
+</tr>
+
+<?php } ?>
+<?php } ?>
+
+</table>
+<br /><br />
+
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

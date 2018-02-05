@@ -1,0 +1,52 @@
+<h3 class="subTitle left"><?php echo $arraySettingAdmin['title'];$this->Lang->change('listTitle', 'の一覧'); ?></h3>
+
+
+<?php if ($arraySettingAdmin['isNew']){ ?>
+<div class="fc" align="right">
+<form action="/<?php echo $this->arrayAction['dir']; ?>edit/" method="post">
+<input type="submit" value="<?php $this->Lang->change('buttonNew', '新規登録'); ?>" class="buttonNormal" target="contentsFrame" />
+</form>
+</div>
+<?php } ?>
+
+<?php if ($arrayData['naviCountEnd'] > 1){ ?>
+<div class="center">
+<ul class="pageNavi">
+<?php  if ($page){ ?>
+<a href="/<?php echo $this->arrayAction['dir']; ?>list/?page=<?php echo $page-1; ?>&<?php if (isset($plusNavi)){echo $plusNavi;} ?>"><li>&lt;</li></a>
+<?php } ?>
+<?php for ($i = $arrayData['naviCountStart']; $i < $arrayData['naviCountEnd']; $i++){ ?>
+<a href="/<?php echo $this->arrayAction['dir']; ?>list/?page=<?php echo $i; ?>&<?php if (isset($plusNavi)){echo $plusNavi;} ?>"><li><?php echo $i+1; ?></li></a>
+<?php } ?>
+
+<?php  if ($page < $arrayData['naviCountEnd']-1){ ?>
+<a href="/<?php echo $this->arrayAction['dir']; ?>list/?page=<?php echo $page+1; ?>&<?php if (isset($plusNavi)){echo $plusNavi;} ?>"><li>&gt;</li></a>
+<?php } ?>
+</ul>
+</div>
+<?php } ?>
+
+<br class="fc">
+
+
+<?php if ($e == 'reflash'){ ?>
+<p class="errorBox">
+データを更新しました。
+</p>
+<br />
+<?php } ?>
+
+<?php if ($e == 'errorDel'){ ?>
+<p class="errorBox">
+削除する物をチェックして下さい。
+</p>
+<br />
+<?php } ?>
+
+
+<?php if ($e == 'reflashDel'){ ?>
+<p class="errorBox">
+該当を削除しました。
+</p>
+<br />
+<?php } ?>

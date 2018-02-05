@@ -1,0 +1,16 @@
+	<?php if (isset($arrayData['arrayCount'])){ ?>
+	<div class="pageNavi clearfix" style="width : 100%;">
+		<div class="left">
+			&nbsp;
+			<?php if (isset($arrayData['back'])){ ?>
+			<a href="<?php getNavi(array('page' => $page-1)); ?>#bbsList" class="buttonGlay3">&lt;&lt;Previous</a>
+			<?php } ?>
+		</div>
+
+		<div class="right">
+		<?php if ($arrayData['naviCountMax'] > $page+1){ ?>
+			<a href="<?php getNavi(array('page' => $page+1)); ?>#bbsList" class="buttonGlay3">Next&gt;&gt;</a>
+		<?php } ?>
+		</div>
+	</div>
+	<?php } ?>

@@ -1,0 +1,72 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/listHeader.html' ?>
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>list/" method="post">
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/listSearch.html' ?>
+
+<div align="center" class="mtNormal">
+<input type="submit" value="<?php $this->Lang->change('buttonSearch', '完全一致'); ?>" class="buttonNormal" /></div>
+</form>
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>del/" method="post" id="frm" class="fc">
+<br />
+<table class="tableNormal mtNormal">
+<tr>
+<th></th>
+<th>Time</th>
+<th>Feedback Type</th>
+<th>Student ID,<br />Name</th>
+<th>Teacher</th>
+<th>See Detail</th>
+</tr>
+
+</form>
+
+<?php while ($item = $arrayData['arrayList']->getData()){ ?>
+<tr id="item<?php echo $item['id']; ?>" >
+<td><?php if (!$item['isOpen']){ ?><a href="/admin/feedbackTake/edit/<?php echo $item['id']; ?>/">●</a><?php } ?></td>
+<td><?php echo date('M d H:i', strtotime($item['created'])); ?></td>
+<td>
+	<?php if (time() - (3600 * 24 * 2) < strtotime($item['created'])){ ?>
+	<?php echo $arrayCardReview[$item['type']]['value']; ?>
+	<?php }else{ ?>
+	<?php echo $arrayFeedLevel[$item['type']]['value']; ?>
+	<?php } ?>
+
+</td>
+<?php  require $this->arrayDir['dirProgram'] . "template/listBodyAll.html"; ?>
+<td>
+	<?php echo $item['member_base_id']; ?><br /><?php echo $item['memberNameSecound']; ?> <?php echo $item['memberNameFirst']; ?>
+	<br />
+		<form action="/login/auth/" method="post" target="_blank">
+		<input type="hidden" name="isMaster" value="1" />
+		<input type="hidden" name="email" value="<?php echo $item['email']; ?>" />
+		<input type="hidden" name="pass" value="<?php echo $SecurtyCode->getDecode($item['pass']); ?>" />
+		<input type="submit" value="Login" />
+		</form>
+
+</td>
+<td>
+	<?php echo $item['takeName']; ?>
+</td>
+<td><a href="/admin/feedbackTake/edit/<?php echo $item['id']; ?>/">Detail</a></td>
+</tr>
+<?php } ?>
+
+</table>
+<br /><br />
+
+<input type="button" value="<?php $this->Lang->change('buttonDel', '削除'); ?>" class="buttonNormal" onclick="if(window.confirm('<?php $this->Lang->change('buttonDel', '削除'); ?>してもよろしいですか？')){$('#frm').submit();}">
+</form>
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

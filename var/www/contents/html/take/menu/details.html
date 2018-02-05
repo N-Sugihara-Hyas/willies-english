@@ -1,0 +1,32 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title><?php echo $arrayUser['nickname']; ?></title>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'take/inc/menu.html' ?>
+
+<div id="contentsMain">
+
+<h2 class="subTitle"><?php echo $arrayData['subject']; ?></h2>
+
+
+<?php echo nl2br($arrayData['body']); ?>
+
+<div class="mt">
+<?php if ($arrayData['fileName1']){ ?><a href="/take/api/download/<?php echo $arrayData['fileName1']; ?>" class="buttonNormal mtNormal" style="max-width:auto;width:auto;padding : 10px;"><?php echo $arrayData['fileNameLabel1']['name'];  ?></a><br /><?php } ?>
+<?php if ($arrayData['fileName2']){ ?><a href="/take/api/download/<?php echo $arrayData['fileName2']; ?>" class="buttonNormal mtNormal" style="max-width:auto;width:auto;padding : 10px;"><?php echo $arrayData['fileNameLabel2']['name'];  ?></a><br /><?php } ?>
+<?php if ($arrayData['fileName3']){ ?><a href="/take/api/download/<?php echo $arrayData['fileName3']; ?>" class="buttonNormal mtNormal" style="max-width:auto;width:auto;padding : 10px;"><?php echo $arrayData['fileNameLabel3']['name'];  ?></a><br /><?php } ?>
+<?php if ($arrayData['fileName4']){ ?><a href="/take/api/download/<?php echo $arrayData['fileName4']; ?>" class="buttonNormal mtNormal" style="max-width:auto;width:auto;padding : 10px;"><?php echo $arrayData['fileNameLabel4']['name'];  ?></a><br /><?php } ?>
+<?php if ($arrayData['fileName5']){ ?><a href="/take/api/download/<?php echo $arrayData['fileName5']; ?>" class="buttonNormal mtNormal" style="max-width:auto;width:auto;padding : 10px;"><?php echo $arrayData['fileNameLabel5']['name'];  ?></a><br /><?php } ?>
+
+</div>
+
+</div>
+
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

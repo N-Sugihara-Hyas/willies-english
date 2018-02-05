@@ -1,0 +1,49 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/listHeader.html' ?>
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>list/" method="post">
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/listSearch.html' ?>
+
+<div align="center" class="mtNormal">
+<input type="submit" value="<?php $this->Lang->change('buttonSearch', '完全一致'); ?>" class="buttonNormal" /></div>
+</form>
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>del/" method="post" id="frm" class="fc">
+<br />
+<table class="tableNormal mtNormal">
+<tr>
+<?php  require_once $this->arrayDir['dirProgram'] . "template/listHeader.html"; ?>
+<th>Text</th>
+</tr>
+
+<?php while ($item = $arrayData['arrayList']->getData()){ ?>
+<tr id="item<?php echo $item['id']; ?>" >
+<td>
+<input type="checkbox" value="<?php echo $item['id']; ?>" name="arrayDel[<?php echo $item['id']; ?>]" />
+<a href="/<?php echo $this->arrayAction['dir']; ?>edit/<?php echo $item['id']; ?>"><?php $this->Lang->change('buttonEdit', '編集'); ?></a>
+</td>
+<td>
+<?php echo $item['id']; ?>
+</td>
+<?php  require $this->arrayDir['dirProgram'] . "template/listBodyAll.html"; ?>
+<td><?php out($item['body'], 20); ?></td>
+</tr>
+<?php } ?>
+
+</table>
+<br /><br />
+
+<input type="button" value="<?php $this->Lang->change('buttonDel', '削除'); ?>" class="buttonNormal" onclick="if(window.confirm('<?php $this->Lang->change('buttonDel', '削除'); ?>してもよろしいですか？')){$('#frm').submit();}">
+</form>
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

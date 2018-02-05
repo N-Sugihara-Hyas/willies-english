@@ -1,0 +1,106 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title><?php echo $arrayUser['nickname']; ?></title>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'take/inc/menu.html' ?>
+
+<div id="contentsMain">
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/listHeader.html' ?>
+
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>list/" method="post">
+
+<div class="cicleNormal2">Put Student’s Name or Student’s ID to sort student info</div>
+<input type="text" name="keyword" value="<?php echo $keyword; ?>" /><br /><br />
+
+
+<input type="checkbox" name="member_base_id" id="member_base_id" value="1" <?php if (isset($member_base_id)){ ?> checked<?php } ?>/><label for="member_base_id">Sort Your Students</label><br /><br />
+
+
+<div align="center" class="mtNormal">
+<input type="submit" value="Enter" class="buttonNormal" />
+</div>
+</form>
+
+<br />
+
+<div style="overflow-x:scroll;width:100%;">
+<table class="tableNormal mtNormal" style="width:1500px;">
+<tr>
+<th>
+ID
+</th>
+<th>
+Name
+</th>
+<th>
+Skype ID
+</th>
+<th>
+Cource | Type
+</th>
+<th>
+Level
+</th>
+<th>
+Textbook
+</th>
+
+<th>
+Teacher
+</th>
+<th>
+Detail | Homework | Feedback | etc
+</th>
+</tr>
+
+<?php foreach ($arrayData['arrayList'] as $item){ ?>
+<tr id="item<?php echo $item['id']; ?>" >
+<td>
+<?php echo $item['id']; ?>
+</td>
+<td>
+<?php echo $item['memberNameFirstEnglish']; ?>&nbsp;
+<?php echo $item['memberNameSecoundEnglish']; ?>
+</td>
+<td><?php echo $item['skypeID']; ?></td>
+<td><?php echo $item['courceNameEnglish']; ?> | <?php echo $item['styleType']; ?></td>
+<td>
+	<?php if ($item['cource_base_id'] == 1){ ?>
+	lavelKids:
+	<?php if ($item['level'] == 5){ ?>1<?php }else{ echo $item['level']; ?><?php } ?>
+	
+	<?php }else{ ?>
+	lavelGCC:<?php echo $item['levelGCC']; ?>
+	 lavelRLC:<?php echo $item['levelRLC']; ?>
+	<?php } ?>
+	
+</td>
+<td>
+<?php foreach ($item['arrayText'] as $keyText => $objText){ ?>
+	<?php echo $keyText; ?>:<?php echo $objText['teachingName']; ?><br />
+<?php } ?>
+</td>
+<td><?php echo $item['nickname']; ?></td>
+<td>
+
+<form action="/take/ext/list/" method="get">
+<input type="hidden" name="id" value="<?php echo $item['id']; ?>" style="width:3em;" />
+<input type="submit" value="Click" />
+</form>
+
+
+</td>
+</tr>
+<?php } ?>
+</table>
+<br /><br />
+
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

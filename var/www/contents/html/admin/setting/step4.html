@@ -1,0 +1,59 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<script type="text/javascript" src="/common/js/jquery.js"></script>
+<script type="text/javascript" src="/common/js/NowLoading.js"></script>
+
+<script>
+	MainNowLoading = new ShowNowLoading('.blackBack');
+</script>
+
+</head>
+
+<div id="contentsMain">
+
+<h2 class="subTitle">受講スケジュールの選択　（レッスン時間帯の選択）</h2>
+
+<p>
+【選択された受講スケジュールの内容】<br />
+・ 受講曜日：毎週 <?php out($arraySchedule['value']); ?><br />
+・ 第１回レッスン日：<?php out(date('m/d', strtotime($dateFirst))); ?>(<?php out($arrayWeek[date('w', strtotime($dateFirst))]); ?>)<br /><br />
+</p>
+
+<p>
+現在、毎週 <?php out($arraySchedule['value']); ?>コースの予約可能時間帯は以下となります。
+ご希望の時間帯を選択し次へボタンを押し、ご希望の講師を選択して下さい。
+他の時間帯をご希望の場合は、前へボタンを押し、他の受講曜日を選択して下さい。
+</p>
+
+<table class="tableNormal">
+<tr>
+<th>レッスン時間</th><th>予約確定</th>
+</tr>
+<?php 
+	foreach ($arrayCourceSchedule as $key => $items){ 
+		$item = array_shift($items);
+	
+?>
+
+<tr>
+<td><?php out(date('A H:i', strtotime($item['timeStart']))); ?>～<?php out(date('A H:i', strtotime($item['timeEnd']))); ?></td>
+<td><a href="javascript:MainNowLoading.show();location.href='/admin/setting/step5/?&time=<?php out($item['timeStart']); ?>';">予約</a></td>
+</tr>
+<?php } ?>
+</table>
+
+<div align="center">
+<a href="/admin/setting/step3/" class="buttonNormal mtNormal">前へ</a>
+</div>
+
+<br />
+</div>
+
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

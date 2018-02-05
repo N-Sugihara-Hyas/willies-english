@@ -1,0 +1,21 @@
+<th>
+
+
+ID
+</th>
+({foreach from=$arrayColum key=key item=item})
+({if $item.list})
+
+({if isset($item.name)})
+<th>
+
+
+({$item.name})
+
+</th>
+({/if})
+
+({/if})
+({/foreach})
+
+

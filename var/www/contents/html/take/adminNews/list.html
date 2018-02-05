@@ -1,0 +1,53 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title><?php echo $arrayUser['nickname']; ?></title>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'take/inc/menu.html' ?>
+
+<div id="contentsMain">
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/listHeader.html' ?>
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>list/" method="post">
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/listSearch.html' ?>
+
+<div align="center" class="mtNormal">
+<input type="submit" value="<?php $this->Lang->change('buttonSearch', '完全一致'); ?>" class="buttonNormal" /></div>
+</form>
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>del/" method="post" id="frm" class="fc">
+<br />
+<table class="tableNormal mtNormal">
+<tr>
+<?php  require_once $this->arrayDir['dirProgram'] . "template/listHeader.html"; ?>
+<th>
+日付
+</th>
+</tr>
+
+<?php while ($item = $arrayData['arrayList']->getData()){ ?>
+<tr id="item<?php echo $item['id']; ?>" >
+<td>
+<a href="/<?php echo $this->arrayAction['dir']; ?>edit/<?php echo $item['id']; ?>">Detail</a>
+</td>
+<td>
+<?php echo $item['id']; ?>
+</td>
+<?php  require $this->arrayDir['dirProgram'] . "template/listBodyAll.html"; ?>
+<td>
+<?php echo $item['created']; ?>
+</td>
+</tr>
+<?php } ?>
+
+</table>
+<br /><br />
+
+</form>
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

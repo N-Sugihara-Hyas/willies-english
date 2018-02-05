@@ -1,0 +1,107 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<script type="text/javascript" src="/common/js/jquery.js"></script>
+<script type="text/javascript" src="/common/js/week.js"></script>
+<script type="text/javascript" src="/common/js/NowLoading.js"></script>
+
+<script>
+	MainNowLoading = new ShowNowLoading('.blackBack');
+
+	function changeSchdule(){
+		MainNowLoading.show();
+
+		arrayWeekFirst = getNextWeekFirst($('#cource_schdule_id').children(':selected').text(), <?php echo time(); ?>);
+
+		$('#dateFirst > option').remove();
+		$('#dateFirst').append($('<option>').html('未選択').val(''));
+
+		loadData();
+	}
+
+	function loadData(){
+		for (key in arrayWeekFirst){
+			arrayWeekOwn = arrayWeekFirst[key].split('(');
+
+			$.ajax({
+				url : '/api/checkReserve/' + arrayWeekOwn[0] + '?out=' + encodeURI(arrayWeekFirst[key]),
+				cache: false,
+				type : "post",
+				success: complateWeekSetHandle
+			});
+
+			delete arrayWeekFirst[key];
+			break;
+		}
+	}
+
+	function complateWeekSetHandle(data){
+		if (data){
+			arrayWeekOwn = data.split(',');
+			$('#dateFirst').append($('<option>').html(arrayWeekOwn[1]).val(arrayWeekOwn[0]));
+		}
+
+		for (var key in arrayWeekFirst){}
+
+
+		if (key){
+			loadData();
+		}else{
+			MainNowLoading.hidden();
+		}
+	}
+</script>
+
+
+<div id="contentsMain">
+
+<h2 class="subTitle">受講スケジュールの選択　（受講曜日と第１回体験レッスン日の選択）</h2>
+
+<?php if ($error){ ?>
+<div class="errorBox">
+受講スケジュールを選択して下さい。
+</div>
+<br />
+<?php } ?>
+
+<table class="tableNormal">
+<tr>
+<th width="35%">
+受講曜日
+</th>
+<td>
+<form action="/admin/setting/step4/" method="post" id="form">
+<select name="cource_schedule_id" onchange="changeSchdule();" id="cource_schdule_id">
+<option value="">選択して下さい</option>
+<?php foreach ($arraySchdule as $key => $item){ ?>
+<option value="<?php echo $item['id']; ?>"><?php echo $item['value']; ?></option>
+<?php } ?>
+</select>
+</td>
+</tr>
+<tr>
+<th>
+第１回体験レッスン日
+</th>
+<td>
+<select name="dateFirst" id="dateFirst">
+<option value="">選択して下さい</option>
+</select>
+</td>
+</tr>
+
+</table>
+
+<div align="center" class="mtNormal">
+<a href="/admin/setting/<?php if (isset($isOwn)){ ?>first<?php }else{ ?>step2<?php } ?>/" class="buttonNormal">前へ</a>
+<input type="submit" class="buttonNormal" value="次へ" onclick="MainNowLoading.show();$('#form').submit();" />
+</div>
+</form>
+<br />
+
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

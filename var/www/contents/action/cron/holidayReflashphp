@@ -1,0 +1,36 @@
+<?php
+
+	/*
+	*	支払いの無い人間の体験終了の処理
+	*/
+	$this->addModel(array('ext/Holiday', 'ext/HolidayReturn', 'member/Base'));
+		
+
+	$date = '2014-05';
+
+	$this->ExtHoliday->addQuery('dateStart LIKE', $date . '%');
+	$dbGet = $this->ExtHoliday->getData();
+
+	$arraySchedule = $this->ExtHoliday->getFunctionData('Schedule');
+
+
+	while ($item = $dbGet->getData()){
+		$w = date('w', strtotime($item['dateStart']));
+
+		foreach ($arraySchedule as $item2){
+			if (strpos($item2['week'], $w) !== FALSE){
+				$week = $item2['id'];
+			}
+		}
+
+		$this->MemberBase->addQuery('cource_schedule_id', $week);
+		$dbGet2 = $this->MemberBase->getData();
+
+		while ($row = $dbGet2->getData()){
+			$this->ExtHolidayReturn->addDataReturn($row['id'], date('Y-m-d', strtotime($item['dateStart'])), $row['timeStart']);
+		}
+	}
+
+	exit();
+		
+?>

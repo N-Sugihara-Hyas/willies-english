@@ -1,0 +1,31 @@
+<?php
+
+	/*
+	*	支払いの無い人間のコースのキャンセルの処理
+	*/
+	$this->addModel(array('ext/HolidayReturn', 'take/Reserve'));
+		
+
+	$this->ExtHolidayReturn->addQuery('dateTime >', date('Y-m-d'));
+	$dbGet = $this->ExtHolidayReturn->getData();
+
+
+
+	while ($item = $dbGet->getData()){
+		list($date, $time) = explode(' ', $item['dateTime']);
+
+		$this->TakeReserve->addQuery('member_base_id', $item['member_base_id']);
+		$this->TakeReserve->addQuery('date', $date);
+		$this->TakeReserve->addQuery('timeStart', $time);
+		//$this->TakeReserve->delData();
+
+		$arrayTakeReserve = $this->TakeReserve->getData()->getData();
+
+		if ($arrayTakeReserve){
+			print_R($arrayTakeReserve);
+		}
+	}
+	
+	exit();
+		
+?>

@@ -1,0 +1,57 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+
+<script>
+$(function(){
+	$('.class_category').bind('change', '', function(){
+		$('#mode').val('category');
+		$('#formMain').submit();
+	});
+});	
+</script>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/editorHeader.html' ?>
+
+	<?php if ($e == 'reflash'){ ?>
+	<p class="errorBox">
+	データを更新しました。
+	</p>
+	<br />
+	<?php } ?>
+
+		<?php if (isset($isError)){ ?>
+		<div class="errorBox2 fc">
+			<p class="left">
+				入力内容に誤りがあります。
+			</p>
+			<br class="fc" />
+		</div>
+		<br />
+		<?php } ?>
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>csv/<?php echo $uid; ?>/#enter" method="post" enctype="multipart/form-data">
+	<p><input type="file" name="csv" /></p>
+	<p><a href="/csv/lesson.csv">サンプルCSV</a></p>
+
+<div align="center">
+	<input type="submit" value="<?php if ($uid){ ?><?php $this->Lang->change('buttonEdit', '編集'); ?><?php }else{ ?><?php $this->Lang->change('buttonRegist', '登録'); ?><?php } ?>" class="buttonNormal">
+
+<?php if ($uid){ ?>
+	<a href="/<?php echo $this->arrayAction['dir']; ?>del/?arrayDel[<?php echo $uid; ?>]=<?php echo $uid; ?>" class="buttonNormal"><?php $this->Lang->change('buttonDel', '削除'); ?></a>
+<?php } ?>
+	<a href="/<?php echo $this->arrayAction['dir']; ?>list/" class="buttonNormal"><?php $this->Lang->change('buttonList', '一覧へ'); ?></a>
+</div>
+
+
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>FLASH CARD：ウィリーズ英語塾</title>
+
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php $cardMenu = 'original';require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+<?php $cardMenu = 'original';require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+	<div id="contentsBody" class="col-md-8 col-md-push-4">
+
+
+<p>
+< カードの作成方法 >　<br />
+レッスンで学んだことなどご自由にカードを作成することができます。<br /><br />
+1. メニューの「オリジナル CARD 作成」 をクリックし、ご自身のCARDを作成してください。<br />
+2. 「Create New Card」 ボタンをクリックしてください。<br />
+3. 任意の単語帳Titleを作成し、Titleをプルダウンメニューから選択してください。<br />
+4. あとは単語帳の要領で、Card (表) と Card (裏) を作成していきます。「次のカードへ」ボタンをクリックすると２枚目、３枚目のカードが作成できます。<br />
+5. カードを作成し終えたら、「登録・編集を確定」ボタンをクリックしてください。<br />
+6. [Edit] 機能を使うことで、後日Cardを追加することも可能です。 <br /><br />
+
+< カードの学習方法 ><br />
+全てのCARDから、確認したいオリジナルCARDをクリックしてください。 するとCARDの(表)が現れますので、クリックしてください。するとCARDの(裏)が表示されます。<br />例えば、(表)「英語を毎日学習しています」→ (裏)「I study English everyday.」となります。<br />
+(裏)の☆マークをクリックすることで、あとで☆マークだけを集中して確認することも可能です。<br />
+</p>
+
+
+<div style="height:300px;overflow:scroll;">
+<table class="tableNormal">
+
+<?php while ($item = $arrayData['dbGet']->getData()){ ?>
+<tr onclick="location.href='/card/original/details/<?php echo $item['id']; ?>/?mode=<?php echo $type; ?>';" style="cursor:pointer;">
+<td class="tdSmall" nowrap><?php echo getNew('<span class="att">New</span>', 14, $item['created']); ?><?php echo date('Y年m月d日', strtotime($item['created'])); ?></td>
+<td class="tdBig" nowrap style="color:#0000FF;"><?php out($item['cardName']); ?></td>
+<td class="tdSmall" nowrap><?php out($item['countCard']); ?>Card <?php if (!$type){ ?> | ★ <?php if (!$item['countAnser']){echo '0';}else{ echo floor( $item['countAnser'] / $item['countCard'] * 100);} ?>%<?php } ?></td>
+</tr>
+<?php } ?>
+</table>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/navi.html'; ?>
+</div>
+</div>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+</div>
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

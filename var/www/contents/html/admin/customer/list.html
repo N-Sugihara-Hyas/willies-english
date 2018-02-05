@@ -1,0 +1,290 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+
+<script type="text/javascript" src="/common/js/nsg/calData.js"></script>
+<script type="text/javascript" src="/common/js/nsg/cal.js"></script>
+
+<link href="/common/css/nsg/cal.css" rel="stylesheet" type="text/css">
+
+<script>
+	$(document).ready(function(){
+			var nsgCaldateDay = new NsgCal('createdStartView', 'createdStart');
+			nsgCaldateDay.getSpecial();
+			nsgCaldateDay.setCal();
+
+			var nsgCaldateDay2 = new NsgCal('createdEndView', 'createdEnd');
+			nsgCaldateDay2.getSpecial();
+			nsgCaldateDay2.setCal();
+
+	});
+</script>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/listHeader.html' ?>
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>list/" method="get">
+
+<div class="cicleNormal2">Insert Customer name or ID</div>
+<input type="text" name="keyword" value="<?php echo $keyword; ?>" /><br /><br />
+
+<div class="cicleNormal2">Insert Teacher name</div>
+<select name="tid">
+<option value="">-</option>
+<?php foreach ($arrayTakeBase as $item){ ?>
+<option value="<?php echo $item['id']; ?>"<?php if ($tid==$item['id']){ ?> selected<?php } ?>><?php echo $item['nickname']; ?></option>
+<?php } ?>
+</select>
+<br />
+<br />
+
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/listSearch.html' ?>
+
+<div class="cicleNormal2 mtNormal">入会日</div>
+
+
+Insert Dates:
+<input type="text"  name="createdStart" id="createdStart" value="<?php echo $createdStart; ?>" style="width:10em;" readonly="readonly" />～
+<div id="createdStartView" class="hiddenCal"></div>
+<input type="text"  name="createdEnd" id="createdEnd" value="<?php echo $createdEnd; ?>" style="width:10em;" readonly="readonly" />
+<div id="createdEndView" class="hiddenCal"></div>
+
+支払不明な人間を抽出する<input type="checkbox" value="0" name="isPayOut" <?php if ($isPayOut){ ?> checked<?php } ?>/>
+
+<div class="cicleNormal2 mtNormal">Paypal lID</div>
+
+
+<input type="text"  name="orderID1" id="orderID1" value="<?php echo $orderID1; ?>" style="width:10em;" />
+
+
+
+
+<div align="center" class="mtNormal">
+<input type="submit" value="<?php $this->Lang->change('buttonSearch', '完全一致'); ?>" class="buttonNormal" /><br />
+<a href="/<?php echo $this->arrayAction['dir']; ?>list/?searchType=clear" class="buttonNormal" />View All</a>
+</div>
+</form>
+
+<br />
+
+<div style="overflow-x:scroll;width:100%;">
+<table class="tableNormal mtNormal" style="width:1500px;">
+<tr>
+<th>
+</th>
+<th>
+ID
+</th>
+<th>
+Date of Apply
+</th>
+<th>
+Request for Substitute lesson
+</th>
+<th>
+referral ID
+</th>
+<th>
+Student Name (kanji)
+</th>
+<th>
+Student Name
+</th>
+<th>
+E-mail
+</th>
+<th>
+Tel
+</th>
+<th>
+SkypeID
+</th>
+<th>
+address
+</th>
+<th>
+occupation
+</th>
+<th>
+current English level
+</th>
+<th>
+goal
+</th>
+<th>
+how do you know WiLLies
+</th>
+<th>
+keyword on your search
+</th>
+<th>
+Regular Lesson Student Status
+</th>
+<th>
+Flash Card Status
+</th>
+<th>
+Group Read Aloud Lesson Status
+</th>
+<th>
+Current Teacher
+</th>
+<th>
+Lesson Course
+</th>
+<th>
+Lesson Style
+</th>
+<th>
+Lesson Schedule
+</th>
+<th>
+Trial Last Date
+<th>
+Trial lesson teacher
+</th>
+</th>
+<th>
+Level
+</th>
+<th>
+Textbook
+</th>
+<th>
+Lesson Record
+</th>
+<th>
+Student's Login Page
+</th>
+<th>
+Teacher's Login Page
+</th>
+<th>
+Mail
+</th>
+<th>
+Mail history
+</th>
+<th>
+communication<br />
+</th>
+<th>
+notes<br />
+</th>
+
+</tr>
+
+<?php foreach ($arrayData['arrayList'] as $item){ ?>
+<tr id="item<?php echo $item['id']; ?>" >
+<td><a href="/<?php echo $this->arrayAction['dir']; ?>edit/<?php echo $item['id']; ?>">Edit</a><br /><a href="/admin/setting/first/<?php echo $item['id']; ?>/" target="_blank">Change</a>
+<a href="javascript:if(window.confirm('本当にいいんですね？')){location.href='/<?php echo $this->arrayAction['dir']; ?>delSch/<?php echo $item['id']; ?>';}">Delete</a>
+</td>
+<td>
+<?php echo $item['id']; ?>
+</td>
+<td>
+<?php echo date('Y/m/d', strtotime($item['created'])); ?>
+</td>
+<td>
+<?php
+	if ($item['acting']){
+		echo 'Yes, request Substitute Lesson';		
+	}else{
+		echo 'No, request Point';				
+	}
+
+?>
+</td>
+<td>
+<?php echo $item['member_base_id_adv']; ?>
+</td>
+<?php  require $this->arrayDir['dirProgram'] . "template/listBodyAll.html"; ?>
+
+<td><?php echo $arrayState[$item['state']]['value']; ?></td>
+<td>
+		<?php if ($item['isPayCard']){ ?>
+		OK
+		<?php }else{ ?>
+		NO
+		<?php } ?>		
+</td>
+<td><?php echo $arrayStateDaily[$item['stateDaily']]['value']; ?></td>
+
+<td><?php echo $item['nickname']; ?></td>
+<td><?php echo $item['courceName']; ?></td>
+<td><?php echo $item['courceStyleName']; ?></td>
+<td>
+<?php if ($item['cource_schedule_id']){ ?>
+<?php echo $arraySchedule[$item['cource_schedule_id']]['value']; ?><br />
+<?php
+	echo date('H:i', strtotime($item['timeStart'])) . '-';
+	echo date('H:i', strtotime($item['timeEnd']));
+?>
+<?php } ?>
+
+</td>
+<td><?php echo $item['dateTest']; ?></td>
+<td><?php echo $item['arrayTrial']['nickname']; ?></td>
+<td>
+		<?php if ($item['levelRLC']){ ?>
+		<div>RLC L<?php echo $item['levelRLC']; ?></div>
+	<?php } ?>
+	<?php if ($item['levelGCC']){ ?>
+		<div>GCC L<?php echo $item['levelGCC']; ?></div>
+	<?php } ?>
+	<?php if ($item['levelChild']){ ?>
+		<div>Child L<?php echo $item['levelChild']; ?></div>
+	<?php } ?>
+	
+</td>
+<td>
+<?php echo nl2br($item['subText']); ?>
+</td>
+<td>
+<a href="/admin/info/history/<?php echo $item['id']; ?>" target="_blank">Lesson Record</a>
+</td>
+<td align="center">
+<form action="/login/auth/" method="post" target="_blank">
+<input type="hidden" name="isMaster" value="1" />
+<input type="hidden" name="email" value="<?php echo $item['email']; ?>" />
+<input type="hidden" name="pass" value="<?php echo $item['pass']; ?>" />
+<input type="submit" value="Login" />
+</form>
+</td>
+
+<td align="center">
+<?php if ($item['takeLoginID']){ ?>
+<form action="/take/login/auth/" method="post" target="_blank">
+<input type="hidden" name="isMaster" value="1" />
+<input type="hidden" name="id" value="<?php echo $item['takeLoginID']; ?>" />
+<input type="hidden" name="pass" value="<?php echo $SecurtyCode->getDecode($item['takePass']); ?>" />
+<input type="submit" value="Login" />
+</form>
+<?php }else{ ?>
+Unknow Login
+<?php } ?>
+
+</td>
+
+
+<td><a href="/<?php echo $this->arrayAction['dir']; ?>mail/<?php echo $item['email']; ?>/" target="_blank">Mail</a></td>
+<td><a href="/admin/mailLog/list/?mid=<?php echo $item['id']; ?>" target="_blank">history</a></td>
+<td><a href="/admin/communication/list/?id=<?php echo $item['id']; ?>" target="_blank">communication</a></td>
+<td><?php echo $item['memo']; ?></td>
+
+</tr>
+<?php } ?>
+
+</table>
+<br /><br />
+
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

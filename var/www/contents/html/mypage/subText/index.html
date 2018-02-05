@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+<title>副教材について </title>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+<script type="text/javascript" src="/common/js/jquery.js"></script>
+
+<script>
+	
+	function onPopup(){		
+		var str = "教材をリクエストしますか";
+		
+		if(window.confirm(str)){
+			$('#formMain').submit();
+		}
+
+	}
+</script>
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+
+
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+<h2 class="subTitle">副教材について</h2>
+
+<p>
+WiLLies Englishでは、生徒様のレベルにあったオススメの教材をご案内していますが、<span class="text-danger">生徒様自身で利用したい教材があれば、以下コメント欄に「教材名」を選択し、リクエストボタンをクリックしてください<br />
+先生が確認し、教材変更手続きをさせて頂きます。</span>
+</p>
+<p>
+レッスンで利用できる教材一覧は以下のリンクをご確認ください<br />
+<a href="http://williesenglish.jp/english_textbook.html" target="_blank">http://williesenglish.jp/english_textbook.html</a><br />
+     - GCC(英作文)はレベル１で、RLC(音読)はレベル２といった使い方も可能です<br />
+　  - 他のコースの教材も利用可能です<br />
+     - TOECI教材や、他のコースの教材もご利用いただけます
+</p>
+
+<p>
+また上記に加え、「映画のスクリプト」や「よくあるシーン」などを題材にしたオリジナル教材をご用意しています<br />
+<a href="http://williesenglish.jp/original_textbook.html" target="_blank">http://williesenglish.jp/original_textbook.html</a>
+</p>
+
+<form action="/mypage/subText/end/" method="post" id="formMain"> 
+	<?php foreach ($arrayTextBook as $key => $arrayText){ ?>
+	<p>
+		<?php echo $key; ?>
+		<select name="<?php echo strtolower($key); ?>_iti">
+			<option value="">-</option>
+			<?php foreach ($arrayText as $objText){ ?>
+			<option value="<?php echo $objText['id']; ?>"<?php if ($arrayUser[strtolower($key)] == $objText['id']){ ?> selected<?php } ?>><?php echo $objText['teachingName']; ?></option>
+			<?php } ?>
+		</select>
+	</p>
+	<?php } ?>
+<p class="text-center">
+	<input type="button" value="リクエスト" class="btn btn-lg btn-primary" onclick="onPopup()" />
+</p>
+</form>
+
+<br /><br />
+
+</div>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

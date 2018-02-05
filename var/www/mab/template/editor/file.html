@@ -1,0 +1,13 @@
+				<?php if (!empty($arrayColum[$key]['api']) ){ ?>
+				<?php if (!empty($arrayInput[$key]) ){ ?>
+				<img src="<?php echo $arrayColum[$key]['api']; ?>/<?php echo getVar($arrayInput, $key); ?>/?cID=<?php echo $key; ?>" class="mt1" align="left" /><br />
+				<?php }else{ ?>
+
+				<?php } ?>
+				<?php } ?>
+				<input type="hidden" id="<?php echo $key; ?>Hidden" name="arrayInput[<?php echo $modelName; ?>][<?php echo $key; ?>]" value="<?php echo getVar($arrayInput, $key); ?>">
+				<input type="file" id="<?php echo $key; ?>" name="<?php echo $key; ?>" <?php if (isset($arrayError['$key']) ){ ?> class="errorInput"<?php } ?>>
+
+				<?php if (!empty($arrayInput[$key]) ){ ?>
+				<br />&nbsp;<input type="checkbox" name="arrayFileDel[<?php echo $modelName; ?>][<?php echo $key; ?>]" value="<?php echo getVar($arrayInput, $key); ?>" />削除する
+				<?php } ?>

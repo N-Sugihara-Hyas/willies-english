@@ -1,0 +1,250 @@
+<style>
+.sch{
+	word-break: break-all;
+}
+
+.sch td,
+.sch th{
+	width  :50px;
+}
+.sch td{
+	color : #FFFFFF;
+}
+
+
+</style>
+
+<script>
+	$(document).ready(function(){
+		resize();
+	});
+
+	var timer = false;
+	$(window).resize(function() {
+	    if (timer !== false) {
+	        clearTimeout(timer);
+	    }
+	    timer = setTimeout(function() {
+	        resize();
+	    }, 200);
+	});
+
+	function resize(){
+		var sch = $('#contentsMain').width() - $('#calTime').width() - 2;
+		$('#calBody').width(sch);
+	}
+
+</script>
+
+<div style="float:left;">
+<table class="tableNormal mtNormal sch" id="calTime">
+
+<?php
+	if ((!isset($isCounter))){
+		unset($arrayTime['00:00']);
+		$arrayTime['00:00']['value'] = '00:00';
+	}
+ ?>
+
+<?php foreach ($arrayTime as $item){ ?>
+<?php if (($item['value'] == '05:00') || ($item['value'] == '12:00') || ($item['value'] == '17:00')){ ?>
+<tr>
+<th>&nbsp;</th><th></th>
+</tr>
+
+<tr>
+<th><div style="width:80px;">PH Time<br />
+<?php if ((!isset($isTake)) && (!$isNotView) && (!isset($isCounter))){ ?>
+<br />
+<?php } ?>
+<br />
+</div></th><th><div style="width:80px;">JP Time
+<?php if ((!isset($isTake)) && (!$isNotView) && (!isset($isCounter))){ ?>
+<br /><br />
+<?php } ?>
+</div></th>
+<?php foreach ($arrayTakeBase as $itemTake){ ?>
+<?php foreach ($arrayDate as $itemDate){ ?>
+
+<?php } ?>
+<?php } ?>
+</tr>
+<?php } ?>
+
+<tr>
+<th valign="top" nowrap>
+<div style="width:50px;">
+<?php
+		if (($item['value'] =='00:00') && (!isset($isCounter))){
+			echo '23:00<Br />23:30';
+		}else{
+			echo date('H:i', strtotime($item['value']) - (3600)) . '<br />';
+			echo date('H:i', strtotime($item['value']) - (1800));
+		}
+?>
+
+</div>
+</th>
+<th nowrap>
+<div style="width:50px;">
+<?php
+		if (($item['value'] =='00:00') && (!isset($isCounter))){
+		echo '24:00<Br />24:30';
+	}else{
+		echo $item['value'] . '<br />';
+		echo date('H:i', strtotime($item['value']) + (1800));
+	}
+?>
+
+</th>
+</tr>
+<?php } ?>
+
+<?php if (isset($isCounter)){ ?>
+<?php foreach ($arrayType as $item){ ?>
+<tr>
+<th style="background:#FFDDFF;white-space:nowrap;" nowrap>パターン<?php echo $item; ?></th>
+<th style="background:#FFDDFF;"><?php echo $arrayPay[$item]; ?></th>
+</tr>
+<?php } ?>
+
+<tr>
+<th style="background:#FFDDFF;" nowrap>その他</th>
+<th style="background:#FFDDFF;"><?php echo $arrayPay[5]; ?></th>
+</tr>
+<tr>
+<th style="background:#FFDDFF;" nowrap>超過勤務</th>
+<th style="background:#FFDDFF;"><?php echo $arrayPay[6]; ?></th>
+</tr>
+<tr>
+<th style="background:#FFDDFF;" nowrap>休み</th>
+<th style="background:#FFDDFF;"><?php echo $arrayPay[7]; ?></th>
+</tr>
+
+<?php } ?>
+</table>
+</div>
+
+
+
+<div style="overflow-x:scroll;float:left;" id="calBody">
+<table class="tableNormal mtNormal sch" style="width:100%">
+
+<?php
+	if ((!isset($isCounter))){
+		unset($arrayTime['00:00']);
+		$arrayTime['00:00']['value'] = '00:00';
+	}
+ ?>
+
+<?php foreach ($arrayTime as $item){ ?>
+<?php if (($item['value'] == '05:00') || ($item['value'] == '12:00') || ($item['value'] == '17:00')){ ?>
+<tr>
+<?php foreach ($arrayTakeBase as $itemTake){ ?>
+<th style="white-space: nowrap;" colspan="<?php echo $countDate; ?>">
+<?php echo $itemTake['nickname']; ?>
+
+
+</th>
+<?php } ?>
+</tr>
+
+<tr>
+<?php foreach ($arrayTakeBase as $itemTake){ ?>
+<?php foreach ($arrayDate as $itemDate){ ?>
+
+<th nowrap>
+<?php echo date('m/d', strtotime($itemDate)); ?><br />
+<?php echo date('D', strtotime($itemDate)); ?>
+<br />
+<?php if ((!isset($isTake)) && (!$isNotView) && (!isset($isCounter))){ ?>
+<br />
+<?php } ?>
+
+</th>
+<?php } ?>
+<?php } ?>
+</tr>
+<?php } ?>
+
+<tr>
+<?php foreach ($arrayTakeBase as $item2){ ?>
+<?php foreach ($arrayDate as $item3){ ?>
+<?php $timeNow = strtotime($item3 . ' ' . $item['value']); ?>
+
+<td valign="top" nowrap style="height:3em;">
+<?php
+
+		if (($item['value'] =='00:00') && (!isset($isCounter))){
+		$item3 = date('Y-m-d', strtotime($item3) + (3600 * 24));
+	}
+	
+	$timeEnd = '';
+	for ($i = 0; $i <= 30; $i+=30){
+		if ($i != 0){
+			$time = str_replace(':00', ':30', $item['value']) . ':00';
+		}else{
+			$time = $item['value'] . ':00';
+		}
+
+	if (strtotime($timeEnd) <= strtotime($time)){		
+		if (isset($arrayResult[$item2['id']][$item3][$time])){
+			$reserve = $arrayResult[$item2['id']][$item3][$time];
+			$timeEnd = $reserve['timeEnd'];
+?>
+			
+			<?php if (!$reserve['groupName']){ ?>
+				<?php if ($isChange){ ?>
+					<a href="/admin/schGroup/edit/?tID=<?php echo $item2['id']; ?>&date=<?php echo $item3; ?>&time=<?php echo $time; ?>&redirect=<?php echo urlencode($my); ?>">E</a>
+				<?php } ?>
+				<?php if ($reserve['type'] == -2){ ?><span style="color:#000000;"><?php if ($isChange){ ?><a style="color:#990000;" href="javascript:if (window.confirm('休みをキャンセルしてよろしいですか？')){location.href='/admin/sch/holidayCancel/<?php echo $reserve['id']; ?>/?&redirect=<?php echo urlencode($my); ?>';}"><?php } ?>X<?php if ($isChange){ ?></a><?php } ?></span><?php } ?><br />
+			<?php }else{ ?>
+				<a href="/<?php if (isset($isTake)){ ?>take<?php }else{ ?>admin<?php } ?>/groupList/list/?gid=<?php echo $reserve['group_base_id']; ?>">G<?php echo $reserve['group_base_id']; ?>
+				<br />
+			<?php } ?>
+
+<?php
+	}else{
+?>
+ 	<?php if ((!isset($isTake)) && (!$isNotView) && (!isset($isCounter))){ ?>
+		<a href="/admin/schGroup/edit/?tID=<?php echo $item2['id']; ?>&date=<?php echo $item3; ?>&time=<?php echo $time; ?>&redirect=<?php echo urlencode($my); ?>">E</a>
+		<!--<a href="javascript:if (window.confirm('休みにしてよろしいですか？')){location.href='/admin/schGroup/holiday/?tID=<?php echo $item2['id']; ?>&date=<?php echo $item3; ?>&time=<?php echo $time; ?>&redirect=<?php echo urlencode($my); ?>';}">H</a>-->
+		<br />
+
+	<?php }else{ ?>
+	<br />
+	<?php } ?>
+
+<?php
+	}
+?>
+
+<?php } ?>
+<?php } ?>
+</td>
+<?php } ?>
+<?php } ?>
+</tr>
+<?php } ?>
+
+<?php if (isset($isCounter)){ ?>
+
+<?php foreach ($arrayType as $item){ ?>
+<tr>
+<?php $type = $item;require 'counter.html'; ?>
+</tr>
+<?php } ?>
+
+<tr>
+<?php $type = 5;require 'counter.html'; ?>
+</tr>
+<tr>
+<?php $type = 6;require 'counter.html'; ?>
+</tr>
+<tr>
+<?php $type = 7; require 'counter.html'; ?>
+</tr>
+
+<?php } ?>
+</table>
+</div>

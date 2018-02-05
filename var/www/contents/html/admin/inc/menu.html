@@ -1,0 +1,198 @@
+
+<div id="contentsLeft">
+	<div class="menuTitle">
+		<div id="contentsMenuTitle">
+			<?php $this->LangMenu->change('menu1', 'マスター管理ツール'); ?>
+		</div>
+	</div>
+	<dl class="menuList" class="fc">
+		<dd>
+			<div>
+				<a href="/admin/messageTake/list/">Communication (Top)</a><br />
+			</div>
+			<div>
+				Master Schedule<br />
+				┣<a href="/admin/sch/list/">Normal</a><br />
+			  ┣<a href="/admin/sch/list/?isNotView=1">View</a><br />
+			  ┗<a href="/admin/sch/list/?isChange=1">Change</a><br />
+			</div>
+
+			<div>
+				<a href="/admin/counter/list/">Counter</a><br />
+			</div>
+			<div>
+				<a href="/admin/salary/list/">Salary</a><br />
+			</div>
+			<div>
+				<a href="/admin/customerTrial/list/">Trial Student</a><br />
+			</div>
+		</dd>
+	</dl>
+
+	<div class="menuTitle mtNormal">
+		<div id="contentsMenuTitle">
+			Teachers List
+		</div>
+	</div>
+	<dl class="menuList" class="fc">
+		<dd>
+			<?php if ($arrayUser['adminType'] == 1){ ?>
+			<div>
+				<a href="/admin/takeMenu/list/">Admin Menu</a>
+			</div>
+			<?php } ?>
+			<div><a href="/admin/take/list/"><?php $this->LangMenu->change('menu4', '講師一覧'); ?></a></div>
+			<div><a href="/admin/take/attendance/">Attendance log</a></div>
+		</dd>
+	</dl>
+
+
+	<div class="menuTitle mtNormal">
+		<div id="contentsMenuTitle">
+			<?php $this->LangMenu->change('menu5', '顧客情報'); ?>
+		</div>
+	</div>
+	<dl class="menuList" class="fc">
+		<dd>
+			<div><a href="/admin/customer/list/"><?php $this->LangMenu->change('menu6', '顧客一覧表示と修正・削除'); ?></a></div>
+			<div><a href="/admin/summary/list/">Summary</a></div>
+
+
+			<?php if ($arrayUser['adminType'] == 1){ ?>
+			<div><a href="/admin/contact/list/">Inquiries</a></div>
+			<div><a href="/admin/feedback/list/">FeedBack</a></div>
+			<div><a href="/admin/feedbackTake/list/">Teacher's Feedback<?php if ($countFeedback){ ?></a><br /><span style="color:#990000;font-weight:800;">（未読<?php echo $countFeedback; ?>件）</span><?php } ?></div>
+			<?php } ?>
+
+			<div><a href="/admin/pointHistory/list/">振替ポイント</a></div>
+			<div><a href="/admin/pointHistoryLesson/list/">レッスンポイント</a></div>
+			<div><a href="/admin/groupList/list/">Group Lesson List</a></div>
+			<div><a href="/admin/customerMenu/list/">Students Menu</a></div>
+
+		</dd>
+	</dl>
+
+	<div class="menuTitle mtNormal">
+		<div id="contentsMenuTitle">
+			Flash Card & Test
+		</div>
+	</div>
+	<dl class="menuList" class="fc">
+		<dd>
+			<div><a href="/admin/card/list/?type=3">School Card</a></div>
+			<div><a href="/admin/card/list/?type=1">Review Card</a></div>
+			<div><a href="/admin/card/list/?type=2">Student Card</a></div>
+			<div><a href="/admin/test/list/">Test</a></div>
+			<div><a href="/admin/testType/list/">Test Type</a></div>
+			<div><a href="/admin/movie/list/">Movie</a></div>
+		</dd>
+	</dl>
+
+
+	<?php if ($arrayUser['adminType'] == 1){ ?>
+	<div class="menuTitle mtNormal">
+		<div id="contentsMenuTitle">
+			レッスンコース・プラン
+		</div>
+	</div>
+	<dl class="menuList" class="fc">
+		<dd>
+			<div><a href="/admin/lesson/list/">レッスンコース一覧表示</a></div>
+			<div><a href="/admin/lessonStyle/list/">レッスンプラン一覧表示</a></div>
+		</dd>
+	</dl>
+
+	<div class="menuTitle mtNormal">
+		<div id="contentsMenuTitle">
+			教材
+		</div>
+	</div>
+	<dl class="menuList" class="fc">
+		<dd>
+			<div><a href="/admin/teachingLesson/edit/">教材・レッスン#登録</a></div>
+			<div><a href="/admin/teachingHomework/edit/">Home Workコンテンツ登録</a></div>
+			<!--<div><a href="/admin/teachingTest/edit/">Test Card登録</a></div>-->
+			<div><a href="/admin/teaching/list/">教材一覧</a></div>
+		</dd>
+	</dl>
+	
+	<div class="menuTitle mtNormal">
+		<div id="contentsMenuTitle">
+			休日情報
+		</div>
+	</div>
+	<dl class="menuList" class="fc">
+		<dd>
+			<div><a href="/admin/holiday/list/">休日一覧表示と修正・削除</a></div>
+		</dd>
+	</dl>
+
+	<div class="menuTitle mtNormal">
+		<div id="contentsMenuTitle">
+			掲示板作成画面
+		</div>
+	</div>
+	<dl class="menuList" class="fc">
+		<dd>
+			<div><a href="/admin/news/list/">生徒向け掲示板</a></div>
+		</dd>
+	</dl>
+
+
+	<div class="menuTitle mtNormal">
+		<div id="contentsMenuTitle">
+			メール作成画面
+		</div>
+	</div>
+	<dl class="menuList" class="fc">
+		<dd>
+			<div><a href="/admin/memberMail/list/">生徒向けメール</a></div>
+			<div><a href="/admin/memberMail/send/">┗送信</a></div>
+			<div><a href="/admin/takeMail/list/">講師向けメール</a></div>
+			<div><a href="/admin/takeMail/send/">┗送信</a></div>
+			<div><a href="/admin/mailLog/list/?searchType=clear">メール送信履歴</a></div>
+
+		</dd>
+	</dl>
+
+	<div class="menuTitle mtNormal">
+		<div id="contentsMenuTitle">
+			その他情報
+		</div>
+	</div>
+	<dl class="menuList" class="fc">
+		<dd>
+			<div><a href="/admin/homeworkbook/list/">宿題の資料</a></div>
+		</dd>
+	</dl>
+
+	<div class="menuTitle mtNormal">
+		<div id="contentsMenuTitle">
+			法人用管理画面
+		</div>
+	</div>
+	<dl class="menuList" class="fc">
+		<dd>
+			<div><a href="/admin/company/edit/">法人グループの作成</a></div>
+			<div><a href="/admin/company/list/">法人グループ一覧</a></div>
+		</dd>
+	</dl>
+
+	<div class="menuTitle mtNormal">
+		<div id="contentsMenuTitle">
+			管理画面
+		</div>
+	</div>
+	<dl class="menuList" class="fc">
+		<dd>
+			<div><a href="/admin/page/list/">ページ生成</a></div>
+			<div><a href="/admin/mail/list/">メールテンプレート</a></div>
+			<div><a href="/admin/user/list/">管理ユーザー</a></div>
+			<div><a href="/admin/login/logout/">ログアウト</a></div>
+		</dd>
+	</dl>
+
+	<?php } ?>
+
+</div>
+

@@ -1,0 +1,104 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title>管理画面</title>
+<script type="text/javascript" src="/common/js/nsg/calData.js"></script>
+<script type="text/javascript" src="/common/js/nsg/cal.js"></script>
+<script type="text/javascript" src="/common/js/view/dialog.js"></script>
+
+<link href="/common/css/nsg/cal.css" rel="stylesheet" type="text/css">
+<link href="/common/css/js/dialog.css" rel="stylesheet" type="text/css">
+
+<script>
+	$(document).ready(function(){
+			var nsgCaldateSalary = new NsgCal('dateSalaryView', 'dateSalary');
+			nsgCaldateSalary.getSpecial();
+			nsgCaldateSalary.setCal();
+			
+			var nsgCaldateDay = new NsgCal('dateStartView', 'dateStart');
+			nsgCaldateDay.getSpecial();
+			nsgCaldateDay.setCal();
+
+			var nsgCaldateDay = new NsgCal('dateEndView', 'dateEnd');
+			nsgCaldateDay.getSpecial();
+			nsgCaldateDay.setCal();
+
+			viewDialog1 = new ViewDialog('cancel1', new Array('Yes', 'No'));
+			viewDialog2 = new ViewDialog('cancel2', new Array('With a point', 'No point'));
+	});
+</script>
+</head>
+
+<body>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+
+<?php $menus = 1;require_once $this->arrayDir['dirHtml'] . 'admin/inc/salary.html' ?>
+
+
+<h3 class="subTitle">給与計算(Basic Information)</h3>
+
+
+<form action="" method="post">
+<table class="table tableNormal">
+	<tr>
+		<th>給与日	Salary for</th><td>
+			<input type="text"  name="dateSalary" id="dateSalary" value="<?php echo $dateSalary; ?>" style="width:10em;" readonly="readonly" />
+			<div id="dateSalaryView" class="hiddenCal"></div>	
+		</td>
+	</tr>
+	<tr>
+		<th>初日	Start date</th><td>
+			<input type="text"  name="dateStart" id="dateStart" value="<?php echo $dateStart; ?>" style="width:10em;" readonly="readonly" />
+			<div id="dateStartView" class="hiddenCal"></div>			
+		</td>
+	</tr>
+	<tr>
+		<th>終日	End date</th><td>
+			<input type="text"  name="dateEnd" id="dateEnd" value="<?php echo $dateEnd; ?>" style="width:10em;" readonly="readonly" />
+			<div id="dateEndView" class="hiddenCal"></div>
+		</td>
+	</tr>
+	<tr>
+		<th>平日稼動日数	Weekday</th><td><?php echo $weekday; ?></td>
+	</tr>
+	<tr>
+		<th>週末稼動日数	Weekend</th><td><?php echo $weekend; ?></td>
+	</tr>
+	<tr>
+		<th>PNB Currency Rate</th><td><input type="text"  name="pcr" id="pcr" value="<?php echo $pcr; ?>" style="width:10em;" /></td>
+	</tr>
+</table>
+<div class="center">
+	<input type="submit" value="更新" class="mtNormal buttonNormal" />
+</div>
+</form>
+		
+			
+<form action="" method="post">
+<table class="tableNormal mtNormal">
+	<tr>
+		<th></th>
+		<th></th>
+		<th>Weekday</th>
+		<th>Weekend</th>
+	</tr>
+	<?php foreach ($arraySalary as $objSalary){ ?>
+		<tr>
+			<td><?php echo $objSalary['objTake']['id']; ?></td>
+			<td><?php echo $objSalary['objTake']['nickname']; ?></td>
+			<td><input type="text" name="arrayInput[<?php echo $objSalary['objTake']['id']; ?>][weekday]" value="<?php echo $objSalary['weekday']; ?>" /></td>
+			<td><input type="text" name="arrayInput[<?php echo $objSalary['objTake']['id']; ?>][weekend]" value="<?php echo $objSalary['weekend']; ?>" /></td>
+		</tr>
+	<?php } ?>
+</table>
+</div>
+
+<br />
+<div align="center">
+	<input type="submit" value="Confirm" class="buttonNormal">
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

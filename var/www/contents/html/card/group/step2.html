@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title><?php echo $title; ?>：ウィリーズ英語塾</title>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+
+<div id="contentsBody">
+
+<h2 class="subTitle">グループレッスン予約</h2>
+
+<p>
+	<?php echo date('Y/m/d D', strtotime($time)); ?><br />
+	<?php echo date('A H:i', strtotime($time)); ?>
+</p>
+
+<p>
+ご希望のレッスン内容を選び「予約」ボタンをクリックしてください。
+</p>
+
+<table class="tableNormal">
+<tr>
+<th>レッスン名</th><th>予約</th><th>レッスン内容</th><th>レッスン概要</th>
+</tr>
+<?php 
+	foreach ($arrayResult as $key => $item){ 	
+		foreach ($item as $item2){ 
+?>
+
+<tr>
+<td><?php echo $item2['groupName']; ?></td>
+<td><a href="/card/group/step3/?gID=<?php echo $item2['id']; ?>&date=<?php echo $key; ?>">予約</a></td>
+<td><?php out($item2['level']); ?></td>
+<td>
+	<?php out($item2['comment']); ?><br />
+	<a href="">詳しくはこちら</a>
+</td>
+</tr>
+<?php } ?>
+<?php } ?>
+</table>
+
+<div align="center">
+<a href="/card/group/step1/" class="buttonNormal mtNormal">前へ</a>
+</div>
+
+<br />
+
+</div>
+
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

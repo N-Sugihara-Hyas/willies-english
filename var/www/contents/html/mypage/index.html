@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>マイページ：ウィリーズ英語塾</title>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+
+
+<div id="contents" class="row">
+	<div id="contentsBody" class="col-md-8 col-md-push-4">
+	
+
+
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title"><i class="glyphicon glyphicon-flash"></i>事務局からのお知らせ</h3>
+			  </div>
+			  <div class="panel-body over">	
+					<?php foreach ($arrayNews as $item){ ?>
+		
+					<strong><?php echo $item['dateDay']; ?></strong><br />
+					<div style="padding-top:10px;padding-left:10px;">
+					<?php if ($item['type'] == 3){ ?><a href="/card/school/details/<?php echo $item['card_base_id']; ?>/"><?php } ?>
+					<?php if ($item['type'] == 1){ ?><a href="/card/feed/details/<?php echo $item['card_base_id']; ?>/"><?php } ?>
+		
+					<?php echo nl2br($item['body']); ?>
+					<?php if ($item['type'] > 0){ ?></a><?php } ?>
+					</div><br />
+		
+					<?php } ?>
+			  </div>
+			</div>
+		</div>
+
+		<div class="col-sm-6">
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title"><i class="glyphicon glyphicon-link"></i>Communication</h3>
+			  </div>
+			  <div class="panel-body over">	
+					<?php foreach ($arrayCommunication as $item){ ?>
+					<strong>Date:<?php echo date('Y-m-d', strtotime($item['dateDay'])); ?></strong><br />
+					<div style="padding-top:10px;padding-left:10px;">
+					<?php if ($item['type'] == 'ext_homework'){ ?>
+					Homework for the next lesson:<br />
+					<?php if (strlen($item['gcc']) > 1){ ?>- GCC: <?php echo $item['gcc']; ?><br /><?php } ?>
+					<?php if (strlen($item['rlc']) > 1){ ?>- RLC: <?php echo $item['rlc']; ?><br /><?php } ?>
+					<?php if (strlen($item['followup']) > 1){ ?><br />Follow-up questions:<br />
+					<?php echo $item['followup']; ?><br /><?php } ?><br/ >
+					<?php echo $item['free']; ?><br /><br/ >
+					
+					<?php }elseif ($item['type'] == 'master_news_card'){ ?>
+					<a target="_blank" href="/card/<?php if ($item['rlc'] == 4){ ?>/test/details/?tid=<?php echo $item['gcc']; ?><?php }else{ ?><?php if ($item['rlc'] == 3){ ?>school<?php }else{ ?>feed<?php } ?>/details/<?php echo $item['gcc']; ?>/<?php } ?>"><?php echo $item['body']; ?></a>
+					<?php }elseif ($item['type'] == 'member_point'){ ?>
+					<?php echo $arrayPoint[$item['body']]['value']; ?>
+					<?php }else{ ?>
+					<?php echo nl2br($item['body']); ?>
+					<?php } ?>
+					</div><br />
+					<?php } ?>
+
+			  </div>
+			</div>
+		</div>
+	</div>
+	
+<?php
+	$count = 0;
+	foreach ($arrayScheduleTrial as $item){if ($item['isTrial'] == 1){if (strtotime($item['date']) >= strtotime(date('Y/m/d 00:00:00'))){$count++;}}}
+?>
+
+
+<?php if ($count){ ?>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><i class="glyphicon glyphicon-calendar"></i>体験レッスン予約情報</h3>
+  </div>
+  <div class="panel-body over">	
+		<?php require_once $this->arrayDir['dirHtml'] . 'inc/calenderTrial.html'; ?>
+  </div>
+</div>
+<?php } ?>
+	
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><i class="glyphicon glyphicon-calendar"></i>レギュラーレッスン予約情報　（キャンセルによる振替ポイント付与は月２回までとなります）</h3>
+  </div>
+  <div class="panel-body over">	
+		<?php require_once $this->arrayDir['dirHtml'] . 'inc/calender.html'; ?>
+		<?php require_once $this->arrayDir['dirHtml'] . 'inc/calenderGroup.html'; ?>
+  </div>
+</div>		
+
+<h3 class="subTitle"><i class="glyphicon glyphicon-book"></i>学習履歴</h3>
+<div class="over mt">
+	<table class="tableNormal">	
+	<?php foreach ($arrayHistory as $item){ ?>
+	<tr>
+	<td><p style="text-align:left;"><?php out($item['date']); ?>&nbsp;<?php out($item['timeStart']); ?><br /><?php out($item['nickname']); ?></p></td>
+	<td nowrap style="width:500px;text-align:left;">
+		<?php if ($item['objHomework']){ ?>
+		<p>Homework and the comment</p>
+		<p>
+			<?php $objHomework = $item['objHomework'];require $this->arrayDir['dirHtml'] . 'inc/homework.html'; ?>
+		</p>
+		<?php  } ?>
+	</td>
+	<td style="text-align:left;">
+		<?php if ($item['objCard']){ ?>
+		<a href="/card/feed/details/<?php echo $item['objCard']['id']; ?>/?mid=<?php echo $arrayUser['id']; ?>" class="btn btn-primary">フィードバックCARD</a>
+		<?php  } ?>
+	</td>
+	</tr>
+	<?php } ?>
+	</table>
+</div>
+
+
+
+<div class="mt text-right">
+		<a href="/card/feed/" class="btn btn-primary">全てのカードを見る</a>	
+</div>
+
+
+<div class="well mt">
+<?php echo $arrayDown['body']; ?>
+</div>
+</div>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+</div>
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

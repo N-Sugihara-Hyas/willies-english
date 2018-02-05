@@ -1,0 +1,43 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title><?php echo $arrayUser['nickname']; ?></title>
+
+<style>
+#gccLabel,#rlcLabel,#followupLabel{
+	background : #9999FF;
+}	
+#typeLabel,#levelLabel,#cardNameLabel,
+#commentLabel,#body1Label,#body2Label{
+	background : #FF9999;
+}	
+
+</style>
+	
+
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/header2.html' ?>
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] .  'take/inc/menu.html' ?>
+
+<div id="contentsMain">
+
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/editorHeader.html' ?>
+
+Student ID:  <?php echo $arrayMember['id']; ?><br />
+Student Name: <?php echo $arrayMember['memberNameFirstEnglish']; ?>&nbsp;&nbsp;<?php echo $arrayMember['memberNameSecoundEnglish']; ?><br />
+Course:  <?php echo $arrayMember['courceName']; ?><br />
+Level: <?php echo $arrayMember['level']; ?><br />
+<br />
+
+	<table class="tableNormal">
+	<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/editorConfirmation.html'; ?>
+	</table>
+
+	<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/editorConfirmationButton.html'; ?>
+	<br />
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/footer.html' ?>

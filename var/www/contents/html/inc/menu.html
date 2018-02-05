@@ -1,0 +1,106 @@
+<script type="text/javascript" src="/common/js/view/show.js" charset="utf-8" id="script-js"></script>
+
+<script>
+  $(document).ready(function(){
+	  setBlock('#menuCard', '#buttonMenuCard');
+  });
+  </script>
+ 
+<?php 
+	if (!empty($cardMenu)){
+		if ($cardMenu == 'original'){
+			$menu = 0;	
+		}
+	}
+?>
+
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+	  <div class="navbar-header">
+	    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	      <span class="sr-only">Toggle navigation</span>
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	    </button>
+	  </div>
+	  <div id="navbar" class="navbar-collapse collapse">
+	    <ul class="nav navbar-nav">
+	      <li<?php if (!$menu){ ?> class="active"<?php } ?>><a href="/mypage/">マイページ<br />トップ</a></li>
+	      <li<?php if ($menu == 1){ ?> class="active"<?php } ?>><a href="http://williesenglish.jp/" target="_blank">ウィリーズ英会話<br />ホームページ</a></li>
+	      <li<?php if ($menu == 2){ ?> class="active"<?php } ?>><a href="/mypage/contact/edit/">お問合せ<br /><br /></a></li>
+	      <li<?php if ($menu == 3){ ?> class="active"<?php } ?>><a href="/mypage/feedback/edit/">講師・レッスン<br />フィードバック</a></li>
+				<li<?php if ($menu == 5){ ?> class="active"<?php } ?>><a href="http://williesenglish.jp/original_textbook.html" target="_blank">オリジナル教材<br />（副教材）</a></li>
+	      <li class="dropdown<?php if ($menu == 6){ ?> active<?php } ?>">
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CARD・ビデオ学習<span class="caret"></span><br /><br /></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="/card/feed/">フィードバック CARD</a></li>
+	          <li><a href="/card/original/">生徒オリジナル CARD</a></li>
+						<li><a href="/card/movie/">ビデオ学習</a></li>
+	        </ul>
+	      </li>
+	    </ul>
+	  </div>
+	</div>
+</nav>
+
+      
+
+
+<?php if (!empty($cardMenu)){
+	if ($cardMenu == 'original'){
+?>
+
+<ul id="menu3" class="row">
+<a class="col-xs-3 pa-non-right" href="/card/original/"><li style="border-left : solid 1px #FFFFFF">全てのCARD表示</li></a>
+<a class="col-xs-3 pa-non" href="/card/original/?mode=star"><li style="border-left : solid 1px #FFFFFF">全ての★CARD表示</li></a>
+<a class="col-xs-3 pa-non" href="/card/original/?mode=nonStar"><li style="border-left : solid 1px #FFFFFF">全ての☆CARD表示</li></a>
+<a class="col-xs-3 pa-non-left" href="/card/original/list/"><li style="border-left : solid 1px #FFFFFF;background:#990000;color:#FFFFFF;">オリジナルCARD作成</li></a>
+</ul>
+
+<?php
+	}
+
+?>
+<?php	if ($cardMenu == 'feed'){ ?>
+<ul id="menu3" class="row">
+	<a class="col-xs-4 pa-non-right" href="/card/feed/"><li style="border-left : solid 1px #FFFFFF">全てのCARD表示</li></a>
+	<a class="col-xs-4 pa-non" href="/card/feed/?mode=star"><li style="border-left : solid 1px #FFFFFF">全ての★CARD表示</li></a>
+	<a class="col-xs-4 pa-non-left" href="/card/feed/?mode=nonStar"><li style="border-left : solid 1px #FFFFFF">全ての☆CARD表示</li></a>
+</ul>
+<?php } ?>
+
+<?php	if ($cardMenu == 'school'){ ?>
+<ul id="menu3" class="clearfix">
+<a href="/card/school/"><li style="border-left : solid 1px #FFFFFF">全てのCARD表示</li></a>
+<a href="/card/school/?mode=star"><li style="border-left : solid 1px #FFFFFF">全ての★CARD表示</li></a>
+<a href="/card/school/?mode=nonStar"><li style="border-left : solid 1px #FFFFFF">全ての☆CARD表示</li></a>
+</ul>
+<br class="fc" />
+
+<?php } ?>
+
+
+<?php
+}
+
+?>
+
+
+<?php if (empty($isCard)){ ?>
+<?php if ($arrayUser['isSetting']){ ?>
+<div class="text-center">
+
+<?php if ($arrayUser['state'] != 3){ ?>
+<?php if ((($arrayUser['state'] == 11) || ($arrayUser['state'] == 10))){  ?>
+<a href="/mypage/setting/trialend/?type=1"><div style="padding:10px;background:#000099;color:#FFFFFF;">スケジュールを確認して、有料会員登録</div></a>
+<?php }else{ ?>
+<a href="/mypage/pay/first/?type=1"><div style="padding:10px;background:#000099;color:#FFFFFF;">有料会員登録（レッスンのご継続）はこちら</div></a>
+<?php } ?>
+<?php } ?>
+
+<?php } ?>
+
+
+
+<?php } ?>

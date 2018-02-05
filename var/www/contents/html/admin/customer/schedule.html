@@ -1,0 +1,59 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+
+<script>
+function onAll(id){
+	$('.' + id).attr('checked', 'checked');
+}
+</script>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+
+<h3 class="subTitle">スケジュールの管理(<?php echo $arrayTakeBase['nickname']; ?>)</h3>
+
+<?php if (isset($reflash)){ ?>
+<div class="updateBox">
+更新しました。
+</div>
+<?php } ?>
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>schedule/<?php echo $uid; ?>/" method="post" id="frm" class="fc">
+
+<table class="tableNormal mtNormal">
+<tr>
+<th>
+時間
+</th>
+<?php foreach ($arrayWeek as $item){ ?>
+<th><?php out($item['value']); ?><input type="button" value="全て" onclick="onAll('week<?php out($item['id']); ?>');" /></th>
+<?php } ?>
+</tr>
+
+<?php foreach ($arrayTime as $item){ ?>
+<tr>
+<th><?php out($item['value']); ?></th>
+
+<?php foreach ($arrayWeek as $item2){ ?>
+<td>
+	<input type="checkbox" class="week<?php out($item2['id']); ?>" name="week[<?php out($item2['id']); ?>][<?php out($item['id']); ?>]" value="1" <?php if (isset($arrayTakeSchedule[$item2['id']][$item['id']])){ ?> checked <?php } ?>/>可能
+</td>
+<?php } ?>
+
+</tr>
+<?php } ?>
+
+</table>
+<br /><br />
+
+<input type="submit" value="更新" class="buttonNormal" />
+</form>
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

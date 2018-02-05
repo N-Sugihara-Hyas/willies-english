@@ -1,0 +1,67 @@
+<table class="tableNormal">
+
+<?php 
+	$count = 1;
+
+	foreach ($arrayColum as $key => $item){
+		if (!empty($item['search'])){
+			if (isset($item['name']) ){
+?>
+</td>
+
+<?php
+				if ($count % 3 == 0) {
+				$count = 1;
+
+?>
+
+</tr>
+<tr>
+<?php		} ?>
+<th align="left" style="width:20%;">
+<?php 
+				echo $item['name'];
+			} 
+
+			$count++;
+?>
+</th>
+<td style="width:30%;">
+<?php
+			$type = $item['type'];
+
+			if ($type == 'textarea'){
+				$type ='text';
+				$arrayColum[$key]['form'] = '';
+			}
+			
+			if ($type == 'string'){
+				$type = 'text';
+			}
+
+			require $this->arrayDir['dirProgram'] .  "template/editor/" . $type . ".html";
+		}
+	}
+?>
+
+<?php
+	if ($count % 3 != 0) {
+?>
+<td colspan="100"></td>
+
+</tr>
+<?php
+	}
+?>
+
+<tr>
+<th colspan="2" align="left">
+<?php $this->Lang->change('searchType', '検索形式'); ?>
+</th>
+<td colspan="2" align="left">
+<input type="radio" name="searchType" value="1"<?php if (($searchType==1) || (empty($searchType))){echo ' checked';} ?> /><?php $this->Lang->change('searchType1', '部分一致'); ?>
+<input type="radio" name="searchType" value="2"<?php if ($searchType==2){echo ' checked';} ?> /><?php $this->Lang->change('searchType2', '完全一致'); ?>
+</td>
+</td>
+</tr>
+</table>

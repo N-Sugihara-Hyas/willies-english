@@ -1,0 +1,23 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+
+<h3 class="subTitle"><?php echo $arraySettingAdmin['title']; ?>の<?php $this->Lang->change('details', '詳細'); ?></h3>
+
+	<table class="tableNormal">
+	<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/editorConfirmation.html' ?>
+	</table>
+
+	<div align="center" class="mtNormal">
+		<a href="/<?php echo $this->arrayAction['dir']; ?>/list/" class="buttonNormal"><?php $this->Lang->change('buttonList', '一覧へ'); ?>戻る</a>
+	</div>
+	<br />
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>マイページ：ウィリーズ英語塾</title>
+
+<link rel="stylesheet" type="text/css" href="/common/css/layout.css" id="layout-css" />
+<link rel="stylesheet" type="text/css" href="/common/css/tool.css" id="layout-css" />
+<script type="text/javascript" src="/common/js/jquery.js"></script>
+<script type="text/javascript" src="/common/js/NowLoading.js"></script>
+
+<script>
+	MainNowLoading = new ShowNowLoading('.blackBack');
+</script>
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents">
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+
+<div id="contentsBody">
+
+<h2 class="subTitle">5. 担任講師の選択</h2>
+
+<p>
+【選択された受講スケジュールの内容】
+</p>
+
+・ 第１回体験レッスン日：<?php out(date('m/d', strtotime($date))); ?>(<?php out($arrayWeek[date('w', strtotime($date))]); ?>)<br />
+・ 受講時間帯： <?php echo date('A H:i', strtotime($time)); ?>～<?php echo date('A H:i', strtotime($time) + (60 * $arrayCourceStyle['weekTime'])); ?><br /><br /><br />
+
+<p>
+ご希望の講師を選択し、次へボタンを押して下さい。
+</p>
+
+<table class="tableNormal">
+<tr>
+<th></th><th>講師名</th><th>予約確定</th><th>講師の紹介</th>
+</tr>
+<?php 
+	foreach ($arrayCourceSchedule as $key => $item){ 	
+?>
+
+<tr>
+<td><img src="<?php getImg('media/Image', $item['photo'], 'Thum'); ?>" /></td>
+<td><?php echo $item['nickname']; ?></td>
+<td><a href="javascript:MainNowLoading.show();location.href='/mypage/setting/step2_3/?tID=<?php out($item['take_base_id']); ?>';">予約</a></td>
+<td><?php out($item['comment']); ?></td>
+</tr>
+<?php } ?>
+</table>
+
+<div align="center">
+<a href="/mypage/setting/step2_1/" class="buttonNormal mtNormal">前へ</a>
+</div>
+
+<br />
+</div>
+
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

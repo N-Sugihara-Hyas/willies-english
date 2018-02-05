@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>FLASH CARD：ウィリーズ英語塾</title>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php $cardMenu = 'feed';require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+
+
+<div id="contents" class="row">
+	<div id="contentsBody" class="col-md-8 col-md-push-4">
+
+
+
+<p>
+< 使い方 >　<br />
+確認したいLesson Review をクリックしてください。するとCARDの(表)が現れます。(表)をクリックするとCARDの(裏)が表示されます。
+<br />例えば、(表)「英語を毎日学習しています」→ (裏)「I study English everyday.」となります。<br />
+(裏)の☆マークをクリックすることで、あとで☆マークだけを集中して確認することも可能です。
+
+</p>
+
+<table class="tableNormal">
+<?php while ($item = $arrayData['dbGet']->getData()){ ?>
+<tr onclick="location.href='/card/feed/details/<?php echo $item['id']; ?>/?mode=<?php echo $type; ?>';" style="cursor:pointer;">
+<td class="tdSmall" nowrap><?php echo getNew('<span class="att">New</span>', 14, $item['created']); ?><?php echo date('Y年m月d日', strtotime($item['created'])); ?></td>
+<td class="tdBig" nowrap style="color:#0000FF;"><?php out($item['cardName']); ?>(<?php echo $item['nickname']; ?>)</td>
+
+<td class="tdSmall" nowrap><?php out($item['countCard']); ?>Card <?php if (!$type){ ?> | ★ <?php if (!$item['countAnser']){echo '0';}else{ echo floor( $item['countAnser'] / $item['countCard'] * 100);} ?>%<?php } ?></td>
+</tr>
+<?php } ?>
+</table>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/navi.html'; ?>
+</div>
+	
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+</div>
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

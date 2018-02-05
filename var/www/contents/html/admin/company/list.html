@@ -1,0 +1,66 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/listHeader.html' ?>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/listSearch.html' ?>
+
+<div align="center" class="mtNormal">
+<input type="submit" value="<?php $this->Lang->change('buttonSearch', '完全一致'); ?>" class="buttonNormal" /></div>
+</form>
+
+<br />
+<table class="tableNormal mtNormal">
+<tr>
+<?php  require_once $this->arrayDir['dirProgram'] . "template/listHeader.html"; ?>
+<th>生徒ID</th>
+<th>法人管理へ</th>
+</tr>
+
+<?php while ($item = $arrayData['arrayList']->getData()){ ?>
+<tr id="item<?php echo $item['id']; ?>" >
+<td>
+	<a href="/<?php echo $this->arrayAction['dir']; ?>edit/<?php echo $item['id']; ?>">Edit</a><br />
+	<a href="javascript:if(window.confirm('本当にいいんですね？')){location.href='/<?php echo $this->arrayAction['dir']; ?>delSch/<?php echo $item['id']; ?>';}">Delete</a>
+</td>
+<td>
+<?php echo $item['id']; ?>
+</td>
+
+<?php  require $this->arrayDir['dirProgram'] . "template/listBodyAll.html"; ?>
+
+<td>
+<?php 
+	$arrayMember = explode(',', $item['arrayMember']);
+	
+	foreach ($arrayMember as $member){
+?>
+<a href="/admin/customer/list/?keyword=<?php echo $member; ?>"><?php echo $member; ?></a>
+<?php
+	}
+?>
+</td>
+<td>
+	<form action="/company/login/auth/" method="post" target="_blank">
+	<input type="hidden" name="id" value="<?php echo $item['loginID']; ?>" />
+	<input type="hidden" name="pass" value="<?php echo $item['pass']; ?>"/ >
+	<input type="submit" value="ログイン" class="buttonNormal" /> 
+	</form>
+</td>
+
+</tr>
+<?php } ?>
+
+</table>
+<br /><br />
+
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

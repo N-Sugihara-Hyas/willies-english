@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>マイページ：ウィリーズ英語塾</title>
+
+			
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+
+<h2 class="subTitle">先生の空き状況</h2>
+
+<form action="/mypage/setting/take/" method="get">
+<select name="takeName">
+	<?php foreach ($arrayTake as $itemTake){ ?>
+	<option value="<?php echo $itemTake['nickname']; ?>"<?php if ($itemTake['nickname'] == $takeName){ ?> selected<?php } ?>><?php echo $itemTake['nickname']; ?></option>
+	<?php } ?>	
+</select>
+
+<input type="submit" value="検索" class="btn btn-lg btn-primary" />
+
+</form>
+
+講師の概要はこちらからご確認下さい：　<a href="http://williesenglish.jp/teachers.html" target="_blank">http://williesenglish.jp/teachers.html</a>
+<br /><br />
+
+<style>
+.sch th,.sch td,
+#calTime th,#calTime td{
+	height : 80px !important;
+}
+
+.sch td,
+.sch th{
+	width  :50px;
+}
+
+
+#calTime{
+	position : absolute;
+	top : 20px;
+	width : 50px;
+}
+</style>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+<script type="text/javascript" src="/common/js/nsg/calData.js"></script>
+<script type="text/javascript" src="/common/js/nsg/cal.js"></script>
+<script type="text/javascript" src="/common/js/view/dialog.js"></script>
+
+<link href="/common/css/nsg/cal.css" rel="stylesheet" type="text/css">
+<link href="/common/css/js/dialog.css" rel="stylesheet" type="text/css">
+
+
+<script>
+	$(document).ready(function(){		
+			var nsgCaldateDay = new NsgCal('dateStartView', 'dateStart');
+			nsgCaldateDay.getSpecial();
+			nsgCaldateDay.setCal();
+
+			var nsgCaldateDay = new NsgCal('dateEndView', 'dateEnd');
+			nsgCaldateDay.getSpecial();
+			nsgCaldateDay.setCal();
+
+		resize();
+	});
+
+	var timer = false;
+	$(window).resize(function() {
+	    if (timer !== false) {
+	        clearTimeout(timer);
+	    }
+	    timer = setTimeout(function() {
+	        resize();
+	    }, 200);
+	});
+
+	function resize(){
+		var sch = $('#contentsBody').width() - $('#calTime').width() - 2;
+		$('#calBody').width(sch);
+	}
+
+</script>
+
+<div style="float:left;padding:0px;position:relative;width:70px;">
+<table class="tableNormal" id="calTime" style="background:#FFFF00">
+
+<?php
+	if ((!isset($isCounter))){
+		unset($arrayTime['00:00']);
+		$arrayTime['00:00']['value'] = '00:00';
+	}
+ ?>
+
+<?php foreach ($arrayTime as $item){ ?>
+<?php if (($item['value'] == '05:00') || ($item['value'] == '12:00') || ($item['value'] == '17:00')){ ?>
+<tr>
+<th>先生</th>
+</tr>
+<tr>
+<th>日付</th>
+</tr>
+
+<tr>
+<?php if ((!isset($isTake)) && (!$isNotView) && (!isset($isCounter))){ ?>
+<br />
+<?php } ?>
+<br />
+<?php if ((!isset($isTake)) && (!$isNotView) && (!isset($isCounter))){ ?>
+<br /><br />
+<?php } ?>
+</div></th>
+<?php foreach ($arrayTake2 as $itemTake){ ?>
+<?php foreach ($arrayDate as $itemDate){ ?>
+
+<?php } ?>
+<?php } ?>
+</tr>
+<?php } ?>
+
+<tr>
+<th nowrap>
+<div style="width:50px;">
+<?php
+		if (($item['value'] =='00:00') && (!isset($isCounter))){
+		echo '24:00<Br />24:30';
+	}else{
+		echo $item['value'] . '<br />';
+		echo date('H:i', strtotime($item['value']) + (1800));
+	}
+?>
+
+</th>
+</tr>
+<?php } ?>
+</table>
+</div>
+
+
+
+<div style="overflow-x:scroll;float:left;" id="calBody">
+<table class="tableNormal mt sch" style="width:100%">
+
+<?php
+	if ((!isset($isCounter))){
+		unset($arrayTime['00:00']);
+		$arrayTime['00:00']['value'] = '00:00';
+	}
+ ?>
+
+<?php foreach ($arrayTime as $item){ ?>
+<?php if (($item['value'] == '05:00') || ($item['value'] == '12:00') || ($item['value'] == '17:00')){ ?>
+<tr>
+<?php foreach ($arrayTake2 as $itemTake){ ?>
+<th style="white-space: nowrap;" colspan="<?php echo $countDate; ?>">
+<?php echo $itemTake['nickname']; ?>
+
+
+</th>
+<?php } ?>
+</tr>
+
+<tr>
+<?php foreach ($arrayTake2 as $itemTake){ ?>
+<?php foreach ($arrayDate as $itemDate){ ?>
+
+<th nowrap>
+<?php echo date('m/d', strtotime($itemDate)); ?><br />
+<?php echo date('D', strtotime($itemDate)); ?>
+<br />
+<?php if ((!isset($isTake)) && (!$isNotView) && (!isset($isCounter))){ ?>
+<?php } ?>
+
+</th>
+<?php } ?>
+<?php } ?>
+</tr>
+<?php } ?>
+
+<tr>
+<?php foreach ($arrayTake2 as $item2){ ?>
+<?php foreach ($arrayDate as $item3){ ?>
+<?php $timeNow = strtotime($item3 . ' ' . $item['value']); ?>
+
+<td nowrap style="height:3em;" class="text-center">
+<?php
+
+	if (($item['value'] =='00:00') && (!isset($isCounter))){
+		$item3 = date('Y-m-d', strtotime($item3) + (3600 * 24));
+	}
+	
+	$timeEnd = '';
+	for ($i = 0; $i <= 30; $i+=30){
+		if ($i != 0){
+			$time = str_replace(':00', ':30', $item['value']) . ':00';
+		}else{
+			$time = $item['value'] . ':00';
+		}
+
+	if (strtotime($timeEnd) <= strtotime($time)){
+		if (isset($arrayResult[$item2['id']][$item3][$time])){			
+			$reserve = $arrayResult[$item2['id']][$item3][$time];
+			$timeEnd = $reserve['timeEnd'];
+?>
+	<span style="color:#FF0000;">●</span>	
+	
+<?php
+		}else{
+?>
+ 	<?php if ((!isset($isTake)) && (!$isNotView) && (!isset($isCounter))){ ?>
+ 		<span style="color:#000000;">&nbsp;</span>	
+	<!--<a href="/admin/sch/edit/?trial=1&tID=<?php echo $item2['id']; ?>&date=<?php echo $item3; ?>&time=<?php echo $time; ?>&redirect=<?php echo $my; ?>">T</a>-->
+	<?php }else{ ?>
+	
+	<?php } ?>
+
+	
+<?php
+	}
+?>
+
+<?php } ?>
+<br />
+<?php } ?>
+</td>
+<?php } ?>
+<?php } ?>
+</tr>
+<?php } ?>
+
+<?php if (isset($isCounter)){ ?>
+
+<?php foreach ($arrayType as $item){ ?>
+<tr>
+<?php $type = $item;require 'counter.html'; ?>
+</tr>
+<?php } ?>
+
+<tr>
+<?php $type = 5;require 'counter.html'; ?>
+</tr>
+<tr>
+<?php $type = 6;require 'counter.html'; ?>
+</tr>
+<tr>
+<?php $type = 7; require 'counter.html'; ?>
+</tr>
+
+<?php } ?>
+</table>
+</div>
+
+
+
+<br /><br />
+
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

@@ -1,0 +1,34 @@
+<?php
+	$count = 0;
+		
+	foreach ($arrayColum as $key => $item){
+		if (($item['type'] != 'hidden') && ($item['type'] != 'password')){
+			if (isset($item['name']) ){
+?>
+		</td>
+<?php 
+				if ($arraySettingAdmin['col'] == $count){ 
+					$count = 0;
+?>
+		</tr>
+		<tr>
+<?php		}	?>
+		<th style="width:5%" nowrap="nowrap">
+<?php		
+				echo $item['name']; 
+				$count++;
+?>
+		</th>
+		<td style="width:20%">
+<?php
+			}
+			echo getVar($item, 'controlFront');
+			require $this->arrayDir['dirProgram'] . 'template/columView.html';
+			echo getVar($item, 'controlBack');
+		}
+	}
+?>
+		</td>
+		</tr>
+
+

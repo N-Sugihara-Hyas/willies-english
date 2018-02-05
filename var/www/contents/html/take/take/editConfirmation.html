@@ -1,0 +1,23 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title><?php echo $arrayUser['nickname']; ?></title>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/editorHeader.html' ?>
+
+	<table class="tableNormal">
+	<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/editorConfirmation.html' ?>
+	</table>
+
+	<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/editorConfirmationButton.html' ?>
+	<br />
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

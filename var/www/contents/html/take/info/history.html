@@ -1,0 +1,37 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title><?php echo $arrayUser['nickname']; ?></title>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'take/inc/menu.html' ?>
+
+<div id="contentsMain">
+
+<h2 class="subTitle">Lesson Record</h2>
+
+
+<table class="tableNormal">
+<tr>
+<th>受講日時</th><th>講師名</th><th>受講時間</th>
+</tr>
+
+<?php while ($item = $arrayData['dbGet']->getData()){ ?>
+<tr>
+<td><?php out($item['date']); ?>&nbsp;<?php out($item['timeStart']); ?></td>
+<td><?php out($item['nickname']); ?></td>
+<td><?php out(date('i', strtotime($item['timeEnd'])) - date('i', strtotime($item['timeStart']))); ?>分</td>
+</tr>
+<?php } ?>
+</table>
+<br />
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/navi.html'; ?>
+
+</div>
+
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

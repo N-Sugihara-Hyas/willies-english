@@ -1,0 +1,26 @@
+<?php 
+	$this->$modelName->arrayInput = $item;
+
+	if (isset($this->$modelName->parent->updateDataOut)){
+		$this->$modelName->updateDataOut();
+	}
+
+	$item = $this->$modelName->arrayInput;
+
+	foreach($arrayColum as $key => $input){
+	if (!empty($arrayColum[$key]['list']) ){ 
+		if (isset($arrayColum[$key]['name']) ){echo '</td><td>';}
+?>
+		
+<?php 
+	$arrayInput[$key] = $item[$key];
+
+
+	require dirname(__FILE__) . '/columView.html';
+?>
+
+<?php
+	}
+} 
+
+?>

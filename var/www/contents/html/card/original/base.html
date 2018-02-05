@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<script>
+<?php if (getVar($arrayPost, 'cardName')){ ?>
+
+window.opener.newBaseEnd('<?php echo getVar($arrayPost, 'cardName'); ?>', '<?php echo getVar($arrayPost, 'uid'); ?>');
+window.close();
+<?php } ?>
+</script>
+
+</head>
+
+<h2 class="subTitle">単語帳登録</h2>
+
+
+<?php if (getVar($arrayPost, 'error')){ ?>
+<p style="color:#FF0000;">入力エラーです。</p>
+<?php } ?>
+
+<form action="/card/original/base/" method="post">
+<input type="text" name="cardName" value="<?php echo getVar($arrayPost, 'cardName'); ?>" /><br /><br />
+<input type="submit" value="新規登録" />
+</form>
+
+</div>
+</div>
+

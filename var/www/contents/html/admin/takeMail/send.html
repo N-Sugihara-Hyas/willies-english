@@ -1,0 +1,64 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+<script src="/common/js/jquery.js" language="javascript"></script>
+
+<script>
+function onAll(id){
+	$('.' + id).attr('checked', 'checked');
+}
+
+function setBody(){
+	body = $('#body' + $('#template').val()).val();
+	subject = $('#subject' + $('#template').val()).val();
+
+	$('#body').val(body);
+	$('#subject').val(subject);
+}
+
+</script>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+<h3 class="subTitle"><?php echo $arraySettingAdmin['title']; ?>の一覧</h3>
+
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>/sendEnd/" method="post">
+<div class="cicleNormal2">下記のメール内容で送信</div>
+<select name="mID" id="template" onchange="setBody();">
+<?php while ($item = $arrayMailTarget->getData()){ ?>
+<option value="<?php echo $item['id']; ?>"><?php echo $item['subject']; ?></option>
+<?php } ?>
+</select>
+<br />
+■Subject<br />
+<input type="text" name="subject" id="subject" size="80"/><br />
+■Text<br />
+<textarea name="body" style="width:30em;height:30em;" id="body"></textarea><br /><br />
+
+<?php foreach ($arrayMailMember as $item){ ?>
+<input type="hidden" id="subject<?php echo $item['id']; ?>" value="<?php echo $item['subject']; ?>" />
+<input type="hidden" id="body<?php echo $item['id']; ?>" value="<?php echo $item['body']; ?>" />
+<?php } ?>
+
+
+<div class="cicleNormal2 mtNormal">下記の講師に送信</div>
+
+<input type="button" value="全て選択" onclick="onAll('take');" /><br />
+
+<?php while ($item = $arrayTarget->getData()){ ?>
+<input type="checkbox" class="take" name="arrayTarget[<?php echo $item['id']; ?>]" value="<?php echo $item['id']; ?>" /><?php echo $item['nickname']; ?><br />
+<?php } ?>
+
+<div class="center mtNormal">
+<input type="submit" value="送信" class="buttonNormal" />
+</div>
+</form>
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

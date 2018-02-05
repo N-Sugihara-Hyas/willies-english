@@ -1,0 +1,64 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title>管理画面</title>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/header2.html' ?>
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/listHeader.html' ?>
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>list/" method="post">
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/listSearch.html' ?>
+
+<div align="center" class="mtNormal">
+<input type="submit" value="<?php $this->Lang->change('buttonSearch', '完全一致'); ?>" class="buttonNormal" /></div>
+</form>
+
+<a href="<?php echo $this->arrayAction['dir']; ?>list/">Inbox</a>
+&nbsp;|&nbsp;<a href="<?php echo $this->arrayAction['dir']; ?>list/?sent=1">Sent</a>
+
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>del/" method="post" id="frm" class="fc">
+<br />
+<table class="tableNormal mtNormal">
+<?php foreach ($arrayData['arrayList'] as $item){ ?>
+<tr id="item<?php echo $item['id']; ?>">
+<?php if (empty($sent)){ ?>
+<td align="center">
+<div class="center">
+<?php if (!$item['take_message_id']){ ?><a href="/<?php echo $this->arrayAction['dir']; ?>details/<?php echo $item['id']; ?>">●</a><?php } ?>
+</div>
+</td>
+<?php } ?>
+
+<td nowrap>
+<?php echo date('M d,H:i', strtotime($item['created'])); ?>
+</td>
+<td>
+<?php if ($sent){ ?>
+<?php if ($item['to_id'] == 0){ ?>All<?php }else{ ?><?php echo $item['nickname']; ?><?php } ?>
+<?php }else{ ?>
+<?php if ($item['from_id'] == -1){ ?>Manager<?php }else{ ?><?php echo $item['nickname']; ?><?php } ?>
+<?php if ($item['from_id'] == -2){ ?>News<?php } ?>
+<?php if ($item['from_id'] == -3){ ?>Contact<?php } ?>
+<?php } ?>
+
+</td>
+<td><a href="/<?php echo $this->arrayAction['dir']; ?>details/<?php echo $item['id']; ?>"><?php echo $item['subject']; ?></a></td>
+<td><?php echo $item['member_base_id']; ?></td></tr>
+</tr>
+<?php } ?>
+
+</table>
+<br /><br />
+
+</form>
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/footer.html' ?>

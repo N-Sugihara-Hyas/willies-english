@@ -1,0 +1,23 @@
+<br />
+	<div align="center">
+		<table style="width:100%;">
+			<tr>
+				<td>
+					<form method="post" action="/<?php echo $this->arrayAction['dir']; ?>edit/reInput/">
+						<div align="center">
+							<input type="hidden" name="sid" value="<?php echo $sid; ?>" />
+							<input type="submit" value="<?php $this->Lang->change('buttonEdit', '入力を編集する'); ?>" class="buttonNormal button">
+						</div>
+					</form>
+				</td>
+				<td>
+					<form method="post" action="/<?php echo $this->arrayAction['dir']; ?>editEnd/">
+						<div align="center">
+							<input type="hidden" name="sid" value="<?php echo $sid; ?>" />
+							<input type="submit" value="<?php $this->Lang->change('enter', '確定'); ?>" class="buttonNormal button">
+						</div>
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>

@@ -1,0 +1,79 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title>管理画面</title>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/header2.html' ?>
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+<h3 class="subTitle left">Test List</h3>
+
+
+<div class="fc" align="right">
+<form action="/admin/test/edit/?new=1" method="post">
+<input type="submit" value="Creat New" class="buttonNormal" target="contentsFrame" />
+</form>
+</div>
+
+
+<br class="fc">
+
+
+<table class="tableNormal mtNormal">
+<tr>
+<th>Edit</th>
+<th>ID</th>
+<th>Status</th>
+<th>Date</th>
+<th>Last Edited Date</th>
+<th>Edited by</th>
+<th>Test Title</th>
+<th># of Question</th>
+<th>Active User</th>
+</tr>
+
+
+<?php while ($item = $arrayData['arrayList']->getData()){ ?>
+<tr>
+<td>
+	<a href="/<?php echo $this->arrayAction['dir']; ?>edit/<?php echo $item['id']; ?>/?new=1">Edit</a><br />
+	<a href="javascript:if(window.confirm('<?php $this->Lang->change('buttonDel', '削除'); ?>してもよろしいですか？')){location.href='/<?php echo $this->arrayAction['dir']; ?>del/?arrayDel[<?php echo $item['id']; ?>]=<?php echo $item['id']; ?>';}">Delete</a>
+</td>
+<td>
+<?php echo $item['id']; ?>
+</td>
+<td>
+<?php if ($item['state']){echo 'Shared';}else{echo 'Save';} ?>
+</td>
+<td>
+<?php echo date('Y-m-d', strtotime($item['created'])); ?>
+</td>
+<td>
+<?php echo date('Y-m-d', strtotime($item['modified'])); ?>
+</td>
+<td>
+<?php echo $item['name']; ?>
+</td>
+<td>
+<?php echo $item['testName']; ?>
+</td>
+<td>
+<?php echo $item['countTest']; ?>
+</td>
+<td>
+<?php echo $item['countMember']; ?>
+</td>
+
+</tr>
+<?php } ?>
+
+</table>
+<br /><br />
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/footer.html' ?>

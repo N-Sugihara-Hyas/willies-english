@@ -1,0 +1,49 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title><?php echo $arrayUser['nickname']; ?></title>
+<script type="text/javascript" src="/common/js/jquery.js"></script>
+<script type="text/javascript" src="/common/js/card.js"></script>
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'company/inc/menu.html' ?>
+
+
+<div id="contentsMain">
+<h3 class="subTitle"><?php echo $arrayUser['companyName']; ?>生徒一覧</h3>
+
+<p>
+	<?php echo date('Y年m月d日', strtotime($arrayCardBase['created'])); ?>  <?php echo $arrayCardBase['cardName']; ?>(<?php echo $arrayCardBase['nickname']; ?>)
+</p>
+
+<?php if ($arrayCardBase['free']){ ?>
+<p class="cicle2">
+	<?php echo $arrayCardBase['free']; ?>
+</p>
+<?php } ?>
+
+<div style="height:300px;overflow:scroll;">
+<table class="tableNormal mt">
+<?php $i = 1;while ($item = $arrayData['dbGet']->getData()){ ?>
+<tr style="cursor:pointer;" onclick="onView(<?php echo $item['id']; ?>);">
+<td nowrap><?php echo $i; ?>/<?php echo $count; ?>&nbsp;&nbsp;<?php out($item['body1']); ?></td>
+</tr>
+<tr style="background:#FFFFCC;display:none;" id="tab<?php echo $item['id']; ?>">
+<td nowrap><?php out($item['body2']); ?>&nbsp;&nbsp</td>
+</tr>
+<?php $i++;} ?>
+</table>
+</div>
+
+<br />
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/navi.html'; ?>
+
+
+</div>
+<br class="fc" />
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

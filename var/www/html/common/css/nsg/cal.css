@@ -1,0 +1,46 @@
+select{
+}
+
+.calender{
+	border-collapse : collapse;
+	width : 200px;
+	background : #FFFFFF;
+}
+
+.calender td,
+.calender th{
+	padding : 5px;
+	font-size : 120%;
+	color : #dddddd;
+}
+
+#calTitle{
+	padding : 10px;
+
+	background : #6666FF;
+	color : #FFFFFF;
+}
+
+.calender{
+	background : #fffffff;
+}
+
+.calender td a{
+	padding : 5px;
+	color : #000000;
+}
+
+.calender td{
+	text-align : center;
+
+}
+
+.special{
+	background : #AA0000;
+}
+
+.hiddenCal{
+	position:absolute;
+	z-index : 9999;
+	display : none;
+}

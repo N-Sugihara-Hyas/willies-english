@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>FLASH CARD：ウィリーズ英語塾</title>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+		<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+<p>
+< 学習方法 >　
+WiLLies Englishが生徒様の英語学習に役立つテストをアップデートしていきます。<br />
+ご利用になりたいテストのカテゴリーを選択し、テストを選択してください。<br />
+一度受講されたテストは、学習履歴として管理され、何度でも受講することが可能です。
+</p>
+
+<form action="/card/test/" method="get">
+<div class="cicle3" style="padding:10px;">
+テストの種類を選択
+<select name="tid">
+<?php foreach ($arrayType as $item){ ?>
+<option value="<?php echo $item['id']; ?>"<?php if ($item['id'] == $tid){ ?> selected<?php } ?>><?php echo $item['typeName']; ?></option>
+<?php } ?>
+</select>
+<input type="submit" value="選択" class="buttonNormal" />
+</div>
+</form>
+
+<?php if ($tid){ ?>
+<div class="cicle3" style="padding:10px;"><div class="center">学習中のテスト:<?php echo $arrayHitType['typeName']; ?></div></div>
+<div class="cicle3" style="padding:10px;">
+
+<?php echo $arrayHitType['typeName']; ?> テストを受ける
+
+<form action="/card/test/details/" method="get">
+<select name="tid">
+<?php foreach ($arrayTest as $item){ ?>
+<option value="<?php echo $item['id']; ?>"><?php echo $item['testName']; ?></option>
+<?php } ?>
+</select>
+<input type="submit" value="選択" class="buttonNormal" />
+</form>
+
+</div>
+
+<?php } ?>
+
+<h3>■学習履歴</h3>
+
+<div style="height:300px;overflow:scroll;">
+<?php foreach ($arrayHistory as $item){ ?>
+<?php echo date('Y-m-d', strtotime($item['modified'])); ?>	|　
+<a href="/card/test/details/?<?php if (!$item['anser']){echo 'tid=' . $item['test_base_id'];}else{echo 'did=' . $item['test_details_id'];} ?>"><?php echo $item['testName']; ?></a>　|　
+<a href="/card/test/details/?<?php if (!$item['anser']){echo 'tid=' . $item['test_base_id'];}else{echo 'did=' . $item['test_details_id'];} ?>&ng=<?php echo $item['ng']; ?>">間違った問題のみ</a>　|　
+
+<?php if (!$item['anser']){ echo $item['point']; ?>点/ <?php echo $item['count']; ?>回目<?php }else{ ?>
+Save中
+<?php } ?>
+<br />
+<?php } ?>
+</div>
+<br class="fc" />
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

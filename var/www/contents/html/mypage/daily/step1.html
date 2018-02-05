@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>グループ音読レッスン：ウィリーズ英語塾</title>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+
+<script src="/common/js/nsg/jquery.js" language="javascript"></script>
+<script src="/common/js/nsg/ajax.js" language="javascript"></script>
+<script>
+
+first = false;
+<?php if ($cource_base_id){ ?>
+$(document).ready(function(){
+	first = true;
+	onChange();
+});
+<?php } ?>
+
+function onChange(){
+	ajax('/api/getLevel', {data:$('#cource_base_id').val()}, complateAjaxEndHandle);
+}
+
+
+function complateAjaxEndHandle(data){
+	_selectID = 'level';
+	setSelect(data);
+
+	if (first){
+		$('#' + _selectID).val('<?php echo $level; ?>');
+	}
+}
+
+</script>
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+
+<h2 class="subTitle">グループ音読レッスンの条件を指定して検索</h2>
+
+<?php if ($error){ ?>
+<div class="errorBox">
+受講コースを選択して下さい。
+</div>
+<br />
+<?php } ?>
+
+<form action="/mypage/return/step1/?type=3" method="post">
+
+<table class="tableNormal">
+<tr>
+<th>
+受講コース
+</th>
+<td>
+<select name="cource_base_daily_id" id="cource_base_id">
+<option value="">選択して下さい</option>
+<?php foreach ($arrayCource as $key => $item){ ?>
+<option value="<?php echo $item['id']; ?>"<?php if ($item['id'] == $cource_base_id){ ?> selected<?php } ?>><?php echo $item['courceName']; ?></option>
+<?php } ?>
+</select>
+</td>
+</tr>
+</table>
+
+<p>
+※体験レッスンは２回までご受講頂けます。その後はPayPalでお支払い後、継続して受講可能です。<br />
+※一度に予約できるのは１週間（週5回）までとなります。<br />
+</p>
+
+<div class="text-center" class="mt">
+<input type="submit" class="btn btn-lg btn-primary" value="確定" />
+</div>
+</form>
+<br />
+
+<div class="cicle2">
+予約は今日から１週間分可能（上記の画面は３日分しか表示できていないが、本来１週間分表示）<br />
+基本的に、時間とコースはあまり変わらない予定。<br />
+予約は１日１コマ、３コマ分まで予約できる。<br />
+最初は２回まで無料で予約可能だが、その後はPayPal画面でお支払いしないと予約できない。<br />
+11/15 AM6:00は定員に達したため、予約できなくなっている。<br />
+11/16 AM6:00に予約を入れている。そのため他の時間帯はキャンセルしない限り、予約できない。<br />
+予約、キャンセルは当日１時間前まで可能。<br />
+</div>
+
+
+</div>
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

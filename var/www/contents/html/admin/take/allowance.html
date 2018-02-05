@@ -1,0 +1,96 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+<script type="text/javascript" src="/common/js/nsg/calData.js"></script>
+<script type="text/javascript" src="/common/js/nsg/cal.js"></script>
+<link href="/common/css/nsg/cal.css" rel="stylesheet" type="text/css">
+
+<script>
+	$(document).ready(function(){
+			var nsgCaldateDay = new NsgCal('dateStartView', 'dateStart');
+			nsgCaldateDay.getSpecial();
+			nsgCaldateDay.setCal();
+
+			var nsgCaldateDay = new NsgCal('dateEndView', 'dateEnd');
+			nsgCaldateDay.getSpecial();
+			nsgCaldateDay.setCal();
+
+	});
+</script>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+<h3 class="subTitle">給与管理</h3>
+
+<div class="cicleNormal2">期間絞込み</div>
+
+<form action="/admin/take/allowance/" method="post">
+<input type="text"  name="dateStart" id="dateStart" value="<?php echo $dateStart; ?>" style="width:10em;" readonly="readonly" />～
+<div id="dateStartView" class="hiddenCal"></div>
+<input type="text"  name="dateEnd" id="dateEnd" value="<?php echo $dateEnd; ?>" style="width:10em;" readonly="readonly" />
+<div id="dateEndView" class="hiddenCal"></div>
+<input type="submit" name="csv" value="CSVダウンロード" />
+<input type="submit" value="表示する" />
+<p>
+※未来は指定できません
+</p>
+
+</form>
+
+<br />
+<table class="tableNormal mtNormal">
+<tr>
+<th>
+講師ID
+</th>
+<th>
+ニックネーム
+</th>
+<th>
+契約就労時間(回)
+</th>
+<th>
+就労時間(回)
+</th>
+<th>
+レギュラーレッスン(回)
+</th>
+<th>
+振替レッスン(回)
+</th>
+<th>
+グループ音読レッスン(回)
+</th>
+<th>
+その他(回)
+</th>
+</tr>
+
+<?php foreach ($arrayData['arrayList'] as $item){ ?>
+<tr id="item<?php echo $item['id']; ?>" >
+<td>
+<?php echo $item['id']; ?>
+</td>
+<td><a href=""><?php echo $item['nickname']; ?></a></td>
+<td><?php echo $item['arrayAllowance']['countSheduleTime']; ?></td>
+<td><?php echo $item['arrayAllowance']['countReserveTime']; ?></td>
+<td><?php echo $item['arrayAllowance']['countNormal']; ?></td>
+<td><?php echo $item['arrayAllowance']['countReturn']; ?></td>
+<td><?php echo $item['arrayAllowance']['countDaily']; ?></td>
+<td><?php echo $item['arrayAllowance']['countOther']; ?></td>
+
+</tr>
+<?php } ?>
+
+</table>
+<br /><br />
+
+</form>
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

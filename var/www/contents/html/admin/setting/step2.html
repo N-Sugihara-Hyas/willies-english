@@ -1,0 +1,46 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<script type="text/javascript" src="/common/js/jquery.js"></script>
+<script type="text/javascript" src="/common/js/NowLoading.js"></script>
+
+<script>
+	MainNowLoading = new ShowNowLoading('.blackBack');
+</script>
+
+
+<div id="contentsMain">
+
+
+<h2 class="subTitle">受講プランの選択</h2>
+
+<?php if ($error){ ?>
+<div class="errorBox">
+受講プランを選択して下さい。
+</div>
+<br />
+<?php } ?>
+
+<form action="/admin/setting/step3/" method="post" id="form">
+<select name="cource_style_id">
+<option value="">選択して下さい</option>
+<?php foreach ($arrayCource as $key => $item){ ?>
+<option value="<?php echo $item['value']; ?>"><?php echo $item['courceStyleName']; ?></option>
+<?php } ?>
+</select>
+
+<div align="center" class="mtNormal">
+<a href="/admin/setting/first/" class="buttonNormal">前へ</a>
+<input type="button" class="buttonNormal" value="次へ" onclick="MainNowLoading.show();$('#form').submit();" />
+</div>
+</form>
+<br />
+
+<br />
+</div>
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

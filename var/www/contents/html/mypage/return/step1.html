@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title><?php echo $title; ?>：ウィリーズ英語塾</title>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+</head>
+
+
+
+
+<?php if (!$isOK){ ?>
+<script>
+alert('ご予約できるスケジュールがございません');
+window.open('http://williesenglish.jp/teachers.html', 'mywindow1', 'width=900, height=700, menubar=no, toolbar=no, scrollbars=yes');
+
+</script>
+<?php } ?>
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+
+
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+
+<h2 class="subTitle"><?php echo $title; ?></h2>
+
+<?php if (($takeName) && ($isOK)){ ?>
+<?php echo $takeName; ?>先生の予約可能なスケジュール<a href="./?type=<?php echo $type; ?>" class="btn btn-lg btn-primary">戻る</a>
+<?php }else{ ?>
+
+<p class="mt" style="color:#FF0000;font-size : 130%;font-weight:800;">1. 講師の空き情報からレッスンを予約</p>
+<form action="./?type=<?php echo $type; ?>" method="post">
+<p>講師の概要はこちらからご確認下さい：　<a href="http://williesenglish.jp/teachers.html" target="_blank">http://williesenglish.jp/teachers.html</a>　</p>
+講師名を入力：<input type="text" name="takeName" value="<?php echo $takeName; ?>" /><input type="submit" value="確認" class="btn btn-lg btn-primary" />
+<p class="mt" style="color:#FF0000;font-size : 130%;font-weight:800;">2. 予約可能なスケジュールからレッスンを予約</p>
+
+<?php } ?>
+
+
+<table class="tableNormal mt">
+<tr>
+<th>レッスン日時</th>
+<?php foreach ($arrayDate as $item){ ?>
+<th><?php echo date('Y/m/d D', strtotime($item)); ?></th>
+<?php  } ?>
+</tr>
+
+
+<?php foreach ($arrayTime as $item){ ?>
+<tr>
+<td><?php echo $item['value']; ?></td>
+<?php foreach ($arrayDate as $item2){ ?>
+<td class="text-center">
+<?php 
+	if (isset($arrayCourceSchedule[$item2][$item['value'] . ':00'])){
+		$arrayReserve = array_shift($arrayCourceSchedule[$item2][$item['value'] . ':00']);
+	}else{
+		$arrayReserve = '';
+	}
+?>
+
+<?php if ($arrayReserve){ ?>
+<input type="button" value="予約" class="btn btn-lg btn-primary" style="width:100px;min-width:100px;" onclick="MainNowLoading.show();location.href='/mypage/return/step2/?date=<?php echo $item2; ?>&tID=<?php echo getVar($arrayTake, 'id'); ?>&time=<?php echo $item['id']; ?>&type=<?php echo $type; ?>';" />
+</td>
+<?php } ?>
+<?php } ?>
+</tr>
+<?php } ?>
+</table>
+
+<br />
+
+
+
+
+
+</div>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>受講履歴：ウィリーズ英語塾</title>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+
+
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+	
+<h2 class="subTitle">受講履歴</h2>
+
+<table class="tableNormal mt">
+<tr>
+<th>受講日時</th><th>講師名</th><th>受講時間</th>
+</tr>
+
+<?php while ($item = $arrayData['dbGet']->getData()){ ?>
+<tr>
+<td><?php out($item['date']); ?>&nbsp;<?php out($item['timeStart']); ?></td>
+<td><?php out($item['nickname']); ?></td>
+<td><?php out(date('i', strtotime($item['timeEnd'])) - date('i', strtotime($item['timeStart']))); ?>分</td>
+</tr>
+<?php } ?>
+</table>
+<br />
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/navi.html'; ?>
+
+</div>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

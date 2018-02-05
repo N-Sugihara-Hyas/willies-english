@@ -1,0 +1,77 @@
+<script type="text/javascript" src="/common/js/ajax/server.js"></script>
+
+<script>
+function onAttendance(){
+	var ajaxServer = new AjaxServer('');
+
+	ajaxServer.fnc = complateAttendanceHandle;
+	ajaxServer.access();
+}
+
+function complateAttendanceHandle(data){
+	if (data == 'OK'){
+		alert('OK');
+	}else{
+		alert('click again later 40 min before your shift starts');
+	}
+}
+</script>
+
+<div id="contentsLeft">
+	<a href="/take/update/ok/" class="buttonNormal">Attendance</a>
+
+	<div class="menuTitle">
+		<div id="contentsMenuTitle">
+			Master Tool
+		</div>
+	</div>
+	<dl class="menuList" class="fc">
+		<dd>
+			<div>
+				<a href="/take/message/list/">Communication(Top)</a><br />
+			</div>
+			<div>
+				<a href="/take/sch/list/">Your Schedule</a><br />
+			</div>
+			<div>
+				<a href="/take/customer/list/">Your Student</a><br />
+			</div>
+		</dd>
+	</dl>
+
+	<div class="menuTitle mtNormal">
+		<div id="contentsMenuTitle">
+			Your Info
+		</div>
+	</div>
+	<dl class="menuList" class="fc">
+		<dd>
+			<div><a href="/take/user/edit/">Self Introduction</a></div>
+		</dd>
+	</dl>
+
+	<div class="menuTitle mtNormal">
+		<div id="contentsMenuTitle">
+			Admin
+		</div>
+	</div>
+	<dl class="menuList" class="fc">
+		<dd>
+			<?php foreach ($arrayMenu as $item){ ?>
+			<div>
+					<?php if ($item['url']){ ?><a href="<?php echo $item['url']; ?>" target="_blank">
+						<?php }else{  ?><a href="/take/menu/details/<?php echo $item['id']; ?>"><?php } ?>
+
+					<?php if ((time() - (3600 * 24 * 4)) < strtotime($item['modified'])){ ?>
+						<span style="color:#009900">
+					<?php } ?>
+						<?php echo $item['subject']; ?>
+					</a>
+
+			</div>
+			<?php } ?>
+		</dd>
+	</dl>
+
+</div>
+

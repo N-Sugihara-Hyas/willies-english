@@ -1,0 +1,34 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+
+
+<h3 class="subTitle">Test Cardコンテンツ登録</h3>
+
+
+
+<p>カテゴリ：　<?php echo $objType['value']; ?></p>
+<p>教材名：　<?php echo $objBase['teachingName']; ?></p>
+<p>レッスン#：　<?php echo $objLesson['lessonName']; ?></p>
+<p>コンテンツ：　<?php if ($count){ ?><?php echo $count; ?>個登録済<?php }else {?>なし<?php } ?></p>
+
+
+
+<div class="center">
+	
+	<form action="/<?php echo $this->arrayAction['dir']; ?>csv/<?php echo $uid; ?>/#enter" method="post" id="formMain" enctype="multipart/form-data">
+		<p><input type="file" name="csv" /></p>
+		<p><input type="submit" value="コンテンツ登録" class="buttonNormal"></p>
+	</form>
+
+</div>
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

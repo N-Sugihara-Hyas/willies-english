@@ -1,0 +1,24 @@
+({include file="admin/inc/delHeader.html"})
+<br /><br />
+
+<p class="fc">
+データを<?php $this->Lang->change('buttonDel', '削除'); ?>します。よろしいですか？
+</p>
+
+
+({assign var=colorNo value=0})
+<table class="tableNormal" id="listTableSubMenu">
+<tr>
+({include file="admin/inc/delList1.html"})
+</tr>
+
+({foreach from=$arrayData.arrayList key=key item=item})
+<tr({if $colorNo is not even}) class="trGlay"({/if}) id="item({$item.id})" >
+({include file="admin/inc/delList2.html"})
+</tr>
+({/foreach})
+</table>
+
+
+({include file="admin/inc/delFooter.html"})
+<br />

@@ -1,0 +1,38 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html'; ?><link href="/common/admin/css/login.css" rel="stylesheet" type="text/css" />
+
+<title>Manage</title>
+</head>
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html'; ?>
+
+
+
+	<form action="/take/login/auth/" method="post">
+		<div class="center">
+
+			<div id="login">
+				<h2 id="loginString"><img src="/common/admin/img/login.jpg" alt="LOGIN" /></h2>
+
+				<table class="tableLogin">
+					<tr>
+						<th valign="middle">LOGIN ID</th>
+						<td><input type="text" name="id" value="<?php getVar($arrayAll, 'id')?>" size="30" /></td>
+					</tr>
+					<tr>
+						<th valign="middle">PASSWORD</th>
+						<td><input type="password" name="pass" value="" size="30" /></td>
+					</tr>
+				</table>
+				<br /><br />
+				<p align="center">
+					<input type="image"  src="/common/admin/img/loginButton.jpg" />
+				</p>
+				<br />
+				<?php if ($error){ ?><div class="errorBox">ID又はPASSWORDが違います。</div><?php } ?></td>
+
+			</div>
+
+		</div>
+	</form>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html'; ?>

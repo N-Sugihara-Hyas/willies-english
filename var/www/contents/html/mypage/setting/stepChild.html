@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>マイページ：ウィリーズ英語塾</title>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+<script type="text/javascript" src="/common/js/jquery.js"></script>
+<script type="text/javascript" src="/common/js/NowLoading.js"></script>
+
+<script>
+	MainNowLoading = new ShowNowLoading('.blackBack');
+</script>
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+
+
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+
+<h2 class="subTitle">体験レッスンで使用する教材を選択</h2>
+
+
+<form action="/mypage/setting/step6/" method="post">
+<p class="mt">
+子供英会話コースでは、<span class="att">「キクタン」</span> 若しくは 「WE CAN!」  テキストブックを使い、必要な知識を計画的に取り込みながら、それを使いこなせる力（聞く力、話す力、読み書きの力）を身に付けていきます。
+<br /><br />
+幼稚園、小学校低学年〜中学年で<span class="att">初めて英会話に挑戦するお子様は「キクタン」をお勧めします。</span>帰国子女のお子様、小学校高学年、<span class="att">学習塾で1-2年英会話に触れたことがあるお子様は「WE CAN!」 をお勧めします。</span>　<a href="http://kids.williesenglish.jp/curriculum" target="_blan">教材について詳しくはこちらをご確認ください</a>
+<br /><br />
+体験レッスンでは、「キクタン」、「WE CAN!」 のサンプルテキストを使って受講いただきます。ご希望のサンプルテキストを以下よりご選択ください。体験レッスン終了後に、改めてお子様のレベルを判定させて頂き、適切な教材をご紹介いたしますので、下記レベル選択はあくまで目安と捉えて下さい。 
+
+</p>
+
+<?php foreach ($arrayChild as $key => $item){ ?>
+<?php if ($key >= 100){ ?>
+<p><input type="radio" name="levelChild" id="radio<?php echo $key; ?>" value="<?php echo $key; ?>"<?php if ($key == $levelChild){ ?> checked<?php } ?><?php if ((!$levelChild) && ($key == 1)){ ?> checked<?php } ?> /><label for="radio<?php echo $key; ?>"><?php echo $item['value']; ?></label></p>
+<?php } ?>
+<?php } ?>
+
+<p><a href="http://williesenglish.jp/textbook_trial_lesson.html" target="_blank">※ キクタン・サンプルテキストについてはこちらよりご確認ください</a></p>
+
+<div class="mt">
+<?php foreach ($arrayChild as $key => $item){ ?>
+<?php if ($key < 100){ ?>
+<?php if (isset($item['value'])){ ?>
+<p><input type="radio" name="levelChild" id="radio<?php echo $key; ?>" value="<?php echo $key; ?>"<?php if ($key == $levelChild){ ?> checked<?php } ?><?php if ((!$levelChild) && ($key == 1)){ ?> checked<?php } ?> /><label for="radio<?php echo $key; ?>"><?php echo $item['value']; ?></label></p>
+<?php } ?>
+<?php } ?>
+<?php } ?>
+</div>
+
+<p><a href="http://williesenglish.jp/textbook_trial_lesson.html" target="_blank">※ WE CAN! サンプル・テキストについてはこちらよりご確認ください</a></p>
+
+
+<br />
+
+<div class="text-center">
+<a href="/mypage/setting/step5/" class="btn btn-lg btn-primary">前へ</a>
+<input type="submit"  class="btn btn-lg btn-primary" value="確定" />
+</form>
+</div>
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

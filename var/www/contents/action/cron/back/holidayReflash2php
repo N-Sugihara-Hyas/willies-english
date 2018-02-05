@@ -1,0 +1,37 @@
+<?php
+
+	/*
+	*	支払いの無い人間の体験終了の処理
+	*/
+	$this->addModel(array('master/Communication', 'ext/HolidayReturn', 'member/Cancel'));
+		
+	$this->MasterCommunication->addQuery('body LIKE', '%以下レッスンのキャンセルを受け付けました。%');
+	$dbGet = $this->MasterCommunication->getData();
+
+	while ($item = $dbGet->getData()){
+		$body = str_replace("\n", '', $item['body']);
+		list($dami, $date) = explode('レッスン日：', $body);
+		list($date, $time) = explode('受講時間帯：', $date);
+		list($time, $dami) = explode('担当講師：', $time);
+
+		$dateTime = $date . ' ' . $time;
+
+		$arrayDataHoliday['member_base_id'] = $item['member_base_id'];
+		$arrayDataHoliday['dateTime'] = $dateTime;
+
+		$this->MemberCancel->addQuery('member_base_id', $item['member_base_id']);
+		$this->MemberCancel->addQuery('cancelDate IS NULL');
+		$arrayMemberCancel = $this->MemberCancel->getData()->getData();
+
+
+		$arrayMemberCancel['cancelDate'] = $date;
+		$arrayMemberCancel['cancelTime'] = $time;
+
+		$this->MemberCancel->commit($arrayMemberCancel);
+
+		//$this->ExtHolidayReturn->commit($arrayDataHoliday);
+	}
+
+	exit();
+		
+?>

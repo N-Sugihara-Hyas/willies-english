@@ -1,0 +1,163 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title><?php echo $arrayUser['nickname']; ?></title>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'take/inc/menu.html' ?>
+
+<div id="contentsMain">
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/listHeader.html' ?>
+
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>list/" method="post">
+
+<div class="cicleNormal2">Put Student’s Name or Student’s ID to sort student info</div>
+<input type="text" name="keyword" value="<?php echo $keyword; ?>" /><br /><br />
+
+
+<input type="checkbox" name="member_base_id" id="member_base_id" value="1" <?php if (isset($member_base_id)){ ?> checked<?php } ?>/><label for="member_base_id">Sort Your Students</label><br /><br />
+
+
+<div align="center" class="mtNormal">
+<input type="submit" value="Enter" class="buttonNormal" />
+</div>
+</form>
+
+<br />
+
+<div style="overflow-x:scroll;width:100%;">
+<table class="tableNormal mtNormal" style="width:1500px;">
+<tr>
+<th>
+StudentID
+</th>
+<th>
+Name
+</th>
+<th>
+Status
+</th>
+<th>
+Main Teacher
+</th>
+<th>
+Skype ID
+</th>
+<th>
+Lesson Cource
+</th>
+<th>
+Lesson Shedule
+</th>
+<th>
+Level
+</th>
+<th>
+Trial Feedback/<br />
+Level Up Feedback
+</th>
+<th>
+Homework
+</th>
+<th>
+Weekly Feedback
+</th>
+<th>
+Review Feedback 
+</th>
+<th>
+Comment on Communication board
+</th>
+<th>
+Lesson Record
+</th>
+</tr>
+
+<?php while ($item = $arrayData['arrayList']->getData()){ ?>
+<tr id="item<?php echo $item['id']; ?>" >
+<td>
+<?php echo $item['id']; ?>
+</td>
+<td>
+<?php echo $item['memberNameFirstEnglish']; ?>&nbsp;
+<?php echo $item['memberNameSecoundEnglish']; ?>
+</td>
+
+<td><?php echo $arrayState[$item['state']]['valueEn']; ?></td>
+<td><?php echo $item['nickname']; ?></td>
+<td><?php echo $item['skypeID']; ?></td>
+<td><?php echo $item['courceNameEnglish']; ?></td>
+<td>
+<?php if ($item['cource_schedule_id']){ ?>
+<?php echo $arraySchedule[$item['cource_schedule_id']]['valueEnglish']; ?><br />
+<?php 
+	echo date('H:i', strtotime($item['timeStart'])) . '～';
+	echo date('H:i', strtotime($item['timeEnd'])); 
+?>
+<?php } ?>
+</td>
+<td>
+
+<form action="/take/customer/level/" method="post">
+<input type="hidden" name="id" value="<?php echo $item['id']; ?>" style="width:3em;" />
+<input type="text" name="level" value="<?php echo $item['level']; ?>" style="width:3em;" />
+<input type="submit" value="Change" />
+</form>
+
+</td>
+
+<td align="center">
+<form action="/take/feedlevel/edit/" method="post">
+<input type="hidden" name="id" value="<?php echo $item['id']; ?>" style="width:3em;" />
+<input type="submit" value="Enter" />
+</form>
+</td>
+
+
+<td align="center">
+<form action="/take/homework/list/" method="post">
+<input type="hidden" name="id" value="<?php echo $item['id']; ?>" style="width:3em;" />
+<input type="submit" value="Enter" />
+</form>
+
+</td>
+
+
+<td align="center">
+<form action="/take/exercise/list/" method="post">
+<input type="hidden" name="id" value="<?php echo $item['id']; ?>" style="width:3em;" />
+<input type="submit" value="Enter" />
+</form>
+</td>
+
+
+<td align="center">
+<form action="/take/monthly/list/" method="post">
+<input type="hidden" name="id" value="<?php echo $item['id']; ?>" style="width:3em;" />
+<input type="submit" value="Enter" />
+</form>
+</td>
+
+
+<td>
+<form action="/take/communication/list/" method="post">
+<input type="hidden" name="id" value="<?php echo $item['id']; ?>" style="width:3em;" />
+<input type="submit" value="Enter" />
+</form>
+</td>
+<td>
+<a href="/take/info/history/<?php echo $item['id']; ?>">Lesson Record</a>
+</td>
+</tr>
+<?php } ?>
+
+</table>
+<br /><br />
+
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

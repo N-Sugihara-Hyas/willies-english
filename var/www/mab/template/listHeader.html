@@ -1,0 +1,27 @@
+<th nowrap>
+
+</th>
+
+<th nowrap>
+ID
+<a href="<?php echo $my; ?>sort/?sortKey=id ASC">▲</a><a href="<?php echo $my; ?>sort/?sortKey=id DESC">▼</a>
+</th>
+
+
+<?php
+ foreach ($arrayColum as $key => $item){ 
+	if ($item['list']){
+?>
+
+<?php if (isset($item['name']) ){ ?>
+<th nowrap>
+<?php echo $item['name']; ?><a href="<?php echo $my; ?>sort/?sortKey=<?php echo $key; ?> ASC">▲</a><a href="<?php echo $my; ?>sort/?sortKey=<?php echo $key; ?> DESC">▼</a>
+</th>
+
+<?php 
+		}
+	}
+} 
+?>
+
+

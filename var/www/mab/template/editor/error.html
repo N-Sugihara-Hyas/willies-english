@@ -1,0 +1,14 @@
+<script type="text/javascript" src="/js/nsg/validate/Base.js"></script>
+<script>
+var Valiate = new ValidateBase();
+
+({assign var=count value=0})
+({foreach from=$arrayValidate key=key item=item})
+({foreach from=$item item=item2})
+({if isset($item2.message) && ($key != 'pass')})
+Valiate.addValidate('({$key})', '({$item2.type})', '({$item2.message})', '({getVar($item2, 'isView')})');
+({/if})
+({/foreach})
+({/foreach})
+
+</script>

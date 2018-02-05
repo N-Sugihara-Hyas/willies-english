@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title><?php echo $title; ?>：ウィリーズ英語塾</title>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+
+
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+
+
+<h2 class="subTitle"><?php echo $title; ?></h2>
+
+<p>
+予約の内容を確認してください。
+</p>
+
+<table class="tableNormal">
+
+<tr>
+<th>講師</th>
+<td><?php out($arrayTake['nickname']); ?></td>
+</tr>
+<tr>
+<th>日時</th>
+<td><?php echo date('Y-m-d (D)', strtotime($arrayDate['date'])); ?>&nbsp;<?php out($arrayDate['time']); ?></td>
+</tr>
+
+</table>
+<br />
+
+<div class="text-center">
+<a href="/mypage/return/<?php if ($op){ ?>step1/?type=<?php echo $type; ?>&takeName=<?php echo $arrayTake['nickname']; ?><?php }else{ ?>step2/?type=<?php echo $type; ?><?php } ?>" class="btn btn-lg btn-primary">前へ</a>
+<a href="javascript:MainNowLoading.show();location.href='/mypage/return/end/?type=<?php echo $type; ?>';" class="btn btn-lg btn-primary">確定</a>
+</div>
+
+
+</div>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

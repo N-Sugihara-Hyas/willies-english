@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title><?php echo $title; ?>：ウィリーズ英語塾</title>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+
+<div id="contentsBody">
+
+<h2 class="subTitle">グループレッスン予約</h2>
+
+<p class="mtNormal" style="color:#FF0000;font-size : 130%;font-weight:800;">1.レッスン内容からレッスンを探す</p><p>
+	<form action="./" method="post">
+	レッスンスケジュールと内容についてはこちらからご確認下さい：　<a href="http:williesenglish.jp/grouplesson.html" target="_blank">http:williesenglish.jp/grouplesson.html</a><br />	レッスン内容を選択してください：
+	<select name="level">
+		<option value="">未選択</option>
+		<?php foreach ($arrayLevel as $item){ ?>
+		<option value="<?php echo $item['level']; ?>"<?php if ($level == $item['level']){ ?> selected<?php } ?>><?php echo $item['level']; ?></option>
+		<?php } ?>
+	</select>	
+	<input type="submit" value="確認" />
+	</form>
+</p>
+
+
+
+<table class="tableNormal mtNormal">
+<tr>
+<th>レッスン日時</th>
+<?php foreach ($arrayDate as $item){ ?>
+<th><?php echo date('Y/m/d D', strtotime($item)); ?></th>
+<?php  } ?>
+</tr>
+
+
+<?php foreach ($arrayTime as $item){ ?>
+<tr>
+<td><?php echo $item['value']; ?></td>
+<?php foreach ($arrayDate as $item2){ ?>
+<td align="center">
+<?php 
+	$key = str_replace('-', '', $item2) . str_replace(':', '', $item['value']);
+	if (isset($arrayResult[$key])){ 
+?>
+<a href="/card/group/step2/?date=<?php echo $key; ?>" class="buttonNormal">予約</a>
+<?php } ?>
+
+<?php } ?>
+</tr>
+<?php } ?>
+</table>
+
+<br />
+
+</div>
+
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

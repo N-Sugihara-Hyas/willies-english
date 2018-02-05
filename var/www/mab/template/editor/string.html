@@ -1,0 +1,3 @@
+<?php echo getVar($arrayInput, $key); ?>
+
+<input type="hidden" name="arrayInput[<?php echo $modelName; ?>][<?php echo $key; ?>]" value="<?php echo htmlspecialchars(getVar($arrayInput, $key)); ?>">

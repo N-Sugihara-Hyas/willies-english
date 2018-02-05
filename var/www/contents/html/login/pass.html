@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>パスワードを忘れた方へ：ウィリーズ英語塾</title>
+
+<link rel="stylesheet" type="text/css" href="/common/css/layout.css" id="layout-css" />
+<link rel="stylesheet" type="text/css" href="/common/css/tool.css" id="layout-css" />
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+<div class="center">
+	<div class="cicle2 mtNormal">
+		下記にメールアドレスを入力して下さい。
+	</div>
+</div>
+
+
+<form action="./" method="post">
+<div align="center">
+	<div class="cicle mtNormal">
+		<table class="tableNormal">
+			<?php if ($email){ ?>
+			<div class="errorBox">
+				そのようなメールアドレスは存在しません
+			</div>
+			<?php } ?>
+
+			<table class="tableWhite">
+				<tr>
+					<th>メールアドレス</th><td><input type="text" name="email" value="<?php echo $email; ?>" size="60" /></td>
+				</tr>
+		</table>
+
+		<input type="submit" class="buttonNormal mtNormal" value="発行する" />
+	</div>
+</div>
+</form>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

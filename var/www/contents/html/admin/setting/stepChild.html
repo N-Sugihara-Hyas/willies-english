@@ -1,0 +1,44 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+
+<h2 class="subTitle">体験レッスンで使用する教材を選択</h2>
+
+
+<form action="/admin/setting/step6/" method="post">
+<p>
+子供英会話コースでは、WE CAN!というテキストブックを使い、必要な知識を計画的に取り込みながら、それを使いこなせる（聴く力、話す力、読み書きの力）を付けていきます。
+<br /><br />
+体験レッスンでは、このWE CAN!のサンプルテキストを使って受講いただきます。<br />
+<span class="att">ご希望のサンプルテキストを以下よりご選択ください。体験レッスン終了後に、改めてお子様のレベルを判定させて頂き、適切な教材をご紹介いたします</span>ので、下記レベル選択はあくまで目安と捉えて下さい。
+</p>
+
+
+<?php foreach ($arrayChild as $key => $item){ ?>
+<p><input type="radio" name="levelChild" id="radio<?php echo $key; ?>" value="<?php echo $key; ?>"<?php if ($key == $levelChild){ ?> checked<?php } ?><?php if ((!$levelChild) && ($key == 1)){ ?> checked<?php } ?> /><label for="radio<?php echo $key; ?>"><?php echo $item['value']; ?></label></p>
+<?php } ?>
+
+
+<p>
+なお、WE CAN! のサンプルテキストは<a href=" http://williesenglish.jp/textbook_trial_lesson.html"  target="_blank">こちら</a>より確認することができます。<br />
+<span class="att">体験レッスンまでに、選択いただいたレベルのテキストをダウンロードし、音読を数回お願い致します。</span>
+</p>
+
+<br />
+
+<div align="center">
+<a href="/admin/setting/step5/" class="buttonNormal">前へ</a>
+<input type="submit"  class="buttonNormal" value="確定" />
+</form>
+</div>
+<br />
+</div>
+
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

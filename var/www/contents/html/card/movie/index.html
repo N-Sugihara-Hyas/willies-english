@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>FLASH CARD：ウィリーズ英語塾</title>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+<?php $menu=4;require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+<div id="contents" class="row">
+
+
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+	
+<p>
+< 学習方法 ><br />日々の学習に役立つ動画を随時アップデートしていきます。<br>ご利用頂ける動画は、生徒様の受講コース、ステイタス（体験中/ レギュラー生徒）、受講中のレベルで異なります。<br>RLC（音読）関連のビデオは、先生に続いて音読に挑戦してみてください。「口に出せる英語は聴き取れる」ようになれます。 
+
+</p>
+
+
+<form action="" method="get" class="mtNormal">
+<p>
+	キーワード検索:<input type="text" name="keyword" value="<?php echo $keyword; ?>" size="60" />
+	<input type="submit" value="検索" />
+</p>
+</form>
+
+<div class="row">
+	<?php foreach ($arrayMovie as $key => $item){ ?>
+	<?php if ($key % 3 == 0){ ?><br class="fc"><?php } ?>
+	<div class="col-sm-4 col-xs-6 mt">
+		<p><iframe frameborder="0" src="https://www.videog.jp/player/<?php echo $item['url']; ?>" scrolling="no" width="100%" height="270" allowfullscreen></iframe></p>
+		
+		<div style="border:solid 1px #DDDDDD;padding : 10px;height:20em;">
+			<p><?php echo $item['movieName']; ?></p>
+			<p><?php echo $item['comment']; ?></p>
+			<p align="right"><a href="/card/movie/details/<?php echo $item['id']; ?>/">大きな動画で見る</a></p>
+		</div>
+	</div>
+	<?php } ?>
+</div>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/navi.html'; ?>
+		<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+</div>
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

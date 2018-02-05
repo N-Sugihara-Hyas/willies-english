@@ -1,0 +1,200 @@
+.clearfix:after{
+  content: ".";
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+}
+.clearfix {
+  min-height: 1px;
+}
+* html .clearfix {
+  height: 1px;
+  /**//*/
+  height: auto;
+  overflow: hidden;
+  /**/
+}
+
+.tdSmall{
+	width : 10%;
+}
+.tdBig{
+	width : 80%;
+}
+
+
+.attBox{
+	color : #FF0000;
+}
+
+
+.center{
+	text-align : center;
+}
+
+.left{
+	float : left;
+}
+
+.right{
+	float : right;
+}
+
+.fc{
+	clear : both;
+}
+
+.att{
+	color : #990000;
+	font-weight : 800;
+}
+
+.tableWhite th,
+.tableWhite td{
+	padding : 10px;
+	text-align : left;
+}
+
+.tableNormal{
+	width : 100%;
+	border-collapse:collapse;
+}
+
+
+.tableNormal th,
+.tableNormal td{
+	padding  :10px;
+	border : solid 1px #999999;
+}
+
+.tableNormal th{
+	background : #EEEEEE;
+}
+
+.tableNormal th a{
+
+}
+
+.mtNormal{
+	margin-top : 20px;
+}
+
+.buttonNormal{
+	padding : 5px 0 0 0;
+	background : url(../img/sidebar/buttonProfile.png);
+	font-size : 100%;
+	width: 200px;
+	height : 25px;
+	min-width : 200px;
+	cursor : pointer;
+	display : inline-block;
+	text-align :center;
+	border-radius : 20px;
+	color : #000000;
+	font-weight : 800;
+	border : none;
+}
+
+input.buttonNormal{
+	height  : 32px;
+	padding-bottom : 20px;
+}
+
+.buttonNormal{
+	text-decoration : none;
+}
+
+.errorBox{
+	margin-top : 2px;
+	padding : 5px;
+	background : #990000;
+	color : #FFFFFF;
+}
+
+.mtNormal{
+	margin-top : 20px;
+}
+
+.cicle{
+	padding : 20px;
+	width : 60%;
+	border : solid 20px #EEEEEE;
+}
+
+.cicle2{
+	margin-left :auto;
+	margin-right : auto;
+
+	padding : 5%;
+	width : 85%;
+	text-align : left;
+
+	background : #FEFEFE;
+	border : solid 1px #DDDDDD;
+}
+
+
+.cicle3{
+	margin-left :auto;
+	margin-right : auto;
+
+	width : 100%;
+	text-align : left;
+
+	background : #FEFEFE;
+	border : solid 1px #DDDDDD;
+}
+
+.subTitle{
+	margin:0px;
+	margin-bottom : 10px;
+	padding : 5px;
+	padding-left : 10px;
+
+	font-size : 110%;
+
+
+	background : #EEEEEE;
+	
+}
+
+.subTitleObi{
+	padding : 10px;
+
+	background : #000000;
+	color : #FFFFFF;
+}
+
+.widthHalf{
+	width : 49%;
+}
+
+.pageNavi{
+	display : block-inline;
+}
+
+.pageNavi .left{
+	width : 33%;
+}
+
+.pageNavi .center{
+	width : 33%;
+}
+.blackBack{
+	position : absolute;
+	display : none;
+	top : 0px;
+	width : 100%;
+	
+	background : #000000;
+
+	filter: alpha(opacity=25);
+  -moz-opacity:0.25;
+  opacity:0.25;
+}
+
+
+.pointer{
+	cursor : pointer;
+}

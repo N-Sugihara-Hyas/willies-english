@@ -1,0 +1,59 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title><?php echo $arrayUser['nickname']; ?></title>
+
+
+<script type="text/javascript" src="/common/js/nsg/calData.js"></script>
+<script type="text/javascript" src="/common/js/nsg/cal.js"></script>
+<link href="/common/css/nsg/cal.css" rel="stylesheet" type="text/css">
+
+<script>
+	$(document).ready(function(){
+			var nsgCaldateDay = new NsgCal('dateStartView', 'dateStart');
+			nsgCaldateDay.getSpecial();
+			nsgCaldateDay.setCal();
+
+			var nsgCaldateDay = new NsgCal('dateEndView', 'dateEnd');
+			nsgCaldateDay.getSpecial();
+			nsgCaldateDay.setCal();
+
+	});
+
+</script>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'take/inc/menu.html' ?>
+
+<div id="contentsMain">
+
+<h3 class="subTitle">Schedule</h3>
+
+<div class="cicleNormal2">Find</div>
+<p>
+<form action="/take/sch/list/" method="get">
+Date:
+<input type="text"  name="dateStart" id="dateStart" value="<?php echo $dateStart; ?>" style="width:10em;" readonly="readonly" />～
+<div id="dateStartView" class="hiddenCal"></div>
+<input type="text"  name="dateEnd" id="dateEnd" value="<?php echo $dateEnd; ?>" style="width:10em;" readonly="readonly" />
+<div id="dateEndView" class="hiddenCal"></div>
+
+
+<input type="submit" value="View" />
+
+</p>
+</form>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/schedule.html'; ?>
+
+
+<br /><br />
+
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

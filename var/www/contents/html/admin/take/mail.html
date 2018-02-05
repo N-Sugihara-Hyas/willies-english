@@ -1,0 +1,45 @@
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<script src="/common/js/jquery.js" language="javascript"></script>
+
+<script>
+function setBody(){
+	body = $('#body' + $('#template').val()).val();
+	subject = $('#subject' + $('#template').val()).val();
+
+	$('#body').val(body);
+	$('#subject').val(subject);
+}
+</script>
+
+<?php if (isset($isSend)){ ?>
+<script>
+	alert('Send OK');
+</script>
+<?php } ?>
+<p>
+Send E-mail to <?php echo $email ?> 
+</p>
+
+<form action="./" method="post" id="mail">
+<input type="hidden" name="email" value="<?php echo $email ?>" />
+
+■Subject<br />
+<input type="text" name="subject" id="subject" size="80"/><br />
+■Text<br /><br />
+<textarea name="body" style="width:30em;height:30em;" id="body"></textarea><br /><br />
+■Mail Template<br />
+<?php foreach ($arrayMailMember as $item){ ?>
+<input type="hidden" id="subject<?php echo $item['id']; ?>" value="<?php echo $item['subject']; ?>" />
+<input type="hidden" id="body<?php echo $item['id']; ?>" value="<?php echo $item['body']; ?>" />
+<?php } ?>
+
+<select id="template" name="template" onchange="setBody();">
+<option value="">---</option>
+<?php foreach ($arrayMailMember as $item){ ?>
+<option value="<?php echo $item['id']; ?>"><?php echo $item['subject']; ?></option>
+<?php } ?>
+</select>
+<br /><br />
+
+<input type="button" value="Send" onclick="if(window.confirm('OK？')){$('#mail').submit();}"  />
+</form>

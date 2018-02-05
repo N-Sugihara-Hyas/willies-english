@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>ログイン：ウィリーズ英語塾</title>
+
+<link rel="stylesheet" type="text/css" href="/common/css/layout.css" id="layout-css" />
+<link rel="stylesheet" type="text/css" href="/common/css/tool.css" id="layout-css" />
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+<div class="center">
+	<div class="cicle2 mtNormal">
+		ログインしてマイページにお進み下さい。体験予約やレッスンスケジュールの確認などができます。
+		<br /><br />
+		1.Skype(Skypeのダウンロードは<a href="http://www.skype.com/ja/" target="_blank">こちら</a>から)<br />
+		2.ヘッドセット(パソコン内蔵の場合は不要です)<br />
+		3.ウェブカメラ(なくても大丈夫です)<br />
+	</div>
+</div>
+
+
+<form action="/login/auth/" method="post">
+<div align="center">
+	<div class="cicle mtNormal">
+		<table class="tableNormal">
+			<?php if ($error){ ?>
+			<div class="errorBox">
+				メールアドレスまたはパスワードが違います。
+			</div>
+			<?php } ?>
+
+			<table class="tableWhite">
+				<tr>
+					<th>メールアドレス</th><td><input type="text" name="email" value="" size="60" /></td>
+				</tr>
+				<tr>
+					<th>パスワード</th><td><input type="password" name="pass" value="" size="60" /></td>
+				</tr>
+		</table>
+
+		<input type="submit" class="buttonNormal mtNormal" value="ログイン" />
+
+		<p>
+			<a href="/login/pass/">パスワードを忘れた方へ</a>
+		</p>
+	</div>
+</div>
+</form>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

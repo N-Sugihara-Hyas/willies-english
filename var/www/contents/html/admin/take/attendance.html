@@ -1,0 +1,105 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+
+<script type="text/javascript" src="/common/js/nsg/calData.js"></script>
+<script type="text/javascript" src="/common/js/nsg/cal.js"></script>
+
+<link href="/common/css/nsg/cal.css" rel="stylesheet" type="text/css">
+
+<script>
+	$(document).ready(function(){
+			var nsgCaldateDay = new NsgCal('dateStartView', 'dateStart');
+			nsgCaldateDay.getSpecial();
+			nsgCaldateDay.setCal();
+
+			var nsgCaldateDay = new NsgCal('dateEndView', 'dateEnd');
+			nsgCaldateDay.getSpecial();
+			nsgCaldateDay.setCal();
+
+			viewDialog1 = new ViewDialog('cancel1', new Array('Yes, student x','Yes, teacher x', 'No'));
+			viewDialog2 = new ViewDialog('cancel2', new Array('Yes', 'No'));
+	});
+
+	function onCancel(id){
+		var data1 = 0;
+
+		viewDialog1.show('Do you want to cancel?', function(data){
+			if ((data == 0) || (data == 1)){
+				data1 = data;
+
+				viewDialog2.show('Give a substitute point?', function(data){
+					if (data == 0){
+						point = 1;
+					}else{
+						point = 0;
+					}
+
+					location.href='/admin/sch/cancel/' + id + '/?redirect=<?php echo urlencode($my); ?>&point=' + point + '&data1=' + data1;
+				});
+			}
+		});
+
+	}
+</script>
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/listHeader.html' ?>
+
+
+<p>
+Insert Teacher's name, nickname or ID
+</p>
+<p>
+<form action="/<?php echo $this->arrayAction['dir']; ?>attendance/" method="post">
+
+<input type="text" name="takeName" value="<?php echo $takeName; ?>" style="width:300px;" />
+<br />
+Insert Dates:
+<input type="text"  name="dateStart" id="dateStart" value="<?php echo $dateStart; ?>" style="width:10em;" readonly="readonly" />～<input type="text"  name="dateEnd" id="dateEnd" value="<?php echo $dateEnd; ?>" style="width:10em;" readonly="readonly" />
+<div id="dateStartView" class="hiddenCal"></div>
+<div id="dateEndView" class="hiddenCal"></div>
+
+</p>
+
+
+<div align="center" class="mtNormal">
+<input type="submit" value="<?php $this->Lang->change('buttonSearch', '検索'); ?>" class="buttonNormal" /></div>
+
+</form>
+
+<div class="mtNormal" align="center">
+<a href="/<?php echo $this->arrayAction['dir']; ?>attendance/?searchType=clear" class="buttonNormal" />View All</a>
+</div>
+
+<br />
+<table class="tableNormal mtNormal">
+<tr>
+<th>Date</th>
+<th>Teachers</th>
+</tr>
+
+<?php while ($item = $arrayData['arrayList']->getData()){ ?>
+<tr id="item<?php echo $item['id']; ?>" >
+<td><?php echo date('Y-m-d H:i', strtotime($item['dateTime'])); ?></td>
+<td>
+<?php if ($item['isOK'] == -1){ ?>1<?php }else{ ?>2<?php } ?>. <?php echo $item['nickname']; ?> 
+is not log in 
+<?php if ($item['isOK'] == -1){ ?>20min before the shift <?php } ?>
+at <?php echo date('H:i', strtotime($item['dateTime'])); ?>(JP) <?php echo date('H:i', strtotime($item['dateTime']) - 60 * 60); ?>(PH)
+</td>
+</tr>
+<?php } ?>
+
+</table>
+<br /><br />
+
+</form>
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

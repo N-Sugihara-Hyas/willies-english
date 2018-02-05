@@ -1,0 +1,5 @@
+<div id="wrap" name="wrap">
+	<div id="header">
+		<div id="logo"><a href="javascript:void(0);"class="alink1"><?php if (isset($arrayUser['nickname'])){echo $arrayUser['nickname'];}else{echo 'Manage';} ?></a></div>
+		<div class="logout"><?php if (!empty($arrayUser)){ ?><a href="/admin/login/logout/"><img src="/common/admin/img/logout.jpg"></a><?php } ?></div>
+	</div>

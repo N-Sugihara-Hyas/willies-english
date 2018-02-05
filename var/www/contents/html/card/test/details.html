@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>FLASH CARD：ウィリーズ英語塾</title>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+		<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+
+<br /><br />
+
+<?php if ($tid){ ?>
+<div class="cicle3" style="padding:10px;">学習中のテスト:<?php echo $arrayTest['testName']; ?></div>
+<div class="cicle3" style="padding:10px;">
+
+<p>Q<?php echo $pageNow; ?>/<?php echo $page; ?><?php echo $arrayDetails['body1']; ?></p>
+
+<?php if (($arrayDetails['url']) || ($arrayDetails['img1'])){ ?>
+	<input type="button" value="Click Here" class="buttonNormal" id="here" onclick="$('#fileView').css('display', '');$('#here').css('display', 'none')" />
+<?php } ?>
+
+<div id="fileView" style="display:none;">
+<?php if ($arrayDetails['url']){ ?>
+<p><a href="<?php echo $arrayDetails['url']; ?>" target="_blank"><?php echo $arrayDetails['url']; ?></a></p>
+<?php } ?>
+</div>
+<?php if ($arrayDetails['img1']){ ?>
+<?php if (isset($isImage)){ ?>
+<p class="center"><img src="/card/api/file/<?php echo $arrayDetails['img1']; ?>/" /></p>
+<?php }else{ ?>
+<p><a href="/card/api/file/<?php echo $arrayDetails['img1']; ?>/" target="_blank">ファイル</a></p>
+<?php } ?>
+
+<?php } ?>
+
+
+
+<form action="/card/test/anser/" method="post">
+<input type="hidden" name="did" value="<?php echo $arrayDetails['id']; ?>" />
+<input type="hidden" name="next" value="<?php echo $arrayNext['id']; ?>" />
+<input type="hidden" name="back" value="<?php echo $arrayBack['id']; ?>" />
+
+<?php if (!empty($ng)){ ?>
+<input type="hidden" name="ng" value="<?php echo $ng; ?>" />
+<?php } ?>
+
+<?php for ($i = 1; $i <= $countSelect; $i++){ ?>
+<?php if (!empty($arrayDetails['select' . $i]) ){ ?>
+<p><input type="radio" name="select" value="<?php echo $i; ?>" <?php if ($i == 1){ ?> checked <?php } ?>/><?php echo $arrayDetails['select' . $i]; ?></p>
+<?php } ?>
+<?php } ?>
+
+<?php if ($arrayBack){ ?>
+<input type="submit" name="sub0" value="<< Back" class="buttonNormal" />
+<?php } ?>
+<input type="submit" name="sub1" value="Next >>" class="buttonNormal" />
+
+<a href="/card/test/save/?tid=<?php echo $tid; ?>&did=<?php echo $arrayDetails['id']; ?>" class="buttonNormal">Save(中断)</a>
+
+</form>
+
+</div>
+
+<?php } ?>
+
+</div>
+<br class="fc" />
+
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

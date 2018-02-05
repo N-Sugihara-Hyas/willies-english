@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>マイページ：ウィリーズ英語塾</title>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+
+
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+
+<h2 class="subTitle">担任講師の選択</h2>
+
+<p>
+【選択された受講スケジュールの内容】
+</p>
+
+・ 受講曜日：毎週 <?php out($arraySchedule['value']); ?><br />
+
+<?php if (!$arrayUser['isSetting']){ ?>
+・ 第１回<?php if (!$arrayUser['isSetting']){ ?>体験<?php } ?>レッスン日：<?php out(date('m/d', strtotime($dateFirst))); ?>(<?php out($arrayWeek[date('w', strtotime($dateFirst))]); ?>)<br />
+<?php } ?>
+・ 受講時間帯： <?php echo date('A H:i', strtotime($timeNow)); ?>～<?php echo date('A H:i', strtotime($timeNow) + (60 * $weekTime)); ?><br /><br /><br />
+
+<p>
+ご希望の講師を選択し、次へボタンを押して下さい。
+</p>
+
+<table class="tableNormal">
+<tr>
+<th></th><th>講師名</th><th>予約確定</th><th>講師の紹介</th>
+</tr>
+<?php
+	foreach ($arrayCourceSchedule as $key => $item){
+?>
+
+<tr>
+<td><img src="<?php getImg('media/Image', $item['photo'], 'Thum'); ?>" /></td>
+<td><?php echo $item['nickname']; ?></td>
+<td><a href="/mypage/setting/<?php if (($arrayCourceBase['id'] == 1) && (!$arrayUser['isSetting'])){ ?>stepChild<?php }else{ ?>step6<?php } ?>/?tID=<?php out($item['take_base_id']); ?>" class="btn btn-danger">予約</a></td>
+<td><?php out($item['comment']); ?></td>
+</tr>
+<?php } ?>
+</table>
+
+<div class="text-center">
+<a href="/mypage/setting/step4/" class="btn btn-lg btn-primary mt">前へ</a>
+</div>
+
+<div class="cicle2 mt">
+※レッスン後も、確定した受講曜日、レッスン時間帯で、継続して受講頂きます。<br />
+
+<?php if (!$arrayUser['isSetting']){ ?>
+※体験レッスン終了後、受講曜日の変更や、レッスン時間帯の変更も可能です。
+<?php } ?>
+
+</div>
+<br />
+</div>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

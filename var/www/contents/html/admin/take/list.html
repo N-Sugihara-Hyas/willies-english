@@ -1,0 +1,96 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/listHeader.html' ?>
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>list/" method="post">
+<div class="cicleNormal2">Select Working Shift</div>
+Date:<select name="week">
+<option value="1"<?php if ($week == 1){ ?> selected<?php } ?>>Mon</optoin>
+<option value="2"<?php if ($week == 2){ ?> selected<?php } ?>>Tue</optoin>
+<option value="3"<?php if ($week == 3){ ?> selected<?php } ?>>Wed</optoin>
+<option value="4"<?php if ($week == 4){ ?> selected<?php } ?>>Thu</optoin>
+<option value="5"<?php if ($week == 5){ ?> selected<?php } ?>>Fri</optoin>
+<option value="6"<?php if ($week == 6){ ?> selected<?php } ?>>Sat</optoin>
+<option value="0"<?php if ($week == 0){ ?> selected<?php } ?>>Sun</optoin>
+
+</select>
+
+Time:<select name="time">
+<option value="">-</option>
+<?php foreach ($arrayTime as $item){ ?>
+<option value="<?php echo $item['value']; ?>"<?php if ($time == $item['value']){ ?> selected<?php } ?>><?php echo $item['value']; ?>
+<?php } ?>
+</select>
+<br /><br />
+
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/listSearch.html' ?>
+
+<div align="center" class="mtNormal">
+<input type="submit" value="<?php $this->Lang->change('buttonSearch', '検索'); ?>" class="buttonNormal" /></div>
+
+</form>
+
+<div class="mtNormal" align="center">
+<a href="/<?php echo $this->arrayAction['dir']; ?>list/?searchType=clear" class="buttonNormal" />View All</a>
+</div>
+
+<br />
+<table class="tableNormal mtNormal">
+<tr>
+<?php  require_once $this->arrayDir['dirProgram'] . "template/listHeader.html"; ?>
+<th>
+<?php $this->Lang->change('details', '詳細'); ?>
+</th>
+<th>
+Working Shift
+</th>
+<th>
+Teacher's Login Page
+</th>
+<th>
+Mail
+</th>
+</tr>
+
+<?php while ($item = $arrayData['arrayList']->getData()){ ?>
+<tr id="item<?php echo $item['id']; ?>" >
+<td><a href="/<?php echo $this->arrayAction['dir']; ?>edit/<?php echo $item['id']; ?>">Edit/ Delete</a></td>
+<td>
+<?php echo $item['id']; ?>
+</td>
+<?php  require $this->arrayDir['dirProgram'] . "template/listBodyAll.html"; ?>
+<td><a href="/<?php echo $this->arrayAction['dir']; ?>details/<?php echo $item['id']; ?>"><?php $this->Lang->change('details', '詳細'); ?></a></td>
+<td><a href="/admin/take/schedule/<?php echo $item['id']; ?>/?redirect=<?php echo urlencode($my); ?>">Edit</a></td>
+<td>
+	<form action="/take/login/auth/" method="post" target="_blank">
+		<?php if  ($item['loginID']){ ?>
+		<input type="hidden" name="id" value="<?php echo $item['loginID']; ?>" />
+		<input type="hidden" name="isMaster" value="1" />
+		<input type="hidden" name="pass" value="<?php echo $item['pass']; ?>" />
+		<input type="submit" value="Login" />
+		<?php }else{ ?>
+			Unknown Login ID
+		<?php } ?>
+	</form>
+</td>
+<td><a href="/<?php echo $this->arrayAction['dir']; ?>mail/<?php echo $item['email']; ?>/" target="_blank">Mail</a></td>
+
+</tr>
+<?php } ?>
+
+</table>
+<br /><br />
+
+</form>
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

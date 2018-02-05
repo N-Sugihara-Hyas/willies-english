@@ -1,0 +1,27 @@
+<table class="tableNormal">
+<?php
+	$count = 0;
+	foreach ($arraySchedule as $item){	
+?>
+	<?php
+		if ($item['isTrial'] != 1){
+	?>
+<tr>
+<td width="60%" align="left">
+	<?php echo date('Y年m月d日', strtotime($item['date'])); ?>(<?php echo $arrayWeek[date('w', strtotime($item['date']))]; ?>)
+	<?php echo date('H:i', strtotime($item['timeStart'])); ?> – <?php echo date('H:i', strtotime($item['timeEnd'])); ?>
+
+	<?php
+		out($arrayType[$item['type']]);
+	?>
+　（<?php echo $item['nickname'];?>）
+</td>
+<td width="40%">
+
+<a class="btn"<?php if (!$item['isCancel']){ ?>style="background : url(/common/admin/img/button.jpg) repeat-x #d2d2d2;"<?php }else{ ?>style="background : #bdd4ff;"<?php  }?> href='javascript:if(window.confirm("<?php echo date('Y年m月d日', strtotime($item['date'])); ?>(<?php echo $arrayWeek[date('w', strtotime($item['date']))]; ?>)のグループレッスンをキャンセルしますか？<?php if ($item['isCancel']){ ?>\n・レギュラー生徒様は月2回まで振替レッスンポイントが付与され、<振替レッスン予約>ボタンから、予約可能な時間帯に振替レッスンを予約することができます。\n\n・体験中の生徒様は振替レッスンポイントは付与されませんが、次回レッスンが自動的に繰上げされますので、改めてスケジュールをご確認ください。（※ 繰上機能のご利用は体験中２回までとなります。）<?php }else{ ?>\n※規定回数以上のキャンセルのため、振替レッスンポイントは付与されません。<?php } ?>")){location.href="/mypage/action/cancel/<?php echo $item['id']; ?>/"}'>キャンセル</a>
+</td>
+</tr>
+	<?php
+		}
+	?>
+<?php } ?>

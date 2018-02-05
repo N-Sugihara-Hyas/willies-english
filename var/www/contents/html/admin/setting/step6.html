@@ -1,0 +1,64 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<script type="text/javascript" src="/common/js/jquery.js"></script>
+<script type="text/javascript" src="/common/js/NowLoading.js"></script>
+
+<script>
+	MainNowLoading = new ShowNowLoading('.blackBack');
+</script>
+
+</head>
+<div id="contentsMain">
+
+<h2 class="subTitle">予約内容の確認</h2>
+
+<p>
+予約内容を確認し、よろしければ確定ボタンを押して下さい。
+</p>
+
+<table class="tableNormal">
+<tr>
+<th>受講コース</th>
+<td><?php out($arrayCourceBase['courceName']); ?></td>
+</tr>
+<tr>
+<th>受講プラン</th>
+<td><?php out($arrayCourceStyle['courceStyleName']); ?></td>
+</tr>
+<tr>
+<th>受講スケジュール(受講曜日)</th>
+<td><?php out($scheduleWeek); ?></td>
+</tr>
+<tr>
+<th>受講スケジュール(開始時間)</th>
+<td><?php echo date('A H:i', strtotime($scheduleTime)); ?></td>
+</tr>
+<tr>
+<th>担当講師</th>
+<td><?php out($arrayTake['nickname']); ?></td>
+</tr>
+
+<?php if ($arrayCourceBase['id'] == 1){ ?>
+<tr>
+<th>レベル</th>
+<td><?php echo $levelChild; ?></td>
+</tr>
+<?php } ?>
+
+
+</table>
+<br />
+
+<div align="center">
+<a href="/admin/setting/<?php if ($arrayCourceBase['id'] == 1){ ?>stepChild<?php }else{ ?>step5<?php } ?>/" class="buttonNormal">前へ</a><a href="javascript:MainNowLoading.show();location.href='/admin/setting/end/';" class="buttonNormal">確定</a>
+</div>
+</div>
+
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

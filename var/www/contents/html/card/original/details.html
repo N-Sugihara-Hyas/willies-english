@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>FLASH CARD：ウィリーズ英語塾</title>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+<script type="text/javascript" src="/common/js/jquery.js"></script>
+<script type="text/javascript" src="/common/js/card.js"></script>
+
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+<?php $cardMenu = 'original';require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+<p>
+	<?php echo date('Y年m月d日', strtotime($arrayCardBase['created'])); ?>  <?php echo $arrayCardBase['cardName']; ?>
+</p>
+
+<div style="height:300px;overflow:scroll;">
+
+<table class="tableNormal mt">
+
+<?php while ($item = $arrayData['dbGet']->getData()){ ?>
+<tr style="cursor:pointer;" onclick="onView(<?php echo $item['id']; ?>);">
+<td nowrap><?php out($item['body1']); ?></td>
+</tr>
+<tr style="background:#FFFFCC;display:none;" id="tab<?php echo $item['id']; ?>">
+<td nowrap><?php out($item['body2']); ?>&nbsp;&nbsp;<a style="text-decoration: none;" href="javascript:onStar('<?php echo $item['id']; ?>')" id="star<?php echo $item['id']; ?>"><?php if ($item['isOK']){ ?>★<?php }else{ ?>☆<?php } ?></a></td>
+</tr>
+<?php } ?>
+</table>
+</div>
+
+<br />
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/navi.html'; ?>
+
+
+</div>
+		<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

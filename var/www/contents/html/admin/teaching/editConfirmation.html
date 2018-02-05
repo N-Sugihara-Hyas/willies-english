@@ -1,0 +1,45 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/editorHeader.html' ?>
+
+	<table class="tableNormal">
+	<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/editorConfirmation.html' ?>
+	</table>
+
+	<?php if ($mode != 'view'){ ?>
+	<div align="center">
+		<table style="width:100%;">
+			<tr>
+				<td>
+					
+					<form method="post" action="/admin/teaching/edit/reInput/?model=<?php echo $model; ?>">
+						<div align="center">
+							<input type="submit" value="Edit" class="buttonNormal button btn btn-primary">
+						</div>
+					</form>
+				</td>
+				<td>
+					<form method="post" action="/admin/teaching/editEnd/?model=<?php echo $model; ?>">
+						<div align="center">
+							<input type="submit" value="Enter" class="buttonNormal button btn btn-success">
+						</div>
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>		<br />
+	<?php }else{ ?>
+	
+	<?php } ?>
+	<br />
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

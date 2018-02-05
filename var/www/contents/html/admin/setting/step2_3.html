@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>マイページ：ウィリーズ英語塾</title>
+
+<link rel="stylesheet" type="text/css" href="/common/css/layout.css" id="layout-css" />
+<link rel="stylesheet" type="text/css" href="/common/css/tool.css" id="layout-css" />
+<script type="text/javascript" src="/common/js/jquery.js"></script>
+<script type="text/javascript" src="/common/js/NowLoading.js"></script>
+
+<script>
+	MainNowLoading = new ShowNowLoading('.blackBack');
+</script>
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents">
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+
+<div id="contentsBody">
+
+<h2 class="subTitle">予約内容の確認</h2>
+
+<p>
+予約内容を確認し、よろしければ確定ボタンを押して下さい。
+</p>
+
+<table class="tableNormal">
+<tr>
+<th>受講コース</th>
+<td><?php out($arrayCourceBase['courceName']); ?></td>
+</tr>
+<tr>
+<th>受講プラン</th>
+<td><?php out($arrayCourceStyle['courceStyleName']); ?></td>
+</tr>
+
+<tr>
+<th>第1回体験レッスン</th>
+<td><?php echo date('Y/m/d (D)', strtotime($arrayDate['date'])); ?> <?php echo date('A H:i', strtotime($arrayDate['time'])); ?></td>
+</tr>
+
+<tr>
+<th>4.担任講師</th>
+<td><?php echo $arrayTake['nickname']; ?></td>
+</tr>
+
+
+</table>
+<br />
+
+<div align="center">
+<a href="/mypage/setting/step2_2/" class="buttonNormal">前へ</a>
+<a href="javascript:MainNowLoading.show();location.href='/mypage/setting/end2/';" class="buttonNormal">確定</a><br />
+</div>
+</div>
+
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

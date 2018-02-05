@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>Facebook：ウィリーズ英語塾</title>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+
+<h2 class="subTitle">Facebook</h2>
+
+<table class="tableNormal">
+<tr>
+<th>講師名</th><th>Facebook</th><th>Facebook設定</th>
+</tr>
+
+<?php while ($item = $arrayData['dbGet']->getData()){ ?>
+<tr>
+<td><?php out($item['nickname']); ?></td>
+<td>
+	<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.5&appId=603306249683169";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-page" data-width="580" data-href="<?php echo $item['fb']; ?>" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="<?php echo $arrayTake['fb']; ?>"><a href="<?php echo $arrayTake['fb']; ?>">Facebook</a></blockquote></div></div>
+
+
+
+</td>
+<td>
+	<?php if ($arrayUser['take_base_id_fb'] ==  $item['id']){ ?>
+	<a href="/mypage/setting/fbAdd/0/" class="btn btn-lg btn-primary">設定解除</a>	
+	<?php }else { ?>
+	<a href="/mypage/setting/fbAdd/<?php echo $item['id']; ?>/" class="btn btn-lg btn-primary">設定</a>
+	<?php } ?>
+</td>
+</tr>
+<?php } ?>
+</table>
+<br />
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/navi.html'; ?>
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

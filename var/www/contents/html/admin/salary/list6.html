@@ -1,0 +1,64 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title>管理画面</title>
+<script type="text/javascript" src="/common/js/nsg/calData.js"></script>
+<script type="text/javascript" src="/common/js/nsg/cal.js"></script>
+<script type="text/javascript" src="/common/js/view/dialog.js"></script>
+
+
+</head>
+
+<body>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+
+<?php $menus = 6;require_once $this->arrayDir['dirHtml'] . 'admin/inc/salary.html' ?>
+
+
+<h3 class="subTitle">給与計算（Internet Allowance）</h3>
+
+
+<form action="./" method="post">
+	<input type="text" name="parsent" value="<?php echo $parsent; ?>" style="width:10em;" />
+	<input type="submit" class="buttonNormal" value="更新" />
+</form>
+		
+<form action="./" method="post">
+<table class="tableNormal mtNormal">
+	<tr>
+		<th></th>
+		<th></th>
+		<th>% of your absence</th>
+		<th>Internet Allowance</th>
+		<th></th>
+	</tr>
+	<?php foreach ($arrayBonus as $objSalary){ ?>
+
+	
+		<tr>
+			<td><?php echo $objSalary['objTake']['id']; ?></td>
+			<td><?php echo $objSalary['objTake']['nickname']; ?></td>
+			<td><input type="text" name="arrayInput[<?php echo $objSalary['objTake']['id']; ?>][icount]" value="<?php echo $objSalary['icount']; ?>" /></td>
+			<td>
+				<?php echo $objSalary['ipeso']; ?>
+			</td>
+			<td>
+				peso
+			</td>
+		</tr>
+	<?php } ?>
+</table>
+
+
+
+
+<br />
+<div align="center">
+	<input type="submit" value="Confirm" class="buttonNormal">
+</div>
+</form>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

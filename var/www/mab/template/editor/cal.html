@@ -1,0 +1,19 @@
+
+				<script type="text/javascript" src="/common/js/nsg/calData.js"></script>
+				<script type="text/javascript" src="/common/js/nsg/cal.js"></script>
+				<link href="/common/css/nsg/cal.css" rel="stylesheet" type="text/css">
+
+				<script>
+				$(document).ready(function(){
+					var nsgCal<?php echo $key; ?> = new NsgCal('id_<?php echo $key; ?>View', 'id_<?php echo $key; ?>');
+					nsgCal<?php echo $key; ?>.getSpecial();
+					nsgCal<?php echo $key; ?>.setCal();
+				});
+				</script>
+
+			<div id="cal">
+			</div>
+
+
+			<input type="text" <?php if (isset($arrayError[$key])){ ?> class="errorInput"<?php } ?> name="arrayInput[<?php echo $modelName;?>][<?php echo $key ?>]" id="id_<?php echo $key ?>" value="<?php echo $arrayInput[$key]; ?>" <?php echo $arrayColum[$key]['form']; ?> readonly="readonly" />
+			<div id="id_<?php echo $key; ?>View" class="hiddenCal"></div>

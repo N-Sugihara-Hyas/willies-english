@@ -1,0 +1,44 @@
+		<?php $count = 0; $error=''; ?>
+
+		<?php foreach ($arrayColum as $key => $item){ ?>
+		<?php 
+			if (isset($item['name']) ){
+				if ($error){
+		?>
+		<?php echo $error; ?>
+		<?php
+					$error = '';
+				}
+		?>
+		</td>
+
+		<?php 
+			if ($arraySettingAdmin['col'] == $count){
+			 $count = 0;} 
+		?>
+		</tr>
+		<tr>
+		<th style="width:5%" nowrap id="<?php echo $key; ?>Label" align="left">
+			<?php 
+				echo $item['name'];
+				if (isset($item['labelBack'])){
+					echo $item['labelBack'];
+				}
+			?>
+		</th>
+		<td style="width:30%;">
+		<?php 
+
+		}
+
+				require $this->arrayDir['dirProgram'] . 'template/control.html';
+				if (isset($arrayError[$key])){
+					$error.= '<div class="errorBox">' . $arrayError[$key] . '</div>';
+				}
+				$count++;
+			}
+			?>
+
+		<?php if ($error){ ?>
+		<div class="errorBox"><?php echo $error; ?></div>
+		<?php } ?>

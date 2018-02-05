@@ -1,0 +1,28 @@
+<script type="text/javascript" src="/common/js/jquery.js"></script>
+<script type="text/javascript" src="/common/js/NowLoading.js"></script>
+
+
+<script>
+	MainNowLoading = new ShowNowLoading('.blackBack');
+</script>
+
+<body>
+
+<div class="blackBack">
+<img src="/common/img/load.gif" />
+</div>
+
+<div class="container">
+	<header>
+		<div class="row">	
+			<p class="col-xs-8">
+				<img src="/common/img/logo.jpg" class="img-responsive" />
+			</p>
+			
+			<?php if ($arrayUser){ ?>
+			<div class="col-xs-4 text-right hidden-xs">
+				<a href="/login/logout/" class="mt-lg btn btn-primary"><i class="glyphicon glyphicon-lock"></i>ログアウト</a>
+			</div>
+			<?php } ?>	
+		</div>
+	</header>

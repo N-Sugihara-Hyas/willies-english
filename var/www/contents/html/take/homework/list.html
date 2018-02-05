@@ -1,0 +1,76 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title><?php echo $arrayUser['nickname']; ?></title>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/header2.html' ?>
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'take/inc/menu.html' ?>
+
+<div id="contentsMain">
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/listHeader.html' ?>
+
+Student ID:  <?php echo $arrayMember['id']; ?><br />
+Student Name: <?php echo $arrayMember['memberNameFirstEnglish']; ?>&nbsp;&nbsp;<?php echo $arrayMember['memberNameSecoundEnglish']; ?><br />
+Course:  <?php echo $arrayMember['courceName']; ?><br />
+Level: <?php echo $arrayMember['level']; ?><br />
+<br />
+<br />
+
+
+<form action="./" method="post">
+If there is any special requests from a student, make Memo.<br />
+<textarea name="memoHomework" style="width:100%;height:20em;"><?php echo $arrayMember['memoHomework']; ?></textarea>
+<input type="submit" value="Memo" />
+</form?
+
+
+<br />
+<br />
+<table class="tableNormal mtNormal">
+<tr>
+<th>Edit</th>
+<th>ID</th>
+<th>Date</th>
+<th>Edited by</th>
+<th>Homework</th>
+</tr>
+
+
+<?php while ($item = $arrayData['arrayList']->getData()){ ?>
+<tr>
+<td>
+<a href="/<?php echo $this->arrayAction['dir']; ?>edit/<?php echo $item['id']; ?>">Edit</a>
+</td>
+<td>
+<?php echo $item['id']; ?>
+</td>
+<td>
+<?php echo date('Y-m-d', strtotime($item['created'])); ?>
+</td>
+<td>
+<?php echo $item['nickname']; ?>
+</td>
+<td>
+Homework for the next lesson:
+<br /><br />
+- GCC: <?php echo $item['gcc']; ?><br/ >
+- RLC: <?php echo $item['rlc']; ?><br/ >
+<br />
+Follow-up questions:<br />
+<?php echo $item['followup']; ?>
+<br /><br />
+<?php echo $item['free']; ?>
+
+</td>
+</tr>
+<?php } ?>
+
+</table>
+<br /><br />
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/footer.html' ?>

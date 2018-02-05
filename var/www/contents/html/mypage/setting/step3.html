@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+<script type="text/javascript" src="/common/js/jquery.js"></script>
+<script type="text/javascript" src="/common/js/week.js"></script>
+<script type="text/javascript" src="/common/js/NowLoading.js"></script>
+
+<script>
+	MainNowLoading = new ShowNowLoading('.blackBack');
+
+	function changeSchdule(){
+		MainNowLoading.show();
+
+		arrayWeekFirst = getNextWeekFirst($('#cource_schdule_id').children(':selected').text(), <?php echo time(); ?>);
+
+		$('#dateFirst > option').remove();
+		$('#dateFirst').append($('<option>').html('未選択').val(''));
+
+		loadData();
+	}
+
+	function loadData(){
+		for (key in arrayWeekFirst){
+			arrayWeekOwn = arrayWeekFirst[key].split('(');
+
+			$.ajax({
+				url : '/api/checkReserve/' + arrayWeekOwn[0] + '?out=' + encodeURI(arrayWeekFirst[key]),
+				cache: false,
+				type : "post",
+				success: complateWeekSetHandle
+			});
+
+			delete arrayWeekFirst[key];
+			break;
+		}
+	}
+
+	function complateWeekSetHandle(data){
+		if (data){
+			arrayWeekOwn = data.split(',');
+			$('#dateFirst').append($('<option>').html(arrayWeekOwn[1]).val(arrayWeekOwn[0]));
+		}
+
+		for (var key in arrayWeekFirst){}
+
+
+		if (key){
+			loadData();
+		}else{
+			MainNowLoading.hidden();
+		}
+	}
+</script>
+
+
+<title>マイページ：ウィリーズ英語塾</title>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+
+
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+
+<h2 class="subTitle">受講スケジュールの選択<?php if ($arrayUser['isSetting']){ ?>（受講曜日と新スケジュール開始日の選択）<?php }else{ ?>（受講曜日と第１回体験レッスン日の選択）<?php } ?></h2>
+
+<?php if ($error){ ?>
+<div class="errorBox">
+受講スケジュールを選択して下さい。
+</div>
+<br />
+<?php } ?>
+
+<table class="tableNormal mt">
+<tr>
+<th width="35%">
+受講曜日
+</th>
+<td>
+<form action="/mypage/setting/step4/" method="post" id="form">
+<select name="cource_schedule_id" onchange="changeSchdule();" id="cource_schdule_id">
+<option value="">選択して下さい</option>
+<?php foreach ($arraySchdule as $key => $item){ ?>
+<option value="<?php echo $item['id']; ?>"><?php echo $item['value']; ?></option>
+<?php } ?>
+</select>
+</td>
+</tr>
+<tr>
+<th>
+<?php if (!$arrayUser['isSetting']){ ?>第１回体験レッスン日<?php }else{ ?>新スケジュール開始日<?php } ?>
+</th>
+<td>
+<select name="dateFirst" id="dateFirst">
+<option value="">選択して下さい</option>
+</select>
+</td>
+</tr>
+
+</table>
+
+<div class="text-center mt">
+<a href="/mypage/setting/<?php if (isset($isOwn)){ ?>first<?php }else{ ?>step2<?php } ?>/" class="btn btn-lg btn-primary">前へ</a>
+<input type="submit" class="btn btn-lg btn-primary" value="次へ" onclick="MainNowLoading.show();$('#form').submit();" />
+</div>
+</form>
+<br />
+
+<div class="cicle2">
+※受講曜日：　月・木/ 火・金/ 土・日コースのいずれかを選択して下さい。Dタイプを選択された場合は、月〜日曜日のいずれかを選択いただけます。
+<br />
+※第１回<?php if (!$arrayUser['isSetting']){ ?>体験<?php } ?>レッスン日<br />
+明日以降の直近の受講曜日を選択頂けます。予約システム上、約１週間先までのご予約しかできませんので、それ以降先のご予約希望の場合は、後日改めて予約をお願い致します。 <br />
+<br />
+
+<?php if (!$arrayUser['isSetting']){ ?>
+※体験レッスンは原則２回ございます。<br />
+例えば、月・木コースで、第１回体験レッスン日を1月1日（月）でご指定頂いた場合、２回目の体験レッスンは1月4日（木）となります。<br />
+但し、フィリピンの祝日に当たる場合などは１回の場合もございます。<br />
+<br />
+※なお体験レッスンに関してはレッスンのキャンセルはできますが、振替レッスンを予約することはできませんので予めご了承下さい。<br />
+なお振替レッスンについて詳しくはこちらをご参照ください。<br />
+<?php } ?>
+
+</div>
+
+
+</div>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

@@ -1,0 +1,56 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title>管理画面</title>
+<script type="text/javascript" src="/common/js/nsg/calData.js"></script>
+<script type="text/javascript" src="/common/js/nsg/cal.js"></script>
+<script type="text/javascript" src="/common/js/view/dialog.js"></script>
+
+
+</head>
+
+<body>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+
+<?php $menus = 4;require_once $this->arrayDir['dirHtml'] . 'admin/inc/salary.html' ?>
+
+
+<h3 class="subTitle">給与計算(# of Class You had)</h3>
+
+
+		
+<form action="./list4/" method="post">
+<table class="tableNormal mtNormal">
+	<tr>
+		<th></th>
+		<th></th>
+		<?php foreach ($arrayTypeCourse as $objView){ ?>
+		<th><?php echo $objView['view']; ?></th>
+		<?php } ?>
+	</tr>
+	<?php foreach ($arrayPay as $objSalary){ ?>
+		<tr>
+			<td><?php echo $objSalary['objTake']['id']; ?></td>
+			<td><?php echo $objSalary['objTake']['nickname']; ?></td>
+			<?php foreach ($arrayTypeCourse as $type => $objView){ ?>
+			<td>				
+				<input type="text" name="arrayInput[<?php echo $objSalary['objTake']['id']; ?>][<?php echo $type; ?>]" value="<?php if (!empty($arrayData[$objSalary['objTake']['id']][$type])){echo $arrayData[$objSalary['objTake']['id']][$type];}else{echo $objSalary[$type];} ?>" />
+			</td>
+			<?php } ?>
+		</tr>
+	<?php } ?>
+</table>
+
+
+</div>
+
+<br />
+<div align="center">
+	<input type="submit" value="Confirm" class="buttonNormal">
+</div>
+</form>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

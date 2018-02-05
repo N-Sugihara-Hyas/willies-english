@@ -1,0 +1,81 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+
+<script type="text/javascript" src="/common/js/nsg/calData.js"></script>
+<script type="text/javascript" src="/common/js/nsg/cal.js"></script>
+<link href="/common/css/nsg/cal.css" rel="stylesheet" type="text/css">
+
+<script>
+	$(document).ready(function(){
+			var nsgCaldateDay = new NsgCal('dateStartView', 'dateStart');
+			nsgCaldateDay.getSpecial();
+			nsgCaldateDay.setCal();
+
+			var nsgCaldateDay = new NsgCal('dateEndView', 'dateEnd');
+			nsgCaldateDay.getSpecial();
+			nsgCaldateDay.setCal();
+
+	});
+</script>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+
+<h3 class="subTitle">Detail Info</h3>
+
+	<table class="tableNormal">
+	<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/editorConfirmation.html' ?>
+	</table>
+
+	<div class="cicleNormal2 mtNormal">
+		Number of Students
+	</div>
+
+	<table class="tableNormal mtNormal">
+		<tr><th>Student Name</th><th>E-Mail</th></tr>
+		<?php foreach ($arrayMemberBase as $item){ ?>
+		<td>
+		<a href="/admin/customer/edit/<?php echo $item['id']; ?>">
+		<?php echo $item['memberNameSecoundEnglish']; ?>
+		<?php echo $item['memberNameFirstEnglish']; ?>
+		</a>
+		</td>
+		<td>
+		<?php echo $item['email']; ?>
+		</td>
+		</tr>
+		<?php } ?>
+	</table>
+
+	<div class="cicleNormal2 mtNormal">
+		Schedule
+	</div>
+
+
+<form action="/admin/take/details/<?php echo $uid; ?>" method="post">
+Dates:
+<input type="text"  name="dateStart" id="dateStart" value="<?php echo $dateStart; ?>" style="width:10em;" readonly="readonly" />～
+<div id="dateStartView" class="hiddenCal"></div>
+<input type="text"  name="dateEnd" id="dateEnd" value="<?php echo $dateEnd; ?>" style="width:10em;" readonly="readonly" />
+<div id="dateEndView" class="hiddenCal"></div>
+
+
+<input type="submit" value="View" />
+
+</p>
+</form>
+
+	<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/schedule.html'; ?>
+
+	<div align="center" class="mtNormal">
+		<a href="/admin/take/list/" class="buttonNormal"><?php $this->Lang->change('buttonList', '一覧へ'); ?>戻る</a>
+	</div>
+	<br />
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

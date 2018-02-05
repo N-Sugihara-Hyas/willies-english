@@ -1,0 +1,38 @@
+.dialogBack{
+	position : absolute;
+	width : 100%;
+	height : 100%;
+	top : 0px;
+	left : 0px;
+
+	background : #000000;
+
+  filter: alpha(opacity=25);
+  -moz-opacity:0.25;
+  opacity:0.25;
+}
+
+.dialogFront{
+	position : absolute;
+	padding : 50px 20px;
+	
+	margin-top : 20%;
+
+	width : 30%;
+
+	left : 35%;
+
+	background : #FFFFFF;
+}
+
+.buttonDialog{
+	margin-left : 10px;
+	margin-top : 20px;
+	width : 20%;
+
+	padding : 10px;
+	background : #FEFEFE;
+	border : solid 1px #999999;
+	cursor:pointer;
+
+}

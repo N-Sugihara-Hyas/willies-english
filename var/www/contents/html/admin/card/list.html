@@ -1,0 +1,149 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title>管理画面</title>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/header2.html' ?>
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+<h3 class="subTitle left"><?php if ($type == 3){ ?>School<?php } ?><?php if ($type == 2){ ?>Student<?php } ?><?php if ($type == 1){ ?>Review<?php } ?> List</h3>
+
+
+<div class="fc" align="right">
+
+<?php if ($type == 3){ ?>
+<form action="/admin/card/edit/?new=1" method="post">
+<input type="submit" value="Creat New" class="buttonNormal" target="contentsFrame" />
+</form>
+<?php } ?>
+</div>
+
+
+<br class="fc">
+
+
+<table class="tableNormal mtNormal">
+<tr>
+<th>Edit</th>
+<th>ID</th>
+<th>Status</th>
+<?php if ($type == 3){ ?><th>Date</th><?php } ?>
+<th>Last Edited Date</th>
+<th>Edited by<br /><?php if ($type == 2){ ?>(Student ID)<?php } ?><?php if ($type == 1){ ?>(Teacher)<?php } ?></th>
+<?php if ($type == 2){ ?><th>Edited by<br />(Student Name)</th><?php } ?>
+<th>Card Title</th>
+
+<?php if ($type == 2){ ?>
+<th>Teacher</th>
+<?php } ?>
+
+<?php if ($type == 1){ ?><th>Student ID</th><?php } ?>
+<?php if ($type == 1){ ?><th>Student Name</th><?php } ?>
+<?php if (($type == 1) || ($type == 2)){ ?><th>Student<br />MyPage</th><?php } ?>
+
+
+
+<th># of Cards</th>
+<?php if ($type == 3){ ?><th>Active User</th><?php } ?>
+</tr>
+
+
+<?php while ($item = $arrayData['arrayList']->getData()){ ?>
+<tr>
+<td>
+<a href="/<?php echo $this->arrayAction['dir']; ?>edit/<?php echo $item['id']; ?>/?new=1&type=<?php echo $type; ?>">Edit</a><br />
+<a href="javascript:if(window.confirm('削除してもよろしいのですか？')){location.href='/<?php echo $this->arrayAction['dir']; ?>del/?arrayDel[<?php echo $item['id']; ?>]=<?php echo $item['id']; ?>';}">Delete</a><br />
+</td>
+<td>
+<?php echo $item['id']; ?>
+</td>
+<td>
+<?php if ($item['state']){echo 'Shared';}else{echo 'Save';} ?>
+</td>
+
+<?php if ($type == 3){ ?>
+<td>
+<?php echo date('Y-m-d', strtotime($item['created'])); ?>
+</td>
+<?php } ?>
+
+<td>
+<?php echo date('Y-m-d', strtotime($item['modified'])); ?>
+</td>
+
+<?php if ($type == 2){ ?>
+<td>
+<?php echo $item['member_base_id']; ?>
+</td>
+<?php } ?>
+
+<td>
+<?php if ($type == 1){ ?>
+<?php echo $item['nickname']; ?>
+<?php } ?>
+<?php if ($type == 2){ ?>
+<?php echo $item['memberNameSecoundEnglish']; ?> <?php echo $item['memberNameFirstEnglish']; ?>
+<?php } ?>
+<?php if ($type == 3){ ?>
+<?php echo $item['name']; ?>
+<?php } ?>
+</td>
+<td>
+<?php echo $item['cardName']; ?>
+</td>
+
+<?php if ($type == 2){ ?>
+<td>
+	<?php 
+		$arrayTake = $TakeBase->getDataUID($item['take_base_id'])->getData();
+		echo $arrayTake['nickname']; 
+	?>
+</td>	
+<?php } ?>
+
+<?php if ($type == 1){ ?>
+<td>
+<?php echo $item['member_base_id']; ?>
+</td>
+<?php } ?>
+
+<?php if ($type == 1){ ?>
+<td>
+<?php echo $item['memberNameSecoundEnglish']; ?> <?php echo $item['memberNameFirstEnglish']; ?>
+</td>
+<?php } ?>
+
+<?php if (($type == 1) || ($type == 2)){ ?>
+<td>
+<form action="/login/auth/" method="post" target="_blank">
+<input type="hidden" name="isMaster2" value="1" />
+<input type="hidden" name="email" value="<?php echo $item['email']; ?>" />
+<input type="hidden" name="pass" value="<?php echo $item['pass']; ?>" />
+<input type="submit" value="Login" />
+</form>
+</td>
+<?php } ?>
+
+<td>
+<?php echo $item['countCard']; ?>
+</td>
+
+<?php if ($type == 3){ ?>
+<td>
+<?php echo $item['countMember']; ?>
+</td>
+<?php } ?>
+
+</tr>
+<?php } ?>
+
+</table>
+<br /><br />
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/footer.html' ?>

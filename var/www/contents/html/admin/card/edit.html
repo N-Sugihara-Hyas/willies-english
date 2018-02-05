@@ -1,0 +1,67 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title>管理画面</title>
+
+
+<script>
+$(document).ready(function(){
+	$('#id_card_base_id').bind('change', '', function(){
+		location.href = '/admin/card/edit/' + $('#id_card_base_id').val() + '/?new=1';
+	});
+});
+
+function newBase(){
+	window.open('/admin/card/base.html', 'mywindow1', 'width=400, height=300, menubar=no, toolbar=no, scrollbars=yes');
+}
+
+function newBaseEnd(cardName, uid){
+	$('#id_card_base_id').append($('<option>').html(cardName).val(uid));
+}
+
+</script>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/header2.html' ?>
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/editorHeader.html' ?>
+
+	<?php if ($e == 'reflash'){ ?>
+	<p class="errorBox">
+	Reflash
+	</p>
+	<br />
+	<?php } ?>
+
+		<?php if (isset($isError)){ ?>
+		<div class="errorBox2 fc">
+			<p class="left">
+				Error
+			</p>
+			<br class="fc" />
+		</div>
+		<br />
+		<?php } ?>
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>editConfirmation/#enter" method="post" id="formMain" enctype="multipart/form-data">
+<table class="tableNormal">
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/editor.html'; ?>
+</table>
+<br />
+<div align="center">
+	<input type="submit" name="sub0" value="Back" class="buttonNormal">
+	<input type="submit" name="sub1" value="Create Next Cards" class="buttonNormal">
+	<input type="submit" name="sub3" value="Save" class="buttonNormal">
+	<input type="submit" name="sub2" value="Finish & Share" class="buttonNormal">
+</div>
+
+
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/footer.html' ?>

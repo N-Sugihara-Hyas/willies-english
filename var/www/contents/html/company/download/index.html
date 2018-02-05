@@ -1,0 +1,45 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title><?php echo $arrayUser['nickname']; ?></title>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'company/inc/menu.html' ?>
+
+<div id="contentsMain">
+<div id="contentsMain">
+<h3 class="subTitle left"><?php echo $arrayUser['companyName']; ?>生徒一覧</h3>
+
+
+<a href="/company/download/index/" class="right buttonNormal">全員分の学習履歴をダウンロード</a>
+
+
+
+<br class="fc" />
+<br />
+学習履歴をダウンロードする期間を選択してください
+
+
+<form action="/company/download/csv/" method="post">
+<table class="table tableNormal mtNormal">
+	<tr>
+		<th class="th">期間</th>
+		<td class="td">
+			<select name="date">
+				<?php for ($i = 1; $i <= 12; $i++){ ?>
+				<option value="<?php echo $i; ?>">過去<?php echo $i; ?>ヶ月分</option>
+				<?php } ?>
+			</select>
+		</td>
+	</tr>
+</table>
+
+<div class="mtNormal center">
+	<input type="submit" class="buttonNormal" value="ダウンロード" />
+</div>
+</form>
+
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

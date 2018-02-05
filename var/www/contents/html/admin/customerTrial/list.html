@@ -1,0 +1,192 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+
+
+<script type="text/javascript" src="/common/js/nsg/calData.js"></script>
+<script type="text/javascript" src="/common/js/nsg/cal.js"></script>
+
+<link href="/common/css/nsg/cal.css" rel="stylesheet" type="text/css">
+
+<script>
+	$(document).ready(function(){
+			var nsgCaldateDay = new NsgCal('createdView', 'created');
+			nsgCaldateDay.getSpecial();
+			nsgCaldateDay.setCal();
+
+			var nsgCaldateDay2 = new NsgCal('createdView2', 'created2');
+			nsgCaldateDay2.getSpecial();
+			nsgCaldateDay2.setCal();
+
+	});
+</script>
+
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+<div id="contentsMain">
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/listHeader.html' ?>
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>list/" method="post">
+Insert Dates:
+<input type="text"  name="created" id="created" value="<?php echo $created; ?>" style="width:10em;" readonly="readonly" />
+<div id="createdView" class="hiddenCal"></div>～
+<input type="text"  name="created2" id="created2" value="<?php echo $created2; ?>" style="width:10em;" readonly="readonly" />
+<div id="createdView2" class="hiddenCal"></div>
+
+<input type="submit" value="View" class="buttonNormal" /><br />
+</form>
+
+<br />
+
+<div style="overflow-x:scroll;width:100%;">
+<table class="tableNormal mtNormal" style="width:1500px;">
+
+<tr>
+<th>
+ID
+</th>
+<th>
+Name
+</th>
+<th>
+Course
+</th>
+<th>
+Lesson Day
+</th>
+<th>
+Lesson Time(JP)
+</th>
+<th>
+1st Trial
+</th>
+<th>
+2nd Trial
+</th>
+<th>
+1st Regular
+</th>
+<th>
+SkypeID
+</th>
+<th>
+E-mail
+</th>
+<th>
+Telephone
+</th>
+<th>
+Memo
+</th>
+</tr>
+
+<?php foreach ($arrayData['arrayList'] as $item){ ?>
+<tr id="item<?php echo $item['id']; ?>" >
+<td>
+<?php echo $item['id']; ?>
+</td>
+<td>
+<?php echo $item['memberNameSecoundEnglish'] . '&nbsp;' . $item['memberNameFirstEnglish']; ?>
+<br />
+<form action="/login/auth/" method="post" target="_blank">
+<input type="hidden" name="isMaster" value="1" />
+<input type="hidden" name="email" value="<?php echo $item['email']; ?>" />
+<input type="hidden" name="pass" value="<?php echo $SecurtyCode->getDecode($item['pass']); ?>" />
+<input type="submit" value="Login" />
+</form>
+
+</td>
+<td>
+<?php echo $item['styleType']; ?><?php echo $item['courceName']; ?>
+</td>
+
+<td>
+<?php if ($item['cource_schedule_id']){ ?>
+<?php if ($item['styleType'] != 'B'){ ?>
+<?php echo $arraySchedule[$item['cource_schedule_id']]['valueEnglish']; ?><br />
+<?php } ?>
+<?php } ?>
+</td>
+<td>
+<?php if ($item['styleType'] != 'B'){ ?>
+<?php
+	echo date('H:i', strtotime($item['timeStart'])) . '-<br />';
+	echo date('H:i', strtotime($item['timeEnd']));
+?>
+<?php } ?>
+</td>
+
+<td nowrap>
+<?php if (!empty($item['arrayTrial'][1]['isTrial'])){ ?>
+<?php echo $item['arrayTrial'][1]['date']; ?><br />
+(<?php echo date('D', strtotime($item['arrayTrial'][1]['date'])); ?>)<br />
+<?php echo substr($item['arrayTrial'][1]['timeStart'],0, 5); ?>-<?php echo substr($item['arrayTrial'][1]['timeEnd'],0, 5); ?><br/>
+<?php echo $item['arrayTrial'][1]['nickname']; ?><br />
+<form action="/take/login/auth/?redirect=feedlevel/list/?id=<?php echo $item['id']; ?>" method="post" target="_blank">
+<input type="hidden" name="isMaster" value="1" />
+<input type="hidden" name="id" value="<?php echo $arrayTake['loginID']; ?>" />
+<input type="hidden" name="pass" value="<?php echo $SecurtyCode->getDecode($arrayTake['pass']); ?>" />
+<input type="submit" value="Feedback" />
+</form>
+<?php } ?>
+<br />
+
+</td>
+
+<td nowrap>
+<?php if (!empty($item['arrayTrial'][0]['isTrial'])){ ?>
+<?php echo $item['arrayTrial'][0]['date']; ?><br />
+(<?php echo date('D', strtotime($item['arrayTrial'][0]['date'])); ?>)<br />
+<?php echo substr($item['arrayTrial'][0]['timeStart'],0, 5); ?>-<?php echo substr($item['arrayTrial'][0]['timeEnd'],0, 5); ?><br/>
+<?php echo $item['arrayTrial'][0]['nickname']; ?><br />
+<form action="/take/login/auth/?redirect=feedlevel/list/?id=<?php echo $item['id']; ?>" method="post" target="_blank">
+<input type="hidden" name="isMaster" value="1" />
+<input type="hidden" name="id" value="<?php echo $arrayTake['loginID']; ?>" />
+<input type="hidden" name="pass" value="<?php echo $SecurtyCode->getDecode($arrayTake['pass']); ?>" />
+<input type="submit" value="Feedback" />
+</form>
+<?php }?>
+
+<br />
+
+</td>
+
+<td>
+<?php if (isset($item['arrayReguler'])){ ?>
+<?php if ($item['arrayReguler']['timeStart']){ ?>
+<?php echo $item['arrayReguler']['date']; ?><br />
+(<?php echo date('D', strtotime($item['arrayReguler']['date'])); ?>)<br />
+<?php echo substr($item['arrayReguler']['timeStart'],0, 5); ?>-<?php echo substr($item['arrayReguler']['timeEnd'],0, 5); ?><br/>
+<?php echo $item['arrayReguler']['nickname']; ?><br />
+<?php }?>
+<?php } ?>
+
+</td>
+
+<td>
+<?php echo $item['skypeID']; ?>
+</td>
+<td>
+<?php echo $item['email']; ?>
+</td>
+<td>
+<?php echo $item['tel']; ?>
+</td>
+<td>
+<?php echo $item['memo']; ?><br />
+<a href="/admin/customer/edit/<?php echo $item['id']; ?>/" target="_blank">insert</a>
+</td>
+</tr>
+<?php } ?>
+
+</table>
+<br /><br />
+
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

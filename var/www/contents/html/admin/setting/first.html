@@ -1,0 +1,43 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?><title>管理画面</title>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'admin/inc/menu.html' ?>
+
+
+<div id="contentsMain">
+
+
+
+<h2 class="subTitle">受講コースの選択</h2>
+
+<?php if ($error){ ?>
+<div class="errorBox">
+受講コースを選択して下さい。
+</div>
+<br />
+<?php } ?>
+
+<form action="/admin/setting/step2/" method="post">
+<select name="cource_base_id">
+<option value="">選択して下さい</option>
+<?php foreach ($arrayCource as $key => $item){ ?>
+<option value="<?php echo $item['id']; ?>"><?php echo $item['value']; ?></option>
+<?php } ?>
+</select>
+
+<div align="center" class="mtNormal">
+<input type="submit" class="buttonNormal" value="次へ" />
+</div>
+</form>
+<br />
+
+
+
+</div>
+
+</div>
+
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

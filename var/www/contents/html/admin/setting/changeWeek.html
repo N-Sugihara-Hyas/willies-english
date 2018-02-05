@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+<script type="text/javascript" src="/common/js/jquery.js"></script>
+<script type="text/javascript" src="/common/js/week.js"></script>
+
+<script type="text/javascript" src="/common/js/NowLoading.js"></script>
+
+<script>
+	MainNowLoading = new ShowNowLoading('.blackBack');
+
+	function changeSchdule(){
+		MainNowLoading.show();
+
+		arrayWeekFirst = getNextWeekFirst($('#cource_schdule_id').children(':selected').text(), <?php echo time(); ?>);
+
+		$('#dateFirst > option').remove();
+		$('#dateFirst').append($('<option>').html('未選択').val(''));
+
+		loadData();
+	}
+
+	function loadData(){
+		for (key in arrayWeekFirst){
+			arrayWeekOwn = arrayWeekFirst[key].split('(');
+
+			$.ajax({
+				url : '/api/checkReserve/' + arrayWeekOwn[0] + '?out=' + arrayWeekFirst[key],
+				cache: false,
+				type : "post",
+				success: complateWeekSetHandle
+			});
+
+			delete arrayWeekFirst[key];
+			break;
+		}
+	}
+
+	function complateWeekSetHandle(data){
+		if (data){
+			arrayWeekOwn = data.split(',');
+			$('#dateFirst').append($('<option>').html(arrayWeekOwn[1]).val(arrayWeekOwn[0]));
+		}
+
+		for (var key in arrayWeekFirst){}
+
+
+		if (key){
+			loadData();
+		}else{
+			MainNowLoading.hidden();
+		}
+	}
+</script>
+
+
+<title>マイページ：ウィリーズ英語塾</title>
+
+<link rel="stylesheet" type="text/css" href="/common/css/layout.css" id="layout-css" />
+<link rel="stylesheet" type="text/css" href="/common/css/tool.css" id="layout-css" />
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents">
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+
+<div id="contentsBody">
+
+<h2 class="subTitle">受講スケジュールの選択</h2>
+
+<?php if ($error){ ?>
+<div class="errorBox">
+受講スケジュールを選択して下さい。
+</div>
+<br />
+<?php } ?>
+
+<table class="tableNormal">
+<tr>
+<th width="35%">
+受講曜日
+</th>
+<td>
+<form action="/mypage/setting/step4/" method="post">
+<select name="cource_schedule_id" onchange="changeSchdule();" id="cource_schdule_id">
+<option value="">選択して下さい</option>
+<?php foreach ($arraySchdule as $key => $item){ ?>
+<option value="<?php echo $item['id']; ?>"><?php echo $item['value']; ?></option>
+<?php } ?>
+</select>
+</td>
+</tr>
+<tr>
+<th>
+第１回レッスン日
+</th>
+<td>
+<select name="dateFirst" id="dateFirst">
+<option value="">選択して下さい</option>
+</select>
+</td>
+</tr>
+
+</table>
+
+<div align="center" class="mtNormal">
+<input type="submit" class="buttonNormal" value="次へ" />
+</div>
+</form>
+<br />
+
+<div class="cicle2">
+※明日以降の指定された受講スケジュールの曜日で選択頂けます。<br />
+</div>
+<br />
+<div align="center">
+<a href="/mypage/setting/first/" class="buttonNormal">戻る</a>
+</div>
+</div>
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>FLASH CARD：ウィリーズ英語塾</title>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+	
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+
+<div class="cicle3" style="height:150px;overflow:scroll;">
+<?php foreach ($arrayNew as $item){ ?>
+<p><?php echo date('m/d', strtotime($item['created'])); ?>&nbsp;&nbsp;
+
+<a href="/card/<?php if ($item['type'] == 4){ ?>/test/details/?tid=<?php echo $item['card_base_id']; ?><?php }else{ ?><?php if ($item['type'] == 3){ ?>school<?php }else{ ?>feed<?php } ?>/details/<?php echo $item['card_base_id']; ?>/<?php } ?>">
+<?php if ($item['type'] == 1){ ?>
+フィードバック CARD 
+<?php } ?>
+<?php if ($item['type'] == 3){ ?>
+スクール CARD
+<?php } ?>
+<?php if ($item['type'] == 4){ ?>
+実力確認テスト
+<?php } ?>
+にアップデートがあります。
+</a>
+</p>
+<?php } ?>
+</div>
+<br /><br />
+
+
+<div class="mtNormal">
+<div class="subTitle">グループレッスン予約情報</div>
+<div style="overflow-y:scroll;height:300px;">
+<table class="tableNormal">
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/calenderGroup.html'; ?>
+</table>
+</div>
+</div>
+
+</div>
+
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

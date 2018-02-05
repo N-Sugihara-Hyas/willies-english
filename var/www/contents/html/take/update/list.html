@@ -1,0 +1,61 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title><?php echo $arrayUser['nickname']; ?></title>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/header2.html' ?>
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'take/inc/menu.html' ?>
+
+<div id="contentsMain">
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/listHeader.html' ?>
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>list/" method="post">
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/listSearch.html' ?>
+
+<div align="center" class="mtNormal">
+<input type="submit" value="<?php $this->Lang->change('buttonSearch', '完全一致'); ?>" class="buttonNormal" /></div>
+</form>
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>del/" method="post" id="frm" class="fc">
+<br />
+<table class="tableNormal mtNormal">
+<tr>
+<th></th>
+<th>date</th>
+<th>Student Name</th>
+<th>Sentences</th>
+</tr>
+
+
+<?php while ($item = $arrayData['arrayList']->getData()){ ?>
+<tr id="item<?php echo $item['id']; ?>">
+<td>
+<input type="checkbox" name="arrayDel[]" value="<?php echo $item['id']; ?>" /><a href="/take/exercise/edit/<?php echo $item['id']; ?>/?mID=<?php echo $item['member_base_id']; ?>">advice</a>
+</td>
+<td>
+<?php echo date('Y M,d', strtotime($item['modified'])); ?>
+</td>
+<td>
+<?php echo $item['memberNameSecoundEnglish']; ?>&nbsp;
+<?php echo $item['memberNameFirstEnglish']; ?>
+
+</td>
+<td>
+<?php echo $item['english']; ?>
+</td>
+
+</tr>
+<?php } ?>
+
+</table>
+<br /><br />
+
+<input type="submit" value="削除" class="buttonNormal" />
+</form>
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/footer.html' ?>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>FLASH CARD：ウィリーズ英語塾</title>
+
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php $cardMenu = 'original';require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+<?php $cardMenu = 'original';require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+	<div id="contentsBody" class="col-md-8 col-md-push-4">
+
+<script>
+$(document).ready(function(){
+	$('#id_card_base_id').bind('change', '', function(){
+		location.href = '/card/original/edit/' + $('#id_card_base_id').val() + '/?new=1';
+	});
+});
+
+
+function newBase(){
+	window.open('/card/original/base.html', 'mywindow1', 'width=400, height=300, menubar=no, toolbar=no, scrollbars=yes');
+}
+
+function newBaseEnd(cardName, uid){
+	$('#id_card_base_id').append($('<option>').html(cardName).val(uid));
+}
+
+</script>
+
+<h2 class="subTitle">Create New Card</h2>
+
+<form action="/<?php echo $this->arrayAction['dir']; ?>editConfirmation/#enter" method="post" id="formMain" enctype="multipart/form-data">
+<table class="tableNormal">
+<tr>
+<th>
+投稿日
+</th>
+<td>
+<?php echo date('Y-m-d'); ?>
+</td>
+</tr>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/editor.html' ?>
+</table>
+<br />
+<div align="center">
+	<input type="submit" name="sub2" value="登録・編集を確定" class="btn btn-lg btn-success">
+
+	<?php if ($page){ ?><input type="submit" name="sub0" value="前のカードへ" class="btn btn-lg btn-primary"><?php } ?>
+	<input type="submit" name="sub1" value="次のカードへ" class="btn btn-lg btn-danger">
+	<a href="/<?php echo $this->arrayAction['dir']; ?>list/" class="btn-lg btn-primary">一覧へ</a>
+</div>
+
+</div>
+<br class="fc">
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+</div>
+
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

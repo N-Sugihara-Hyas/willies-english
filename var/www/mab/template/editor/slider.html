@@ -1,0 +1,27 @@
+			<link href="/common/css/slider.css" rel="stylesheet" type="text/css" />
+			<script type="text/javascript" src="/common/js/nsg/slider.js"></script>
+
+			<div id="wrapSlider">
+			({if isset($arrayColum[$key].data)})
+			({foreach from=$arrayColum[$key].data item=item2})
+			<input type="hidden" name="arrayInput[({$modelName})][({$key})][({$item2.id})]" id="i({$key})_({$item2.id})_value" value="({if getVar($arrayInput, $key)})({if getVar($arrayInput[$key], $item2.id)})({$arrayInput[$key][$item2.id]})({/if})({else})({getVar($arrayColum[$key], 'default')})({/if})" /><br />
+
+			<script>
+				$(document).ready(function(){
+					var slider_i({$key})_({$item2.id}) = new Slider('i({$key})_({$item2.id})', ({$arrayColum[$key].max}), '({if getVar($arrayInput, $key)})({if getVar($arrayInput[$key], $item2.id)})({$arrayInput[$key][$item2.id]})({/if})({else})({getVar($arrayColum[$key], 'default')})({/if})', '({getVar($arrayColum[$key], 'ownSize')})', ({if isset($isView)})true({else})false({/if}));
+				});
+			</script>
+
+			<div class="fc label1">
+			({$item2.value})
+			</div>
+			<div class="backSlider">
+				<div id="i({$key})_({$item2.id})" class="buttonSlider"></div>
+			</div>
+			<div class="label2">
+			({getVar($item2, 'value2')})
+			</div>
+			<br />
+			({/foreach})
+			({/if})
+			</div>

@@ -1,0 +1,35 @@
+<?php
+
+	/*
+	*	休日の場合の振替ポイント
+	*/
+	$this->addModel(array('ext/HolidayReturn', 'member/Base', 'member/Point'));
+
+
+	//7日後設定
+	$day = 0;
+	$date = date('Y-m-d', time() + ($day * 3600 * 24));
+
+	$this->ExtHolidayReturn->order = 'dateTime ASC';
+	$this->ExtHolidayReturn->target = '*,ext_holiday_return.*';
+	$this->ExtHolidayReturn->joinMemberBase();
+	$this->ExtHolidayReturn->group = 'member_base_id,dateTime';
+	$this->ExtHolidayReturn->addQuery('dateTime <=', $date . ' 00:00:00');
+	$this->ExtHolidayReturn->addQuery('member_base.timeStart IS NOT NULL');
+	$this->ExtHolidayReturn->addQuery('member_base.take_base_id<>0');
+
+
+	$dbGet = $this->ExtHolidayReturn->getData();
+
+	while ($item = $dbGet->getData()){
+		if ($item['state'] == 3){			
+			$arrayData['id'] = $item['member_base_id'];
+			$arrayData['countReturn'] = $item['countReturn'] - 5;
+			
+			$this->MemberBase->commit($arrayData);
+		}
+		
+	}
+	exit();
+
+?>

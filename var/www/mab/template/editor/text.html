@@ -1,0 +1,1 @@
+<input type="text" <?php if (isset($arrayError[$key])){ ?> class="errorInput"<?php } ?> name="arrayInput[<?php echo $modelName;?>][<?php echo $key ?>]" id="id_<?php echo $key ?>" value="<?php echo htmlspecialchars($arrayInput[$key]); ?>" <?php echo $arrayColum[$key]['form']; ?> />

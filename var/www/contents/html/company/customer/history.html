@@ -1,0 +1,60 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title><?php echo $arrayUser['nickname']; ?></title>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header2.html' ?><?php require_once $this->arrayDir['dirProgram'] . 'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'company/inc/menu.html' ?>
+
+<div id="contentsMain">
+<div id="contentsMain">
+<h3 class="subTitle"><?php echo $arrayUser['companyName']; ?>生徒一覧</h3>
+
+
+
+
+<h2 class="mtNormal center" style="background:#000000;color:#FFFFFF;">ID:<?php echo $objMember2['id']; ?> <?php echo $objMember2['memberNameSecound']; ?> <?php echo $objMember2['memberNameFirst']; ?>　  学習履歴</h2>
+
+
+
+<br class="fc" />
+<br />
+
+
+<table class="tableNormal">
+
+
+<?php foreach ($arrayList as $item){ ?>
+<tr>
+<td><p class="center"><?php out($item['date']); ?>&nbsp;<?php echo date('H:i',strtotime($item['timeStart'])); ?><br /><?php out($item['nickname']); ?></p></td>
+<td style="width:500px;">
+	<?php if ($item['objHomework']){ ?>
+	<p>Homework and the comment</p>
+	<p>
+		<?php $objHomework = $item['objHomework'];$objHomework['free'] = getVar($item['objCard'], 'free'); require $this->arrayDir['dirHtml'] . 'inc/homework.html'; ?>
+	</p>
+	<?php  } ?>
+</td>
+<td>
+	<?php if ($item['objCard']){ ?>
+	<a href="/company/customer/card/<?php echo $item['objCard']['id']; ?>/?mid=<?php echo $uid; ?>" class="buttonNormal">フィードバックCARD</a>
+	<?php  } ?>
+</td>
+</tr>
+<?php } ?>
+</table>
+
+
+<br />
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/navi.html'; ?>
+
+
+<div class="mtNormal center">
+	<a href="/company/customer/list/" class="buttonNormal">トップに戻る</a>
+</div>
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/footer.html' ?>

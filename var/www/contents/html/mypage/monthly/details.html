@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="none">
+<meta name="robots" content="nofollow,noarchive">
+<meta name="robots" content="index,nofollow">
+<meta name="googlebot" content="none">
+<meta name="slurp,bingbot" content="nofollow">
+
+
+<title>レビューフィードバック</title>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerMy.html'; ?>
+
+</head>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/headerBody.html'; ?>
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/menu.html'; ?>
+
+<div id="contents" class="row">
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/sidebar.html'; ?>
+
+<div id="contentsBody" class="col-md-8 col-md-push-4">
+<h2 class="subTitle">レビューフィードバック</h2>
+<br class="fc" />
+
+	<table class="tableNormal">
+		<tr>
+			<th>コース</th><td><?php out($arraySideCourceBase['courceName']); ?></td><th>レベル</th><td><?php echo $arrayUser['level']; ?></td>
+		</tr>
+		<tr>
+			<th>作成者</th><td><?php out($arrayInput['nickname']); ?></td>
+		</tr>
+	</table>
+	<br /><br />
+	<table class="tableNormal">
+		<tr>
+			<th>GCC Cycle</th><td><strong style="font-size:150%;"><?php out($arrayInput['gcc']); ?></strong>&nbsp;&nbsp;cycle</td>
+		</tr>
+		<tr>
+			<th>RLC Cycle</th><td><strong style="font-size:150%;"><?php out($arrayInput['rlc']); ?></strong>&nbsp;&nbsp;cycle</td>
+		</tr>
+	</table>
+	<br /><br />
+	<?php if ($arrayInput['points1']){ ?>
+	上達した点:<br />
+	<?php out(nl2br($arrayInput['points1'])); ?><br/ ><br />
+	<?php } ?>
+
+	<?php if ($arrayInput['points2']){ ?>
+	上達が必要な点とアドバイス: <br />
+	<?php out(nl2br($arrayInput['points2'])); ?><br/ ><br />
+	<?php } ?>
+
+	<?php out(nl2br($arrayInput['feedback'])); ?><br/ ><br />
+
+	<div class="mt" class="text-center">
+		<a href="/<?php echo $this->arrayAction['dir']; ?>list/" class="btn btn-lg btn-primary">リストに戻る</a>
+	</div>
+
+</div>
+</div>
+
+
+<?php require_once $this->arrayDir['dirHtml'] . 'inc/footerMy.html'; ?>

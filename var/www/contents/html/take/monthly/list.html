@@ -1,0 +1,83 @@
+<?php require_once $this->arrayDir['dirProgram'] . 'template/admin/header.html' ?>
+<title><?php echo $arrayUser['nickname']; ?></title>
+
+</head>
+
+<body>
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/header2.html' ?>
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/headerContents.html' ?>
+
+<?php require_once $this->arrayDir['dirHtml'] . 'take/inc/menu.html' ?>
+
+<div id="contentsMain">
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/listHeader.html' ?>
+
+Student ID:  <?php echo $arrayMember['id']; ?><br />
+Student Name: <?php echo $arrayMember['memberNameFirstEnglish']; ?>&nbsp;&nbsp;<?php echo $arrayMember['memberNameSecoundEnglish']; ?><br />
+Course:  <?php echo $arrayMember['courceName']; ?><br />
+Level: <?php echo $arrayMember['level']; ?><br />
+<br />
+
+
+
+
+
+<br />
+<table class="tableNormal mtNormal">
+<tr>
+<th>Edit</th>
+<th>ID</th>
+<th>Date</th>
+<th>Edited by</th>
+<th>GCC<br />cycle</th>
+<th>RLC<br />cycle</th>
+<th>Points improved</th>
+<th>Points needs to be improved</th>
+<th>View</th>
+</tr>
+
+
+<?php while ($item = $arrayData['arrayList']->getData()){ ?>
+<tr>
+<td>
+<a href="/<?php echo $this->arrayAction['dir']; ?>edit/<?php echo $item['id']; ?>">Edit</a>
+</td>
+<td>
+<?php echo $item['id']; ?>
+</td>
+<td>
+<?php echo date('Y-m-d', strtotime($item['created'])); ?>
+</td>
+<td>
+<?php echo $item['nickname']; ?>
+</td>
+<td>
+<?php echo $item['gcc']; ?>
+</td>
+<td>
+<?php echo $item['rlc']; ?>
+</td>
+<td>
+<?php echo $item['points1']; ?>
+</td>
+<td>
+<?php echo $item['points2']; ?>
+</td>
+<td>
+<?php if ($item['isView']){ ?>
+View
+<?php }else{ ?>
+Save Only
+<?php } ?>
+
+</td>
+
+</tr>
+<?php } ?>
+
+</table>
+<br /><br />
+
+</div>
+
+<?php require_once $this->arrayDir['dirProgram'] .  'template/admin/footer.html' ?>
